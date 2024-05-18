@@ -1,0 +1,27 @@
+name: Deploy react-app 
+
+
+
+on:
+  push:
+    branches:
+      - dev  # Replace with your branch name
+
+jobs:
+  deploy:
+    runs-on: self-hosted  
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Build and Deploy
+        run: |
+          npm install
+          npm run build
+          
+          sudo cp -r ./build/* /var/www/html
+
+      - name: Restart Nginx
+        run: |
+          sudo systemctl restart nginx
