@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import PrimaryButton from './components/PrimaryButton'
+import CypherButton from './components/atoms/CypherButton'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -22,7 +22,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <PrimaryButton placeHolder="Count is" count={count} increaseCount={increaseCount}/>
+        <CypherButton placeHolder="Primary Button" helperFunction={increaseCount}/>
         <p>
         Usem & Pollam Solutions.
         </p>
