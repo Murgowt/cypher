@@ -8,6 +8,10 @@ export default {
     extend: {},
     colors:{
       primary:'#FF9500'
+    },
+    fontFamily:{
+      primaryFont:['Courier New'],
+      secondaryFont:['Abhaya Libre'],
     }
   },
   plugins: [],
