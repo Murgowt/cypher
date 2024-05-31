@@ -6,7 +6,7 @@ type props={
 const CypherButton = ({placeHolder,helperFunction}:props) =>{
 
     return(
-        <button className="bg-primary px-3 py-2 font-semibold" onClick ={()=>helperFunction()}>
+        <button className="bg-primary px-3 py-2 text-secondaryFont rounded-xl" onClick ={()=>helperFunction()}>
             {placeHolder }
         </button>
     )

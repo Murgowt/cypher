@@ -1,12 +1,13 @@
 import { FC } from "react";
+import HeroSection from "../components/organisms/HeroSection";
 
 interface HomePageProps {}
 
 const HomePage : FC<HomePageProps> = () =>{
     console.log("HomePage")
     return(
-        <div className="font-secondaryFont">
-            <h1>Is this abhayaFont too</h1>
+        <div className="px-10 ">
+            <HeroSection/>
         </div>
     )
 }
