@@ -23,7 +23,6 @@ const HeroSection:FC<HeroSectionProps> =()=>{
             <div className="flex">
                 <Image path={BannerPath} altText={'Banner'}/>
             </div>
-
         </div>
     )
 }

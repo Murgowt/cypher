@@ -8,6 +8,7 @@ const DefaultLayout: FC<DefaultLayoutProps> = () =>{
     console.log("Default Layout")
     return(
         <div className="bg-white">
+
             <Outlet/>
         </div>
     )
