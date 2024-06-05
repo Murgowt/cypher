@@ -1,6 +1,9 @@
 import { FC } from "react";
 import HeroSection from "../components/organisms/HeroSection";
 
+import AboutUsSection from "../components/organisms/AboutUsSection";
+import PerfectFitSection from "../components/organisms/PerfectFitSection";
+
 interface HomePageProps {}
 
 const HomePage : FC<HomePageProps> = () =>{
@@ -8,6 +11,8 @@ const HomePage : FC<HomePageProps> = () =>{
     return(
         <div className="px-10 ">
             <HeroSection/>
+            <AboutUsSection/>
+            <PerfectFitSection/>
         </div>
     )
 }
