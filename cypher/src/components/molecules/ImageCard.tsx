@@ -1,4 +1,3 @@
-import { defaults } from "autoprefixer";
 import { FC } from "react";
 import Image from "../atoms/Image";
 interface ImageCard {
