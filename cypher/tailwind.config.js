@@ -16,7 +16,8 @@ export default {
       secondary:'#5D3891',
       white:'#FFFFFF',
       grey: '#61788A',
-      lightgrey: '#DBE0E5'
+      lightgrey: '#DBE0E5',
+      purple: '#F4EEFD'
     },
     fontSize: {
       xs: ['12px', { lineHeight: '20px', letterSpacing: '-0.005em' }],
