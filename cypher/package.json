@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@fontsource/abhaya-libre": "^5.0.24",
+    "@fontsource/be-vietnam-pro": "^5.0.20",
     "@fontsource/manrope": "^5.0.20",
+    "@tanstack/react-router": "^1.35.1",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "react": "^18.2.0",
@@ -25,7 +27,7 @@
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
-    "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-react": "^4.3.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",

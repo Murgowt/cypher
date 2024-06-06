@@ -1,14 +1,14 @@
-import { GoTrophy, GoVerified } from 'react-icons/go';
-import { IoWalletOutline } from 'react-icons/io5';
+import { GoVerified } from 'react-icons/go';
+import { PiWallet, PiTrophy } from "react-icons/pi";
 
 export const aboutUsDetails = [
   {
-    img: IoWalletOutline,
+    img: PiWallet,
     title: 'Low Rates',
     info: 'Our coders offer competitive rates, ensuring you get top talent without overspending.'
   },
   {
-    img: GoTrophy,
+    img: PiTrophy,
     title: 'Quality Work',
     info: 'Rigorous verification ensures you hire skilled, experienced coders who deliver pixel-perfect solutions.'
   },

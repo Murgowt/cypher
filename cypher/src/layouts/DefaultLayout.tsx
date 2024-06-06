@@ -7,7 +7,7 @@ interface DefaultLayoutProps {}
 const DefaultLayout: FC<DefaultLayoutProps> = () =>{
     console.log("Default Layout")
     return(
-        <div className="bg-white">
+        <div className="">
 
             <Outlet/>
         </div>
