@@ -7,8 +7,7 @@ import ButtonDropdown from '../atoms/ButtonDropdown';
 
 import { HOME_PAGE } from '../../constants/routes.ui';
 import {
-  navbarLoginButton,
-  navbarSignupButton,
+  navbarSignupButton
 } from '../../constants/navbarButtons';
 import CypherButton from '../atoms/CypherButton';
 
