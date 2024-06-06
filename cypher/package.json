@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@fontsource/abhaya-libre": "^5.0.24",
+    "@fontsource/be-vietnam-pro": "^5.0.20",
     "@fontsource/manrope": "^5.0.20",
+    "@tanstack/react-router": "^1.35.1",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "react": "^18.2.0",

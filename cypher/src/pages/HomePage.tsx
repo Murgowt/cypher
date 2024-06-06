@@ -8,7 +8,7 @@ interface HomePageProps {}
 const HomePage : FC<HomePageProps> = () =>{
     console.log("HomePage")
     return(
-        <div className="px-10 bg-[url('/images/HeroBackground.png')] bg-no-repeat tablet:p-20 desktop-p-20">
+        <div className="px-10 py-10 tablet:px-20 tablet:py-12 bg-[url('/images/HeroBackground.png')] bg-no-repeat tablet:bg-contain">
             <HeroSection/>
             <PerfectFitSection/>
         </div>
