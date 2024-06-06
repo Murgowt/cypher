@@ -20,20 +20,21 @@ export default {
       purple: '#F4EEFD'
     },
     fontSize: {
-      xs: ['12px', { lineHeight: '20px', letterSpacing: '-0.005em' }],
+      xs: ['10px', { lineHeight: '20px', letterSpacing: '-0.005em' }],
       sm: ['14px', { lineHeight: '24px', letterSpacing: '-0.005em' }],
       md: ['16px', { lineHeight: '28px', letterSpacing: '-0.005em' }],
       lg: ['20px', { lineHeight: '28px', letterSpacing: '-0.005em' }],
-      xl: ['24px', { lineHeight: '36px', letterSpacing: '-0.005em' }],
-      '2xl': ['30px', { lineHeight: '48px', letterSpacing: '-0.005em' }],
-      '3xl': ['48px', { lineHeight: '56px', letterSpacing: '-0.005em' }],
-      '4xl': ['56px', { lineHeight: '64px', letterSpacing: '-0.005em' }],
-      '5xl': ['64px', { lineHeight: '80px', letterSpacing: '-0.005em' }],
-      xxl: ['96px', { lineHeight: '100px', letterSpacing: '-0.005em' }]
+      xl: ['24px', { lineHeight: '36px', letterSpacing: '0.015em' }],
+      '2xl': ['30px', { lineHeight: '48px', letterSpacing: '0.015em' }],
+      '3xl': ['48px', { lineHeight: '56px', letterSpacing: '0.015em'}],
+      '4xl': ['56px', { lineHeight: '64px', letterSpacing: '0.015em' }],
+      '5xl': ['64px', { lineHeight: '80px', letterSpacing: '0.015em' }],
+      xxl: ['96px', { lineHeight: '100px', letterSpacing: '0.015em' }],
+      sms: ['14px', { lineHeight: '20px', letterSpacing: '0.15em' }],
     },
     fontFamily: {
       'abhaya': ['Abhaya Libre'],
-      'vietnam': ['Be Vietnam'],
+      'vietnam': ['Be Vietnam Pro'],
       'manrope': ['Manrope']
     },
   },
