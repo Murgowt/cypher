@@ -6,10 +6,11 @@ import NavLink from '../atoms/NavLink';
 import ButtonDropdown from '../atoms/ButtonDropdown';
 
 import { HOME_PAGE } from '../../constants/routes.ui';
+
 import {
-  navbarSignupButton
+  navbarSignupButton,
+  navbarSigninButton
 } from '../../constants/navbarButtons';
-import CypherButton from '../atoms/CypherButton';
 
 export interface NavbarProps {}
 
@@ -20,14 +21,9 @@ const Navbar: FC<NavbarProps> = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const helperFunction =() =>{
-    console.log("Clicked on Helper Function.")
-}
-
   return (
     <div className="w-full h-20 px-4 bg-white max-h-24 tablet:px-10 desktop:px-20 bg-white rounded-lg">
       <div className="flex items-center w-full h-full justify-between tablet:gap-8 desktop:gap-20">
-        {/* TODO: Remove border and change to new logo */}
         <div>
           <BrandLogo/>
         </div>
@@ -44,9 +40,10 @@ const Navbar: FC<NavbarProps> = () => {
               type="secondary"
               dropdownValues={navbarSignupButton}
             />
-            <CypherButton
-              placeHolder="Login"
-              helperFunction={helperFunction}
+            <ButtonDropdown
+              buttonTitle="Login"
+              type="primary"
+              dropdownValues={navbarSigninButton}
             />
           </div>
         </div>
