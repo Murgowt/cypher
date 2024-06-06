@@ -1,14 +1,16 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
 
-interface DefaultLayoutProps {}
+interface AuthLayoutProps {}
 
-const DefaultLayout: FC<DefaultLayoutProps> = () =>{
+
+const AuthLayout: FC<AuthLayoutProps> = () =>{
     return(
         <div className="">
+            <h1>AUthLAYOUT</h1>
             <Outlet/>
         </div>
     )
 }
 
-export default DefaultLayout;
+export default AuthLayout;
