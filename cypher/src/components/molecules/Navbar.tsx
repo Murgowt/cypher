@@ -29,7 +29,7 @@ const Navbar: FC<NavbarProps> = () => {
     <div className="w-full h-20 px-4 bg-white max-h-24 tablet:px-10 desktop:px-20 bg-white rounded-lg">
       <div className="flex items-center w-full h-full justify-between tablet:gap-8 desktop:gap-20">
         {/* TODO: Remove border and change to new logo */}
-        <div className="border">
+        <div>
           <BrandLogo/>
         </div>
         <div className="items-center justify-between hidden w-full tablet:flex desktop:flex">

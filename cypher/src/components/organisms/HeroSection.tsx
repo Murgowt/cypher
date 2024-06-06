@@ -14,9 +14,9 @@ const HeroSection:FC<HeroSectionProps> =()=>{
         console.log("Clicked on Helper Function.")
     }
     return(
-        <div className="pb-16 monitor:py-5 monitor:px-20">
+        <div className="pb-16 monitor:py-10 monitor:px-20">
             <Navbar/>
-            <div className='flex flex-row justify-center grid grid-cols-1 py-10 tablet:p-8 desktop:p-20 pb-16 gap-4 tablet:grid-cols-2 desktop:grid-cols-2'>
+            <div className='flex flex-row justify-center grid grid-cols-1 py-10 desktop:p-16 pb-16 gap-4 tablet:grid-cols-2 desktop:grid-cols-2'>
                 <div className="flex flex-col justify-center">
                     <div className="text-3xl font-abhaya font-extrabold text-secondary tablet:text-3xl desktop:text-xxl">Join Cypher Today!</div>
                     <div className='font-abhaya py-10 pr-[20%] text-secondary desktop:text-md monitor:text-lg' >
@@ -33,8 +33,8 @@ const HeroSection:FC<HeroSectionProps> =()=>{
             </div>
             <div className="bg-white shadow-lg rounded-lg w-full">
                 <div className="flex items-center">
-                    <div className="flex flex-col gap-4">
-                        <div className="grid grid-cols-1 gap-4 tablet:px-1 tablet:grid-cols-3 tablet:gap-4 desktop:gap-32">
+                    <div className="flex flex-col gap-2">
+                        <div className="grid grid-cols-1 gap-2 tablet:px-1 tablet:grid-cols-3 tablet:gap-4 desktop:gap-32">
                         { aboutUsDetails.map((card) => (
                             <div key={card.title} className="col-span-1">
                             <AboutUsCard icon={<card.img />} title={card.title} info={card.info}/>
