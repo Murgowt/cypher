@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Link } from '@tanstack/react-router';
+import { Link } from 'react-router-dom';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 
 import { Dropdown } from '../../interfaces/DropDown';
