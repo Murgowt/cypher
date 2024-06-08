@@ -1,0 +1,1 @@
+export const CLIENT_SIGNUP_ENDPOINT      = "";
