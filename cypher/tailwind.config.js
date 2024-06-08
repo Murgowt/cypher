@@ -17,7 +17,8 @@ export default {
       white:'#FFFFFF',
       grey: '#61788A',
       lightgrey: '#DBE0E5',
-      purple: '#F4EEFD'
+      purple: '#F4EEFD',
+      black: '#171A1F'
     },
     fontSize: {
       xs: ['10px', { lineHeight: '20px', letterSpacing: '-0.005em' }],

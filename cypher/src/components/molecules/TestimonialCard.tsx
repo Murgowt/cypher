@@ -10,7 +10,7 @@ interface TestimonialCardProps{
 const TestimonialCard:FC<TestimonialCardProps> = ({imgPath,name,designation,testimonial})=>{
 
     return (
-    <div className='bg-white rounded shadow-md font-abhaya overflow-hidden'>
+    <div className='bg-white rounded shadow-lg shadow-top-lg font-abhaya overflow-hidden p-6'>
         <div className='flex px-5 pt-4'>
             <Image path={imgPath} altText={"Client"}/>
             <div className='px-5 '>

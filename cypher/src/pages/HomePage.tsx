@@ -3,6 +3,7 @@ import HeroSection from "../components/organisms/HeroSection";
 import TestimonialSection from "../components/sections/TestimonialSection";
 import PerfectFitSection from "../components/organisms/PerfectFitSection";
 import LandingFooter from "../components/molecules/LandingFooter";
+import ClientProjects from "../components/organisms/ClientProjects";
 
 interface HomePageProps {}
 

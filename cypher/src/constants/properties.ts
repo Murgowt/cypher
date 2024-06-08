@@ -20,3 +20,22 @@ export const aboutUsDetails = [
 ];
 
 export const AboutUsDetails = typeof aboutUsDetails;
+
+
+
+export const progressDetails = [
+  {
+    title: 'All Projects',
+    color: '#8964BD'
+  },
+  {
+    title: 'Completed',
+    color: '#F99F17'
+  },
+  {
+    title: 'Pending',
+    color: '#FF8078'
+  }
+];
+
+export const ProgressDetails = typeof progressDetails;
