@@ -8,9 +8,12 @@ interface AuthLayoutProps {}
 const AuthLayout: FC<AuthLayoutProps> = () =>{
     return(
         <div className="">
-            <Navbar/>
+            <div className="py-10">
+             <Navbar/>
+            </div>
+            
             <Outlet/>
-            <div className="tablet:relative bottom-0 monitor:relative bottom-0">
+            <div className="tablet:relative bottom-0 monitor:relative bottom-0 pt-10">
                 <LandingFooter/>
             </div>
         </div>
