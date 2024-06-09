@@ -1,28 +1,29 @@
 import { FC, useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-
+import Image from "../atoms/Image";
 import BrandLogo from '../atoms/BrandLogo';
 import NavLink from '../atoms/NavLink';
-import ButtonDropdown from '../atoms/ButtonDropdown';
 
 import { HOME_PAGE } from '../../constants/routes.ui';
+import CypherButton from '../atoms/CypherButton';
 
-import {
-  navbarSignupButton,
-  navbarSigninButton
-} from '../../constants/navbarButtons';
+export interface DashboardNavbarProps {}
 
-export interface NavbarProps {}
-
-const Navbar: FC<NavbarProps> = () => {
+const DashboardNavbar: FC<DashboardNavbarProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const helperFunction =() =>{
+    console.log("Clicked on Helper Function.")
+  }
+
+  let ProfilePath='/images/ProfilePhoto.png'
+
   return (
-    <div className="w-full h-20 px-4 bg-white max-h-24 tablet:px-10 desktop:px-20 bg-white rounded-lg">
+    <div className="w-full h-20 px-4 bg-white max-h-24 tablet:px-10 desktop:px-20 py-12 bg-white rounded-lg">
       <div className="flex items-center w-full h-full justify-between tablet:gap-8 desktop:gap-20">
         <div>
           <BrandLogo/>
@@ -30,21 +31,13 @@ const Navbar: FC<NavbarProps> = () => {
         <div className="items-center justify-between hidden w-full tablet:flex desktop:flex">
           <div className="flex items-center tablet:gap-4 desktop:gap-10">
             {/* TODO: Change href attributes */}
-            <NavLink href={HOME_PAGE}>Home</NavLink>
-            <NavLink href={HOME_PAGE}>Find Work</NavLink>
-            <NavLink href={HOME_PAGE}>Request Wizard</NavLink>
+            <NavLink href={HOME_PAGE}>Dashboard</NavLink>
+            <NavLink href={HOME_PAGE}>Post Work</NavLink>
+            <NavLink href={HOME_PAGE}>Manage Projects</NavLink>
           </div>
-          <div className="flex items-center tablet:gap-2 desktop:gap-4">
-          <ButtonDropdown
-              buttonTitle="Sign Up"
-              type="secondary"
-              dropdownValues={navbarSignupButton}
-            />
-            <ButtonDropdown
-              buttonTitle="Login"
-              type="primary"
-              dropdownValues={navbarSigninButton}
-            />
+          <div className="flex items-center tablet:gap-8">
+            <CypherButton placeHolder='Log Out' helperFunction={helperFunction}/>
+            <Image path={ProfilePath} altText={'Profile Photo'}/>
           </div>
         </div>
         <button
@@ -58,7 +51,7 @@ const Navbar: FC<NavbarProps> = () => {
           <AiOutlineMenu size={28} className="text-secondary" />
         </button>
         <div
-          className={`fixed z-[99] w-[100%] h-screen overflow-hidden p-10 top-0 tablet:hidden desktop:hidden bg-primary ease-in duration-500
+          className={`fixed z-[99] w-[100%] h-screen overflow-hidden p-10 top-0 tablet:hidden desktop:hidden bg-white ease-in duration-500
 					${menuOpen ? 'left-0' : 'left-[100%] opacity-0'}`}
         >
           <div className="flex items-center justify-end w-full">
@@ -72,13 +65,10 @@ const Navbar: FC<NavbarProps> = () => {
             </button>
           </div>
           <div className="flex flex-col gap-4">
-            <NavLink href={HOME_PAGE}>Home</NavLink>
-            <NavLink href={HOME_PAGE}>Find Work</NavLink>
-            <NavLink href={HOME_PAGE}>Request Wizard</NavLink>
-            <NavLink href={HOME_PAGE}>Client Login</NavLink>
-            <NavLink href={HOME_PAGE}>Client Signup</NavLink>
-            <NavLink href={HOME_PAGE}>Cypher Login</NavLink>
-            <NavLink href={HOME_PAGE}>Cypher Signup</NavLink>
+            <NavLink href={HOME_PAGE}>Dashboard</NavLink>
+            <NavLink href={HOME_PAGE}>Post Work</NavLink>
+            <NavLink href={HOME_PAGE}>Manage Projects</NavLink>
+            <CypherButton placeHolder='Log Out' helperFunction={helperFunction}/>
           </div>
         </div>
       </div>
@@ -86,4 +76,4 @@ const Navbar: FC<NavbarProps> = () => {
   );
 };
 
-export default Navbar;
+export default DashboardNavbar;

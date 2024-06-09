@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Link } from '@tanstack/react-router';
+import { Link } from 'react-router-dom';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 
 import { Dropdown } from '../../interfaces/DropDown';
@@ -44,7 +44,7 @@ const ButtonDropdown: FC<ButtonDropdownProps> = ({
         </button>
         {isOpen && (
           <div
-            className={`absolute left-0 w-full rounded-b-md border border-primary border-t-0 ${type === 'primary' && 'bg-primary'} ${type === 'secondary' && ''}`}
+            className={`absolute left-0 w-full rounded-b-md border border-primary border-t-0 ${type === 'primary' && 'bg-primary'} ${type === 'secondary' && 'bg-white'}`}
           >
             <ul
               role="menu"
@@ -56,7 +56,7 @@ const ButtonDropdown: FC<ButtonDropdownProps> = ({
                   <li key={dropdown.text}>
                     <Link
                       to={dropdown.link}
-                      className={`block px-4 py-2 rounded-b-md text-sm w-22 ${type === 'primary' && 'bg-primary text-white'} ${type === 'secondary' && ' text-primary'}`}
+                      className={`block px-4 py-2 rounded-b-md text-sm w-22 ${type === 'primary' && 'bg-primary text-white'} ${type === 'secondary' && 'bg-white text-primary'}`}
                       onClick={closeDropdown}
                     >
                       {dropdown.text}

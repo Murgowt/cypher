@@ -13,15 +13,14 @@ const TestimonialSection: FC<TestimonialSectionProps> =() =>{
                 <h1 className="text-center text-2xl text-secondary font-abhaya font-extrabold tablet:text-left tablet:text-lg desktop:text-2xl">
                     Testimonials
                 </h1>
-                <div >
-                    
-                    <div className="flex grid grid-cols-1 tablet:grid-cols-3 gap-10  ">
-                    <div className='  tablet:pl-[10%]'>
-                        <Image path={ Testicals} altText="Testimonials"/>
+                <div className="absolute overflow-hidden tablet:m-10">
+                    <Image path={Testicals} altText="Testimonials" />
+                </div>
+                <div className="flex grid grid-cols-1 tablet:grid-cols-2 gap-10 mt-20 ml-10 tablet:mt-32 tablet:ml-40 tablet:pr-10">
+                    <div className="relative">
+                        <TestimonialCard imgPath={client1} name={"Esther Hills"} designation={"CEO @ Paradowski"} testimonial={"Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores."}/>
                     </div>
-                        <TestimonialCard imgPath={client1 }name={"Esther Hills"} designation={"CEO @ Paradowski"} testimonial={"Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. "}/>
-                        <TestimonialCard imgPath={client2 }name={"Sankeerth Siram"} designation={"CEO @ BoltAbacus"} testimonial={"Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. "}/>
-                    </div>
+                        <TestimonialCard imgPath={client2} name={"Sankeerth Siram"} designation={"CEO @ BoltAbacus"} testimonial={"Fuga et debitis numquam omnis sed explicabo rem. Temporibus aut earum harum sint enim quia sit. Odit blanditiis illum amet doloribus."}/>
                 </div>
            </div>
         </div>

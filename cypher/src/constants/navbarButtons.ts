@@ -1,27 +1,26 @@
 import { Dropdown } from '../interfaces/DropDown';
 import { CLIENT, CYPHER } from '../constants/app';
-import { CLIENT_DASHBOARD, CYPHER_DASHBOARD } from '../constants/routes.ui';
-
-/* TODO: Change href attributes */
+import { CLIENT_SIGNUP, CYPHER_SIGNUP, CLIENT_SIGNIN, CYPHER_SIGNIN } from '../constants/routes.ui';
 
 export const navbarSignupButton: Dropdown[] = [
   {
     text: CYPHER,
-    link: CYPHER_DASHBOARD,
+    link: CYPHER_SIGNUP,
   },
   {
     text: CLIENT,
-    link: CLIENT_DASHBOARD,
+    link: CLIENT_SIGNUP,
   },
 ];
 
-export const navbarLoginButton: Dropdown[] = [
+export const navbarSigninButton: Dropdown[] = [
   {
     text: CYPHER,
-    link: CYPHER_DASHBOARD,
+    link: CYPHER_SIGNIN,
   },
   {
     text: CLIENT,
-    link: CLIENT_DASHBOARD,
+    link: CLIENT_SIGNIN,
   },
 ];
+

@@ -57,7 +57,7 @@ const LandingFooter: FC<LandingFooterProps> = () => {
                 <FaLinkedinIn className="text-lg" />
               </a>
               <a
-                className="p-2 rounded-md hover:text- transition-all duration-200 ease-in-out text-white  border border-white border-opacity-50"
+                className="p-2 rounded-md hover:text-primary transition-all duration-200 ease-in-out text-white  border border-white border-opacity-50"
                 href={SOCIAL_INSTAGRAM}
                 target="_blank"
                 rel="noreferrer"
