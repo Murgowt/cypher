@@ -10,7 +10,3 @@ export type ClientDashboardParams = {
     isVerified: boolean;
     token: string;
   };
-
-  export type ClientDashboardStringParams = {
-    [K in keyof ClientDashboardParams]: string;
-  };
