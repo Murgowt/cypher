@@ -13,7 +13,7 @@ const AuthLayout: FC<AuthLayoutProps> = () =>{
             </div>
             
             <Outlet/>
-            <div className="tablet:relative bottom-0 monitor:relative bottom-0 pt-10">
+            <div className="tablet:relative bottom-0 monitor:relative pt-10">
                 <LandingFooter/>
             </div>
         </div>

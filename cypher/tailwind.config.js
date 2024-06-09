@@ -18,7 +18,9 @@ export default {
       grey: '#61788A',
       lightgrey: '#DBE0E5',
       purple: '#F4EEFD',
-      authSubHeading: '#4F709C'
+      authSubHeading: '#4F709C',
+      red:'#8B0000',
+      green:'#008000'
     },
     fontSize: {
       xs: ['10px', { lineHeight: '20px', letterSpacing: '-0.005em' }],

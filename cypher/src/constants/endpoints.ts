@@ -1,1 +1,1 @@
-export const CLIENT_SIGNUP_ENDPOINT      = "";
+export const CLIENT_SIGNUP_ENDPOINT      = "client/register";

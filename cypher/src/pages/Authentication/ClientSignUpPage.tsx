@@ -1,6 +1,8 @@
 import {FC, useState} from 'react';
 import FormElement from '../../components/atoms/FormElement';
 import { CLIENT_SIGNUP_REQUEST } from '../../services/auth';
+
+
 interface ClientSignUpPageProps{}
 
 const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
@@ -11,16 +13,53 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
         password:'',
         confirmPassword: ''
     })
-
+    const [errorMsg, setErrorMsg] = useState('');
+    const [success,toggleSuccess] = useState(false);
     const handleChange = (e:any) =>{
         console.log(e.target.value)
         setPostData({...postData,[e.target.name]:e.target.value})
     }
 
-    const handleSubmit = (e:any) =>{
+    const handleSubmit = async(e:any) =>{
+        toggleSuccess(false)
         e.preventDefault();
+        if(postData.first_name.length==0){
+            setErrorMsg('First Name cant be empty.');
+            return
+        }
+        if(postData.last_name.length==0){
+            setErrorMsg('Last Name cant be empty.');
+            return
+        }
+        if(postData.email.length==0){
+            setErrorMsg('Email cant be empty.');
+            return
+        }
+        if(postData.password.length==0){
+            setErrorMsg('Password cant be empty.');
+            return
+        }
+        if(postData.password.length<8){
+            setErrorMsg('Password should be minimum 8 characters.');
+            return
+        }
+        if(postData['confirmPassword']!= postData['password']){
+            setErrorMsg('Passwords do not match');
+            return
+        }
         let {confirmPassword,...rest}=postData
-        CLIENT_SIGNUP_REQUEST(rest)
+        setErrorMsg('');
+        const result = await CLIENT_SIGNUP_REQUEST(rest)
+        if(result==2){
+            console.log('success')
+            toggleSuccess(true);
+        }
+        else if(result==1){
+            setErrorMsg('Account with email already exists.');
+        }
+        else{
+            setErrorMsg('Something went wrong, please try again later.');
+        }
     }
     return (
     <div className='flex items-start justify-center '>
@@ -64,7 +103,16 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
                 <button className="bg-primary text-white px-5 py-3 w-full rounded-lg shadow-lg" onClick={handleSubmit}>Submit</button>
             </div>
             </form>
-
+            {
+                errorMsg.length==0?<></>:<div >
+                <h1 className='relative items-center justify-center   text-red'>*{errorMsg}</h1>
+            </div>
+            }
+            {
+                success?<div >
+                <h1 className='relative items-center justify-center   text-green'>{"*Check your email and verify your account."}</h1>
+            </div>:<></>
+            }
 
             </div>
         </div>
