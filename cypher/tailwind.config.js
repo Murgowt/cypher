@@ -19,7 +19,7 @@ export default {
       lightgrey: '#DBE0E5',
       purple: '#F4EEFD',
       black: '#171A1F',
-      orange: '#F99417'
+      orange: '#F99417',
       authSubHeading: '#4F709C',
       red:'#8B0000',
       green:'#008000'
