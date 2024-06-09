@@ -18,12 +18,16 @@ export default {
       grey: '#61788A',
       lightgrey: '#DBE0E5',
       purple: '#F4EEFD',
+      black: '#171A1F',
+      orange: '#F99417'
       authSubHeading: '#4F709C',
       red:'#8B0000',
       green:'#008000'
+
     },
     fontSize: {
-      xs: ['10px', { lineHeight: '20px', letterSpacing: '-0.005em' }],
+      xxs: ['10px', { lineHeight: '20px', letterSpacing: '-0.005em' }],
+      xs: ['12px', { lineHeight: '20px', letterSpacing: '-0.005em' }],
       sm: ['14px', { lineHeight: '24px', letterSpacing: '-0.005em' }],
       md: ['16px', { lineHeight: '28px', letterSpacing: '-0.005em' }],
       lg: ['20px', { lineHeight: '28px', letterSpacing: '-0.005em' }],
