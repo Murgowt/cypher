@@ -25,7 +25,7 @@ export const AboutUsDetails = typeof aboutUsDetails;
 
 export const progressDetails = [
   {
-    title: 'All Projects',
+    title: 'Total',
     color: '#8964BD'
   },
   {

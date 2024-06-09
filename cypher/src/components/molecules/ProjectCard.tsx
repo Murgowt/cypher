@@ -9,11 +9,11 @@ export interface ProjectCardProps {
 
 const ProjectCard: FC<ProjectCardProps> = ({ name, task, status, budget }) => {
   return (
-    <div className="flex justify-between items-center gap-32 p-4 rounded-lg shadow-md">
-      <p className="truncate font-abhaya text-sm text-black">{name}</p>
-      <p className="truncate font-abhaya text-sm text-black">{task}</p>
-      <p className="truncate font-abhaya text-sm text-black">{status}</p>
-      <p className="truncate text-sm text-primary">{budget}</p>
+    <div className="flex justify-between items-center p-3 rounded-lg border border-black border-opacity-5 w-full text-center text-xs monitor:text-md">
+      <p className="w-1/4 truncate font-abhaya text-black">{name}</p>
+      <p className="w-1/4 truncate font-abhaya text-black">{task}</p>
+      <p className="w-1/4 truncate font-abhaya text-black">{status}</p>
+      <p className="w-1/4 truncate text-orange">{budget}</p>
   </div>
   );
 };
