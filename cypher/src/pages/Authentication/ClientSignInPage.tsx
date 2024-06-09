@@ -1,9 +1,12 @@
 import {FC,useState} from 'react';
 import FormElement from '../../components/atoms/FormElement';
 import { CLIENT_SIGNIN_REQUEST } from '../../services/auth';
+import { useNavigate } from 'react-router-dom';
+import { CLIENT_DASHBOARD } from '../../constants/routes.ui';
 interface ClientSignInPageProps{}
 
 const ClientSignInPage: FC<ClientSignInPageProps> =()=>{
+    const navigate = useNavigate();
     const [postData, setPostData] = useState({
         email:'',
         password:''
@@ -47,7 +50,7 @@ const ClientSignInPage: FC<ClientSignInPageProps> =()=>{
         }
         else{
             toggleSuccess(true);
-            
+            navigate(CLIENT_DASHBOARD,{state:result})
         }
     }
     return (

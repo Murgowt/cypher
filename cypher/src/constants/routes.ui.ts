@@ -7,3 +7,6 @@ export const CLIENT_SIGNUP = `${AUTH_ROUTE}/client-signup`;
 
 export const CYPHER_SIGNIN = `${AUTH_ROUTE}/cypher-signin`;
 export const CYPHER_SIGNUP = `${AUTH_ROUTE}/cypher-signup`;
+
+export const CLIENT_ROUTE = '/client';
+export const CLIENT_DASHBOARD = `${CLIENT_ROUTE}/dashboard`;
