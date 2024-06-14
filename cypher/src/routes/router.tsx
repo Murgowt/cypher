@@ -8,6 +8,8 @@ import CypherSignUpPage from '../pages/Authentication/CypherSignUpPage';
 import CypherSignInPage from '../pages/Authentication/CypherSignInPage';
 import ClientLayout from '../layouts/ClientLayout';
 import ClientDashboard from '../pages/Client/ClientDashboard';
+import PostWorkPage from '../pages/Client/PostWorkPage';
+
 const router = createBrowserRouter([
         {
         path:'/',
@@ -49,6 +51,10 @@ const router = createBrowserRouter([
                     {
                         path:'dashboard',
                         element: <ClientDashboard/>
+                    },
+                    {
+                        path:'post-work',
+                        element:<PostWorkPage/>
                     }
                 ]
             }
