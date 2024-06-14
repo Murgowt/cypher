@@ -7,7 +7,7 @@ import ClientSignInPage from '../pages/Authentication/ClientSignInPage';
 import CypherSignUpPage from '../pages/Authentication/CypherSignUpPage';
 import CypherSignInPage from '../pages/Authentication/CypherSignInPage';
 import ClientLayout from '../layouts/ClientLayout';
-import ClientDashboard from '../pages/Client/ClientDashboard';
+import ClientDashboard from '../pages/Client/ClientDashboardPage';
 const router = createBrowserRouter([
         {
         path:'/',

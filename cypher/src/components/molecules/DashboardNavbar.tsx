@@ -4,7 +4,7 @@ import Image from "../atoms/Image";
 import BrandLogo from '../atoms/BrandLogo';
 import NavLink from '../atoms/NavLink';
 
-import { HOME_PAGE } from '../../constants/routes.ui';
+import { CLIENT_SIGNIN, HOME_PAGE } from '../../constants/routes.ui';
 import CypherButton from '../atoms/CypherButton';
 
 export interface DashboardNavbarProps {}
@@ -36,7 +36,10 @@ const DashboardNavbar: FC<DashboardNavbarProps> = () => {
             <NavLink href={HOME_PAGE}>Manage Projects</NavLink>
           </div>
           <div className="flex items-center tablet:gap-8">
+            <NavLink href={CLIENT_SIGNIN}>
             <CypherButton placeHolder='Log Out' helperFunction={helperFunction}/>
+            </NavLink>
+            
             <Image path={ProfilePath} altText={'Profile Photo'}/>
           </div>
         </div>

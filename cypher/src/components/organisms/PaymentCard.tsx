@@ -4,7 +4,7 @@ export interface PaymentCardProps {}
 
 
 const PaymentCard: FC<PaymentCardProps> = () => {
-    let details ={ Wizard: 'Jane Cooper', Time: '2 days', Payment: '$20' };
+    let details ={ Cypher: 'Jane Cooper', Time: '2 days', Payment: '$20' };
   
 
   return (
