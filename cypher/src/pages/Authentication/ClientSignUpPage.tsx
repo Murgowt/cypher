@@ -16,7 +16,7 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
     const [errorMsg, setErrorMsg] = useState('');
     const [success,toggleSuccess] = useState(false);
     const handleChange = (e:any) =>{
-        console.log(e.target.value)
+
         setPostData({...postData,[e.target.name]:e.target.value})
     }
 
