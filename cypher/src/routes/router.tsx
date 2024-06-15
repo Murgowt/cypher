@@ -8,6 +8,7 @@ import CypherSignUpPage from '../pages/Authentication/CypherSignUpPage';
 import CypherSignInPage from '../pages/Authentication/CypherSignInPage';
 import ClientLayout from '../layouts/ClientLayout';
 import ClientDashboard from '../pages/Client/ClientDashboard';
+import Error404Page from '../pages/Error404Page';
 const router = createBrowserRouter([
         {
         path:'/',
@@ -49,8 +50,13 @@ const router = createBrowserRouter([
                     {
                         path:'dashboard',
                         element: <ClientDashboard/>
-                    }
+                    },
                 ]
+            },
+            //404 Error
+            {
+                path:'*',
+                element:<Error404Page/>
             }
         ]
     }
