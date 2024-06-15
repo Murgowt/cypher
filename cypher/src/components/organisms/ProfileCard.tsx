@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { User } from '../../interfaces/User';
+import { RESET_PASSWORD_PAGE } from '../../constants/routes.ui';
 
 export interface ProfileCardProps {
   user: User;
@@ -28,7 +29,9 @@ const ProfileCard: FC<ProfileCardProps> = ({ user }) => {
                   <p className="w-1/2 truncate font-abhaya text-xs text-black text-right pr-10 monitor:text-md">{value}</p>
                 </div>
               ))}
+              <a href={RESET_PASSWORD_PAGE}>
               <p className="truncate font-abhaya text-xxs text-primary text-right pr-10 monitor:text-sm">Change password</p>
+              </a>
             </div>
           </div>
         </div>

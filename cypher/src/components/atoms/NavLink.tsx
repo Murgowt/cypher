@@ -7,7 +7,6 @@ export interface NavLinkProps {
 }
 
 const NavLink: FC<NavLinkProps> = ({ href, children, onclick }) => {
-  console.log('here')
   return (
     <a href={href} onClick={onclick}>
       <div className="text-sm transition duration-300 group cursor-pointer">

@@ -2,6 +2,8 @@ import { FC } from 'react';
 import ActiveProjectsCard from '../molecules/ActiveProjectsCard';
 import CypherButton from '../atoms/CypherButton';
 import { AllOrdersResponse } from '../../interfaces/apis/client';
+import { useNavigate } from 'react-router-dom';
+import { POST_WORK } from '../../constants/routes.ui';
 
 export interface ActiveProjectsProps {
   activeOrders: AllOrdersResponse['activeOrders']
@@ -9,10 +11,10 @@ export interface ActiveProjectsProps {
 
 
 const ActiveProjects: FC<ActiveProjectsProps> = ({activeOrders}) => {
-console.log(activeOrders)
+  const navigate=useNavigate()
 
   const helperFunction =() =>{
-    console.log("Clicked on Helper Function.")
+    navigate(POST_WORK)
 }
 
   return (

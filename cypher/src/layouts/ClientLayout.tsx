@@ -5,7 +5,7 @@ import { validAuthToken } from '../helpers/auth';
 import { useAuthStore } from '../store/authStore';
 import DashboardNavbar from "../components/molecules/DashboardNavbar";
 import Footer from "../components/molecules/Footer";
-import { CLIENT_SIGNUP } from '../constants/routes.ui';
+import { CLIENT_SIGNIN } from '../constants/routes.ui';
 
 interface ClientLayoutProps {}
 
@@ -15,23 +15,17 @@ const ClientLayout: FC<ClientLayoutProps> = () =>{
     const user = useAuthStore((state) => state.user);
     const logout = useAuthStore((state) => state.logout);
 
+    if (!authToken || !user || (user && user.role !== 'client') || !validAuthToken(authToken!)) {
+      logout();
+      return <Navigate to={CLIENT_SIGNIN} />;
+    }
+
     return(
-      <>
-      {(!authToken ||
-        !user ||
-        (user && user.role !== 'client') ||
-        !validAuthToken(authToken!)) && (
-        <>
-          {logout()}
-          <Navigate to={CLIENT_SIGNUP} />
-        </>
-      )}
         <div className="flex flex-col min-h-screen">
             <DashboardNavbar/>
             <Outlet/>
             <Footer />
         </div>
-        </>
     )
 }
 
