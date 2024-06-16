@@ -17,10 +17,3 @@ export const ERRORS = {
   SERVER_ERROR: 'Something went wrong. Please try again.',
   AUTHENTICATION_ERROR: 'Please Login to view this page.'
 };
-
-export const MESSAGES = {
-  TRY_AGAIN: 'Please Try Again',
-  GO_DASHBOARD: 'Go to Dashboard',
-  GO_LOGIN: 'Go to Login Page',
-  PASSWORD_RESET: 'Password reset successfully!',
-};

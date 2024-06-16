@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Navigate } from 'react-router-dom';
 import { Outlet } from "react-router-dom";
 import { validAuthToken } from '../helpers/auth';
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore } from '../helpers/authStore';
 import DashboardNavbar from "../components/molecules/DashboardNavbar";
 import Footer from "../components/molecules/Footer";
 import { CLIENT_SIGNIN } from '../constants/routes.ui';

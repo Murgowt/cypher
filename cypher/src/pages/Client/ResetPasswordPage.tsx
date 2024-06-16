@@ -1,17 +1,16 @@
 import {FC, useState} from 'react';
 import FormElement from '../../components/atoms/FormElement';
 import { RESET_PASSWORD_REQUEST } from '../../services/auth';
-import { useAuthStore } from '../../store/authStore';
+import { useAuthStore } from '../../helpers/authStore';
 
-
-interface ResetPasswordPageProps{}
+export interface ResetPasswordPageProps{}
 
 const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
     const user = useAuthStore((state) => state.user);
     const authToken = useAuthStore((state) => state.authToken);
     console.log(authToken)
     const [postData, setPostData] = useState({
-        email: user?.email,
+        email: user!.email,
         password:'',
         confirmPassword: ''
     })
@@ -39,8 +38,8 @@ const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
         }
         let {confirmPassword,...rest}=postData
         setErrorMsg('');
-        const result = await RESET_PASSWORD_REQUEST(rest,authToken!)
-        if(result==2){
+        const result = await RESET_PASSWORD_REQUEST(rest, authToken!, user!.role)
+        if(result === 'OK'){
             console.log('success')
             toggleSuccess(true);
         }

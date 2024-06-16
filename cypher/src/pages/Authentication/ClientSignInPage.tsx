@@ -4,7 +4,7 @@ import { CLIENT_SIGNIN_REQUEST } from '../../services/auth';
 import { useNavigate } from 'react-router-dom';
 import { CLIENT_DASHBOARD } from '../../constants/routes.ui';
 import { LoginResponse } from '../../interfaces/apis/auth';
-import { useAuthStore } from '../../store/authStore';
+import { useAuthStore } from '../../helpers/authStore';
 
 interface ClientSignInPageProps{}
 

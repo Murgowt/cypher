@@ -9,7 +9,8 @@ export const LoginResponseSchema = z.object({
   id: z.string(),
   isVerified: z.string(),
   token: z.string(),
-  username: z.string()
+  username: z.string(),
+  creationtimestamp: z.number()
 });
 
 export type LoginResponse = z.infer<typeof LoginResponseSchema>;
