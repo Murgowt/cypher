@@ -12,6 +12,9 @@ import ClientDashboard from '../pages/Client/ClientDashboardPage';
 import PostWorkPage from '../pages/Client/PostWorkPage';
 import ResetPasswordPage from '../pages/Client/ResetPasswordPage';
 import ManageProjectsPage from '../pages/Client/ManageProjectsPage';
+import CypherDashboard from '../pages/Cypher/CypherDashboard';
+import CypherLayout from '../layouts/CypherLayout';
+import FindWorkPage from '../pages/Cypher/FindWorkPage'
 
 
 const router = createBrowserRouter([
@@ -75,6 +78,24 @@ const router = createBrowserRouter([
             {
                 path:'*',
                 element:<Error404Page/>
+            },
+            {
+                path:'cypher',
+                element:<CypherLayout/>,
+                children:[
+                    {
+                        path:'dashboard',
+                        element:<CypherDashboard/>
+                    },
+                    {
+                        path:'find-work',
+                        element:<FindWorkPage/>
+                    },
+                    {
+                        path:'manage-projects',
+                        element:<ManageProjectsPage/> //Todo: Change it accordingly
+                    }
+                ]
             }
         ]
     }

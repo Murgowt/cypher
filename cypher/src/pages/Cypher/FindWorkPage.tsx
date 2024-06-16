@@ -3,7 +3,7 @@ import ProjectDescriptionCard from '../../components/molecules/ProjectDescriptio
 import { useAuthStore } from '../../helpers/authStore';
 import { ERRORS } from '../../constants/app';
 import { isAxiosError } from 'axios';
-import { ALLORDERS_REQUEST } from '../../services/client';
+import { FINDWORK_REQUEST } from '../../services/cypher';
 import { AllOrdersResponse } from '../../interfaces/apis/client';
 
 interface ManageProjectsPageProps{}
@@ -23,7 +23,7 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
         const getDashboardData = async () => {
           if (isAuthenticated) {
             try {
-              const res = await ALLORDERS_REQUEST(authToken!, user!.role);
+              const res = await FINDWORK_REQUEST(authToken!, user!.role);
               if (res.status === 200) {
                 const allOrdersResponse: AllOrdersResponse = res.data;
                 setallOrders(allOrdersResponse)
@@ -50,27 +50,9 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
 
 
     const [projects, setProjects] = useState<any[]>(allOrders.activeOrders);
-    const [selectedStatus, setSelectedStatus] = useState('active');
     const [currentPage, setCurrentPage] = useState(1);
     const projectsPerPage = 3;
-    
-
-    useEffect(() => {
-            switch (selectedStatus) {
-                case 'open': setProjects(allOrders.openOrders);
-                    break;
-                case 'active': setProjects(allOrders.activeOrders);
-                    break;
-                case 'completed': setProjects(allOrders.completedOrders);
-                    break;
-                default: setProjects(allOrders.activeOrders);
-            }
-    }, [selectedStatus]);
-
-    const handleStatusChange = (newStatus: string) => {
-        setSelectedStatus(newStatus);
-        setCurrentPage(1);
-    };
+    setProjects(allOrders.activeOrders);
 
     const handlePageChange = (pageNumber: number) => {
         setCurrentPage(pageNumber);
@@ -96,21 +78,7 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
     return (
         <>{apiError ? <p>Something went wrong</p> :
         <div className="px-20">
-            <h1 className="text-2xl text-secondary font-abhaya pb-6">Projects</h1>
-            <div className="flex">
-                <button onClick={() => handleStatusChange('active')} 
-                    className={`px-4 py-2 rounded text-secondary font-abhaya border border-grey border-opacity-10 ${selectedStatus === 'active' ? 'bg-skillPurple' : 'bg-white'}`}>
-                    Active Projects
-                </button>
-                <button onClick={() => handleStatusChange('completed')} 
-                    className={`px-4 py-2 rounded text-secondary font-abhaya border border-grey border-opacity-10 ${selectedStatus === 'completed' ? 'bg-skillPurple' : 'bg-white'}`}>
-                    Completed Projects
-                </button>
-                <button onClick={() => handleStatusChange('open')} 
-                    className={`px-4 py-2 rounded text-secondary font-abhaya border border-grey border-opacity-10 ${selectedStatus === 'open' ? 'bg-skillPurple' : 'bg-white'}`}>
-                    Pending Projects
-                </button>
-            </div>
+            <h1 className="text-2xl text-secondary font-abhaya pb-6">Find Work</h1>
             <div className="grid grid-cols-1 gap-6 bg-skillPurple p-8">
                 {currentProjects.length > 0 ? (currentProjects.map(project => (<ProjectDescriptionCard key={project.id} project={project} />))) : (<p className="p-8 rounded-md bg-white shadow-md font-abhaya"> No projects yet </p>)}
             </div>
