@@ -1,6 +1,9 @@
 import {FC,useState} from 'react';
 import RemovableSkillBox from '../../components/atoms/RemovableSkillBox';
 import CREATE_PROJECT_REQUEST from '../../services/CreateProject';
+import { useAuthStore } from '../../helpers/authStore';
+import { useNavigate } from 'react-router-dom';
+import { CLIENT_DASHBOARD } from '../../constants/routes.ui';
 interface PostWorkPageProps {}
 interface StateDeclaration {
     values:string[]
@@ -14,10 +17,13 @@ interface OrderSataDeclaration {
     file? : File
 }
 const PostWorkPage: FC<PostWorkPageProps> =() =>{
+    const navigate = useNavigate();
+    const user = useAuthStore((state) => state.user);
+    const authToken = useAuthStore((state) => state.authToken);
     const [file,setFile ] = useState<File|undefined>();
     const [techs,EditTechs] =  useState<StateDeclaration>({values:[]})
     const [errorMsg,setErrorMsg] = useState('');
-    const [successMsg,setSuccessMsg] = useState('');
+    const [success,toggleSuccess] = useState(false);
     const [currSkill,SetCurrSkill] = useState('')
     const [orderData,setOrderData] = useState<OrderSataDeclaration>({
         title: "",
@@ -58,7 +64,8 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
         }
         EditTechs({values:newTechs})
     }
-    const handleSubmit= (e:any) =>{
+    const handleSubmit= async (e:any) =>{
+        console.log("Handle Submit")
         e.preventDefault();
         if(orderData.title.length==0){
             setErrorMsg('Title cant be empty.');
@@ -92,7 +99,16 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
         if(file){
             data.file = file
         }
-        CREATE_PROJECT_REQUEST(data)
+        console.log(data)
+        const result = await CREATE_PROJECT_REQUEST(data,authToken!,user!.role)
+        if(result == "Something went wrong, please try again later."){
+            setErrorMsg("Something went wrong, please try again later.");
+            return
+        }
+        else{
+            toggleSuccess(true);
+            navigate(CLIENT_DASHBOARD);
+        }
     }
 
     const skillList = techs.values.map((tech,index) =>  <RemovableSkillBox skill={tech} index={index} parentFunc={handleDeleteSkill} key={index}/>);
@@ -144,8 +160,8 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
             </div>
             }
             {
-                successMsg?<div >
-                <h1 className='relative items-center justify-center   text-green'>{"*Check your email and verify your account."}</h1>
+                success?<div >
+                <h1 className='relative items-center justify-center   text-green'>{"*Login Succesful, loading..."}</h1>
             </div>:<></>
             }
             </div>
