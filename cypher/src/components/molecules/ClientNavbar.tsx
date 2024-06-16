@@ -8,9 +8,9 @@ import { CLIENT_DASHBOARD, CLIENT_PROJECTS, CLIENT_SIGNIN, POST_WORK } from '../
 import CypherButton from '../atoms/CypherButton';
 import { useAuthStore } from '../../helpers/authStore';
 
-export interface DashboardNavbarProps {}
+export interface ClientNavbarProps {}
 
-const DashboardNavbar: FC<DashboardNavbarProps> = () => {
+const ClientNavbar: FC<ClientNavbarProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const logout = useAuthStore((state) => state.logout);
 
@@ -81,4 +81,4 @@ const DashboardNavbar: FC<DashboardNavbarProps> = () => {
   );
 };
 
-export default DashboardNavbar;
+export default ClientNavbar;
