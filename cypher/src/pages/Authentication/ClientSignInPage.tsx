@@ -3,6 +3,9 @@ import FormElement from '../../components/atoms/FormElement';
 import { CLIENT_SIGNIN_REQUEST } from '../../services/auth';
 import { useNavigate } from 'react-router-dom';
 import { CLIENT_DASHBOARD } from '../../constants/routes.ui';
+import { LoginResponse } from '../../interfaces/apis/auth';
+import { useAuthStore } from '../../helpers/authStore';
+
 interface ClientSignInPageProps{}
 
 const ClientSignInPage: FC<ClientSignInPageProps> =()=>{
@@ -13,6 +16,8 @@ const ClientSignInPage: FC<ClientSignInPageProps> =()=>{
     })
     const [errorMsg, setErrorMsg] = useState('');
     const [success,toggleSuccess] = useState(false);
+    const setAuthToken = useAuthStore((state) => state.setAuthToken);
+    const setUser = useAuthStore((state) => state.setUser);
     const handleChange = (e:any) =>{
         console.log(e.target.value)
         setPostData({...postData,[e.target.name]:e.target.value})
@@ -50,7 +55,20 @@ const ClientSignInPage: FC<ClientSignInPageProps> =()=>{
         }
         else{
             toggleSuccess(true);
-            navigate(CLIENT_DASHBOARD,{state:result})
+            const loginResponse: LoginResponse = result;
+
+            setAuthToken(loginResponse.token);
+            setUser({
+            name: {
+                first: loginResponse.first_name,
+                last: loginResponse.last_name,
+            },
+            email: loginResponse.email,
+            username: loginResponse.username,
+            role: 'client',
+            });
+
+            navigate(CLIENT_DASHBOARD)
         }
     }
     return (
