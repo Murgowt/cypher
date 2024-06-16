@@ -1,15 +1,17 @@
 import {FC, useState} from 'react';
 import FormElement from '../../components/atoms/FormElement';
-import { CLIENT_SIGNUP_REQUEST } from '../../services/auth';
+import { RESET_PASSWORD_REQUEST } from '../../services/auth';
+import { useAuthStore } from '../../store/authStore';
 
 
-interface ClientSignUpPageProps{}
+interface ResetPasswordPageProps{}
 
-const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
+const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
+    const user = useAuthStore((state) => state.user);
+    const authToken = useAuthStore((state) => state.authToken);
+    console.log(authToken)
     const [postData, setPostData] = useState({
-        first_name:'',
-        last_name:'',
-        email:'',
+        email: user?.email,
         password:'',
         confirmPassword: ''
     })
@@ -23,18 +25,6 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
     const handleSubmit = async(e:any) =>{
         toggleSuccess(false)
         e.preventDefault();
-        if(postData.first_name.length==0){
-            setErrorMsg('First Name cant be empty.');
-            return
-        }
-        if(postData.last_name.length==0){
-            setErrorMsg('Last Name cant be empty.');
-            return
-        }
-        if(postData.email.length==0){
-            setErrorMsg('Email cant be empty.');
-            return
-        }
         if(postData.password.length==0){
             setErrorMsg('Password cant be empty.');
             return
@@ -49,13 +39,10 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
         }
         let {confirmPassword,...rest}=postData
         setErrorMsg('');
-        const result = await CLIENT_SIGNUP_REQUEST(rest)
+        const result = await RESET_PASSWORD_REQUEST(rest,authToken!)
         if(result==2){
             console.log('success')
             toggleSuccess(true);
-        }
-        else if(result==1){
-            setErrorMsg('Account with email already exists.');
         }
         else{
             setErrorMsg('Something went wrong, please try again later.');
@@ -66,28 +53,9 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
         <div className=' tablet:px-[5rem]  bg-white border-secondary shadow-xl rounded overflow-hidden tablet:w-[60%] desktop:w-[40%] py-10 '>
             <div className='px-3'>
             <h1 className="text-center text-2xl text-secondary font-abhaya font-extrabold tablet:text-left tablet:text-lg desktop:text-2xl p-0">
-               Welcome
+               Reset Password
             </h1>
-            <div className="text-authSubHeading text-xs">
-                <span>Sign up to get unlimited access to information and talent.</span>
-            </div>
-            
             <form className="py-8 mx-auto">
-
-                <FormElement 
-                    labelText="First Name*" helperFunction={handleChange} 
-                    placeHolder="" name="first_name" 
-                    type="first_name" id="first_name" />
-
-                <FormElement 
-                    labelText="Last Name*" helperFunction={handleChange} 
-                    placeHolder="" name="last_name" 
-                    type="last_name" id="last_name" />
-
-                <FormElement 
-                    labelText="Your Email*" helperFunction={handleChange} 
-                    placeHolder="" name="email" 
-                    type="email" id="email" />
 
                 <FormElement 
                     labelText="Your password*" helperFunction={handleChange} 
@@ -119,4 +87,4 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
     </div>)
 }
 
-export default ClientSignUpPage;
+export default ResetPasswordPage;

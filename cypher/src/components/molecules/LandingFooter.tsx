@@ -35,7 +35,7 @@ const LandingFooter: FC<LandingFooterProps> = () => {
             <div className="grid grid-cols-1 tablet:grid-cols-3 justify-items-center desktop:gap-4 font-abhaya text-white">
                 <p>Home</p>
                 <p>Find Work</p>
-                <p>Request Wizard</p>
+                <p>Request Cypher</p>
             </div>
             <div className="flex items-right gap-2 desktop:gap-4">
                 <a

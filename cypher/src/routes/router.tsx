@@ -6,16 +6,22 @@ import AuthLayout from '../layouts/AuthLayout';
 import ClientSignInPage from '../pages/Authentication/ClientSignInPage';
 import CypherSignUpPage from '../pages/Authentication/CypherSignUpPage';
 import CypherSignInPage from '../pages/Authentication/CypherSignInPage';
+import ClientLayout from '../layouts/ClientLayout';
+import ClientDashboard from '../pages/Client/ClientDashboardPage';
+import PostWorkPage from '../pages/Client/PostWorkPage';
+import ResetPasswordPage from '../pages/Client/ResetPasswordPage';
 
 const router = createBrowserRouter([
         {
         path:'/',
         element:<DefaultLayout/>,
         children:[
+            //HOME PAGE
             {
                 path:'',
                 element:<HomePage/>
             },
+            //AUTH
             {
                 path:'auth',
                 element:<AuthLayout/>,
@@ -36,6 +42,25 @@ const router = createBrowserRouter([
                         path:'cypher-signin',
                         element:<CypherSignInPage/>
                     },
+                ]
+            },
+            //CLIENT 
+            {
+                path:'client',
+                element:<ClientLayout/>,
+                children:[
+                    {
+                        path:'dashboard',
+                        element: <ClientDashboard/>
+                    },
+                    {
+                        path:'post-work',
+                        element:<PostWorkPage/>
+                    },
+                    {
+                        path:'reset-password',
+                        element:<ResetPasswordPage/>
+                    }
                 ]
             }
         ]

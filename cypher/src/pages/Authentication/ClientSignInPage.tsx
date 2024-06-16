@@ -1,15 +1,23 @@
 import {FC,useState} from 'react';
 import FormElement from '../../components/atoms/FormElement';
 import { CLIENT_SIGNIN_REQUEST } from '../../services/auth';
+import { useNavigate } from 'react-router-dom';
+import { CLIENT_DASHBOARD } from '../../constants/routes.ui';
+import { LoginResponse } from '../../interfaces/apis/auth';
+import { useAuthStore } from '../../store/authStore';
+
 interface ClientSignInPageProps{}
 
 const ClientSignInPage: FC<ClientSignInPageProps> =()=>{
+    const navigate = useNavigate();
     const [postData, setPostData] = useState({
         email:'',
         password:''
     })
     const [errorMsg, setErrorMsg] = useState('');
     const [success,toggleSuccess] = useState(false);
+    const setAuthToken = useAuthStore((state) => state.setAuthToken);
+    const setUser = useAuthStore((state) => state.setUser);
     const handleChange = (e:any) =>{
         console.log(e.target.value)
         setPostData({...postData,[e.target.name]:e.target.value})
@@ -47,12 +55,25 @@ const ClientSignInPage: FC<ClientSignInPageProps> =()=>{
         }
         else{
             toggleSuccess(true);
-            
+            const loginResponse: LoginResponse = result;
+
+            setAuthToken(loginResponse.token);
+            setUser({
+            name: {
+                first: loginResponse.first_name,
+                last: loginResponse.last_name,
+            },
+            email: loginResponse.email,
+            username: loginResponse.username,
+            role: 'client',
+            });
+
+            navigate(CLIENT_DASHBOARD)
         }
     }
     return (
     <div className='flex items-start justify-center '>
-        <div className=' tablet:px-[5rem]  bg-white border-secondary shadow-xl rounded overflow-hidden tablet:w-[60%] monitor:w-[40%] py-10 '>
+        <div className=' tablet:px-[5rem]  bg-white border-secondary shadow-xl rounded overflow-hidden tablet:w-[60%] desktop:w-[40%] py-10 '>
             <div className='px-3'>
             <h1 className="text-center text-2xl text-secondary font-abhaya font-extrabold tablet:text-left tablet:text-lg desktop:text-2xl p-0">
                Welcome

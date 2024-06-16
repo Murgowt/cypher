@@ -1,10 +1,13 @@
 import { FC } from 'react';
 import ProjectCard from '../molecules/ProjectCard';
 import ProgressCounts from '../molecules/ProgressCounts';
+import { AllOrdersResponse } from '../../interfaces/apis/client';
 
-export interface ClientProjectsProps {}
+export interface ClientProjectsProps {
+  allOrders: AllOrdersResponse
+}
 
-const ClientProjects: FC<ClientProjectsProps> = () => {
+const ClientProjects: FC<ClientProjectsProps> = ({ allOrders }) => {
   let projects = [
     { name: 'Roseret', task: 'Wireframing', status: 'Pending', budget: '$40' },
     { name: 'Roseret', task: 'Wireframing', status: 'Pending', budget: '$40' },
@@ -14,6 +17,12 @@ const ClientProjects: FC<ClientProjectsProps> = () => {
     { name: 'Roseret', task: 'Wireframing', status: 'Pending', budget: '$40' }
   ];
 
+  const progressCounts: number[] = [
+    allOrders.activeOrders.length + allOrders.completedOrders.length + allOrders.openOrders.length , 
+    allOrders.completedOrders.length,
+    allOrders.activeOrders.length + allOrders.openOrders.length
+  ]
+
   return (
     <div className="p-2 tablet:pl-10 pb-4">
       <div className="flex justify-between font-abhaya px-10">
@@ -21,7 +30,7 @@ const ClientProjects: FC<ClientProjectsProps> = () => {
         <p className="text-sm text-orange monitor:text-md">Manage Projects</p>
       </div>
       <div className="shadow-md p-4 bg-white rounded-md desktop:h-[70vh] monitor:h-[80vh]">
-        <ProgressCounts />
+        <ProgressCounts progressCounts={progressCounts}/>
         <div className="flex justify-between items-center px-4 py-2 w-full text-center monitor:p-8">
             <p className="w-1/4 truncate font-abhaya text-xs text-secondary monitor:text-lg">Project Name</p>
             <p className="w-1/4 truncate font-abhaya text-xs text-secondary monitor:text-lg">Task</p>
