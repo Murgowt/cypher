@@ -1,25 +1,24 @@
 import { FC } from 'react';
-import { User } from '../../interfaces/User';
+import { useAuthStore } from '../../helpers/authStore';
 import { RESET_PASSWORD_PAGE } from '../../constants/routes.ui';
 
-export interface ProfileCardProps {
-  user: User;
-}
+export interface ProfileCardProps {}
 
-const ProfileCard: FC<ProfileCardProps> = ({ user }) => {
-  let details = { Username: user.username, Email: user.email, Password: '*******' };
+const ProfileCard: FC<ProfileCardProps> = ({ }) => {
+  const user = useAuthStore((state) => state.user);
+  let details = { Username: user!.username, Email: user!.email, Password: '*******' };
   let ProfilePath = '/images/ProfilePhoto.png';
 
   return (
     <>
       {user && (
-        <div className="p-8 tablet:px-8 pb-4 monitor:h-1/2">
+        <div className="p-8 tablet:px-8 pb-4 h-1/2">
           <div className="border border-black border-opacity-5 bg-white rounded-md relative">
-            <div className="absolute -top-16 left-1/2 -translate-x-1/2">
+            <div className="absolute -top-12 left-1/2 -translate-x-1/2">
               <img
                 src={ProfilePath}
                 alt="Profile Picture"
-                className="w-32 h-32 rounded-full object-cover"
+                className="w-28 h-28 rounded-full object-cover"
               />
             </div>
             <div className="p-4 pt-24 grid grid-cols-1 gap-2 tablet:px-1 monitor:gap-8">

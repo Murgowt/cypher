@@ -4,9 +4,9 @@ import Image from "../atoms/Image";
 import BrandLogo from '../atoms/BrandLogo';
 import NavLink from '../atoms/NavLink';
 
-import { CLIENT_SIGNIN, HOME_PAGE, POST_WORK } from '../../constants/routes.ui';
+import { CLIENT_DASHBOARD, CLIENT_PROJECTS, CLIENT_SIGNIN, POST_WORK } from '../../constants/routes.ui';
 import CypherButton from '../atoms/CypherButton';
-import { useAuthStore } from '../../store/authStore';
+import { useAuthStore } from '../../helpers/authStore';
 
 export interface DashboardNavbarProps {}
 
@@ -33,9 +33,9 @@ const DashboardNavbar: FC<DashboardNavbarProps> = () => {
         <div className="items-center justify-between hidden w-full tablet:flex desktop:flex">
           <div className="flex items-center tablet:gap-4 desktop:gap-10">
             {/* TODO: Change href attributes */}
-            <NavLink href={HOME_PAGE}>Dashboard</NavLink>
+            <NavLink href={CLIENT_DASHBOARD}>Dashboard</NavLink>
             <NavLink href={POST_WORK}>Post Work</NavLink>
-            <NavLink href={HOME_PAGE}>Manage Projects</NavLink>
+            <NavLink href={CLIENT_PROJECTS}>Manage Projects</NavLink>
           </div>
           <div className="flex items-center tablet:gap-8">
             <NavLink href={CLIENT_SIGNIN} onclick={logout}>
@@ -70,9 +70,9 @@ const DashboardNavbar: FC<DashboardNavbarProps> = () => {
             </button>
           </div>
           <div className="flex flex-col gap-4">
-            <NavLink href={HOME_PAGE}>Dashboard</NavLink>
-            <NavLink href={HOME_PAGE}>Post Work</NavLink>
-            <NavLink href={HOME_PAGE}>Manage Projects</NavLink>
+            <NavLink href={CLIENT_DASHBOARD}>Dashboard</NavLink>
+            <NavLink href={POST_WORK}>Post Work</NavLink>
+            <NavLink href={CLIENT_PROJECTS}>Manage Projects</NavLink>
             <CypherButton placeHolder='Log Out' helperFunction={helperFunction}/>
           </div>
         </div>

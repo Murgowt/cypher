@@ -63,7 +63,7 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
     }
     return (
     <div className='flex items-start justify-center '>
-        <div className=' tablet:px-[5rem]  bg-white border-secondary shadow-xl rounded overflow-hidden tablet:w-[60%] desktop:w-[40%] py-10 '>
+        <div className=' tablet:px-[5rem] bg-white border-secondary shadow-xl rounded overflow-hidden tablet:w-[60%] desktop:w-[40%] py-10'>
             <div className='px-3'>
             <h1 className="text-center text-2xl text-secondary font-abhaya font-extrabold tablet:text-left tablet:text-lg desktop:text-2xl p-0">
                Welcome
@@ -110,7 +110,7 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
             }
             {
                 success?<div >
-                <h1 className='relative items-center justify-center   text-green'>{"*Check your email and verify your account."}</h1>
+                <h1 className='relative items-center justify-center text-green'>{"*Password changed successfully"}</h1>
             </div>:<></>
             }
 

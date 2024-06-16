@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import SkillBox from '../../components/atoms/SkillBox';
 
-interface PostWorkPageProps {}
+export interface PostWorkPageProps {}
 
 const PostWorkPage: FC<PostWorkPageProps> =() =>{
     return(

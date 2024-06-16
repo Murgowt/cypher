@@ -11,3 +11,4 @@ export const CLIENT_ROUTE = '/client';
 export const CLIENT_DASHBOARD = `${CLIENT_ROUTE}/dashboard`;
 export const POST_WORK = `${CLIENT_ROUTE}/post-work`;
 export const RESET_PASSWORD_PAGE = `${CLIENT_ROUTE}/reset-password`;
+export const CLIENT_PROJECTS = `${CLIENT_ROUTE}/manage-projects`;

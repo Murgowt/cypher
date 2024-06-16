@@ -45,39 +45,22 @@ export const CLIENT_SIGNUP_REQUEST = (postData:{first_name:string,last_name:stri
  }
 
 
-//  export const RESET_PASSWORD_REQUEST = async (postData:{email:string,password:string}, token: string ) =>{
-//     let promise = axios.post(RESET_PASSWORD_ENDPOINT,postData,{
-//         headers: { 'AUTH-TOKEN': token },
-//       })
-//                 .then(response=>{
-//                     if('data' in response){
-//                         return response.data
-//                     }
-//                     else{
-//                         return "Something went wrong, please try again later."
-//                     }
-//                 })
-//                 .catch(err=>{
-//                     console.log(err)
-//                     return "Something went wrong, please try again later."
-//                 })
-//     console.log(promise)
-//     return promise;
-//  }
-
- export const RESET_PASSWORD_REQUEST = async (postData:{email:string,password:string}, token: string) => {
-    let promise = axios.post(
-      RESET_PASSWORD_ENDPOINT,
-      {
-        postData,
-      },
-      {
-        headers: {
-          'AUTH-TOKEN': token,
-          'Access-Control-Allow-Origin': '*',
-        },
-      }
-    );
+ export const RESET_PASSWORD_REQUEST = async (postData:{email:string,password:string}, token: string, role: string ) =>{
+    let promise = axios.post(RESET_PASSWORD_ENDPOINT,postData,{
+        headers: { 'token': token, 'user': role },
+      })
+                .then(response=>{
+                    if('data' in response){
+                        return response.data
+                    }
+                    else{
+                        return "Something went wrong, please try again later."
+                    }
+                })
+                .catch(err=>{
+                    console.log(err)
+                    return "Something went wrong, please try again later."
+                })
     console.log(promise)
     return promise;
-  };
+}

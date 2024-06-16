@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const OrderSchema = z.object({
+export const OrderSchema = z.object({
     budget: z.number(),
     milestones: z.number(),
     status: z.enum(['open', 'active', 'completed']),
@@ -13,8 +13,11 @@ const OrderSchema = z.object({
     description: z.string(),
     id: z.string(),
     wizardId: z.string(),
-    title: z.string()
+    title: z.string(),
+    creationtimestamp: z.number()
   });
+
+export type Order = z.infer<typeof OrderSchema>;
 
 export const AllOrdersResponseSchema = z.object({
     openOrders: z.array(OrderSchema),

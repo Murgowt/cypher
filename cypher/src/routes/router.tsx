@@ -10,6 +10,7 @@ import ClientLayout from '../layouts/ClientLayout';
 import ClientDashboard from '../pages/Client/ClientDashboardPage';
 import PostWorkPage from '../pages/Client/PostWorkPage';
 import ResetPasswordPage from '../pages/Client/ResetPasswordPage';
+import ManageProjectsPage from '../pages/Client/ManageProjectsPage';
 
 const router = createBrowserRouter([
         {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
                     {
                         path:'reset-password',
                         element:<ResetPasswordPage/>
+                    },
+                    {
+                        path:'manage-projects',
+                        element: <ManageProjectsPage/>
                     }
                 ]
             }
