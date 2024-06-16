@@ -4,13 +4,15 @@ import Image from "../atoms/Image";
 import BrandLogo from '../atoms/BrandLogo';
 import NavLink from '../atoms/NavLink';
 
-import { HOME_PAGE } from '../../constants/routes.ui';
+import { CLIENT_SIGNIN, HOME_PAGE, POST_WORK } from '../../constants/routes.ui';
 import CypherButton from '../atoms/CypherButton';
+import { useAuthStore } from '../../store/authStore';
 
 export interface DashboardNavbarProps {}
 
 const DashboardNavbar: FC<DashboardNavbarProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const logout = useAuthStore((state) => state.logout);
 
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
@@ -32,11 +34,14 @@ const DashboardNavbar: FC<DashboardNavbarProps> = () => {
           <div className="flex items-center tablet:gap-4 desktop:gap-10">
             {/* TODO: Change href attributes */}
             <NavLink href={HOME_PAGE}>Dashboard</NavLink>
-            <NavLink href={HOME_PAGE}>Post Work</NavLink>
+            <NavLink href={POST_WORK}>Post Work</NavLink>
             <NavLink href={HOME_PAGE}>Manage Projects</NavLink>
           </div>
           <div className="flex items-center tablet:gap-8">
+            <NavLink href={CLIENT_SIGNIN} onclick={logout}>
             <CypherButton placeHolder='Log Out' helperFunction={helperFunction}/>
+            </NavLink>
+            
             <Image path={ProfilePath} altText={'Profile Photo'}/>
           </div>
         </div>
@@ -47,7 +52,7 @@ const DashboardNavbar: FC<DashboardNavbarProps> = () => {
           className={`cursor-pointer tablet:hidden desktop:hidden ${
             menuOpen ? 'hidden' : ''
           }`}
-        >
+        >            
           <AiOutlineMenu size={28} className="text-secondary" />
         </button>
         <div
