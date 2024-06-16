@@ -1,26 +1,43 @@
 import {FC,useState} from 'react';
 import RemovableSkillBox from '../../components/atoms/RemovableSkillBox';
+import CREATE_PROJECT_REQUEST from '../../services/CreateProject';
 interface PostWorkPageProps {}
 interface StateDeclaration {
     values:string[]
 }
+interface OrderSataDeclaration {
+    title: string,
+    description:string,
+    budget:number,
+    tech:string[],
+    milestones:number,
+    file? : File
+}
 const PostWorkPage: FC<PostWorkPageProps> =() =>{
+    const [file,setFile ] = useState<File|undefined>();
     const [techs,EditTechs] =  useState<StateDeclaration>({values:[]})
+    const [errorMsg,setErrorMsg] = useState('');
+    const [successMsg,setSuccessMsg] = useState('');
     const [currSkill,SetCurrSkill] = useState('')
-    const [orderData,setOrderData] = useState({
+    const [orderData,setOrderData] = useState<OrderSataDeclaration>({
         title: "",
         description:"",
-        budget:"",
+        budget:0,
         tech:[],
-        milestones:""
+        milestones:0
     })
+
+    const handleFileUpload = (e:any) =>{
+        setFile(e.target.files[0])
+    }
+
     const handleChange = (e:any) =>{
         setOrderData({...orderData,[e.target.name]:e.target.value})
     }
     const handleAddingSkill = (e:any) =>{
         SetCurrSkill(e.target.value)
     }
-    const handleAddSkill = (e:any) =>{
+    const handleAddSkill = () =>{
         if(currSkill.length ==0){
             return
         }
@@ -41,6 +58,43 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
         }
         EditTechs({values:newTechs})
     }
+    const handleSubmit= (e:any) =>{
+        e.preventDefault();
+        if(orderData.title.length==0){
+            setErrorMsg('Title cant be empty.');
+            return
+        }
+        if(orderData.description.length==0){
+            setErrorMsg('Project Description cant be empty.');
+            return
+        }
+        if(techs.values.length==0){
+            setErrorMsg('Please add a few skills.');
+            return
+        }
+        else{
+            orderData.tech=techs.values
+        }
+        if(orderData.description.length==0){
+            setErrorMsg('Project Description cant be empty.');
+            return
+        }
+        if(Number(orderData.milestones)==0 ){
+            setErrorMsg('Please set a valid number of milestones.');
+            return
+        }
+        if(Number(orderData.budget)<10){
+            setErrorMsg('Minimum budget is 10$.');
+            return
+        }
+        setErrorMsg('');
+        const data = orderData;
+        if(file){
+            data.file = file
+        }
+        CREATE_PROJECT_REQUEST(data)
+    }
+
     const skillList = techs.values.map((tech,index) =>  <RemovableSkillBox skill={tech} index={index} parentFunc={handleDeleteSkill} key={index}/>);
 
     return(
@@ -73,17 +127,27 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
                 </div>
                 <div>
                 <h1 className='text-secondary text-lg mb-2'>Attachment</h1>
-                <input className="mb-10" type='file'/>
+                <input className="mb-10" type='file' onChange={handleFileUpload}/>
                 <h1 className='text-secondary text-lg mb-2'>Number of Milestones</h1>
-                <input className='border-b-2 border-primary mb-10 outline-none text-xl w-10 text-secondary' onChange={handleChange} name={"milestones"} placeholder='#'/>
+                <input className='border-b-2 border-primary mb-10 outline-none text-xl w-10 text-secondary' onChange={handleChange} name={"milestones"} placeholder='#' type='number'/>
 
                 <h1 className='text-secondary text-lg mb-2'>Budget($)</h1>
-                <input className='border-b-2 border-primary mb-10 outline-none text-lg w-10 text-secondary'  placeholder='$' onChange={handleChange} name={"budget"} />
+                <input className='border-b-2 border-primary mb-10 outline-none text-lg w-[2.75rem] text-secondary'  placeholder='$' onChange={handleChange} name={"budget"} type='number'/>
                 </div>
                 <div className='w-full'>
-                    <button className="bg-secondary text-white px-5 py-3 w-full rounded-lg shadow-lg" >Create New Project</button>
+                    <button className="bg-secondary text-white px-5 py-3 w-full rounded-lg shadow-lg" onClick={handleSubmit} >Create New Project</button>
                 </div>
             </form>
+            {
+                errorMsg.length==0?<></>:<div >
+                <h1 className='relative items-center justify-center   text-red'>*{errorMsg}</h1>
+            </div>
+            }
+            {
+                successMsg?<div >
+                <h1 className='relative items-center justify-center   text-green'>{"*Check your email and verify your account."}</h1>
+            </div>:<></>
+            }
             </div>
         </div>
     </div>
