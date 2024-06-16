@@ -1,5 +1,4 @@
 export const HOME_PAGE = '/';
-export const RESET_PASSWORD_PAGE = '/reset-password';
 
 export const AUTH_ROUTE = '/auth';
 export const CLIENT_SIGNIN = `${AUTH_ROUTE}/client-signin`;
@@ -10,3 +9,6 @@ export const CYPHER_SIGNUP = `${AUTH_ROUTE}/cypher-signup`;
 
 export const CLIENT_ROUTE = '/client';
 export const CLIENT_DASHBOARD = `${CLIENT_ROUTE}/dashboard`;
+export const POST_WORK = `${CLIENT_ROUTE}/post-work`;
+export const RESET_PASSWORD_PAGE = `${CLIENT_ROUTE}/reset-password`;
+export const CLIENT_PROJECTS = `${CLIENT_ROUTE}/manage-projects`;

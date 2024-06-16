@@ -32,7 +32,7 @@ const Navbar: FC<NavbarProps> = () => {
             {/* TODO: Change href attributes */}
             <NavLink href={HOME_PAGE}>Home</NavLink>
             <NavLink href={HOME_PAGE}>Find Work</NavLink>
-            <NavLink href={HOME_PAGE}>Request Wizard</NavLink>
+            <NavLink href={HOME_PAGE}>Request Cypher</NavLink>
           </div>
           <div className="flex items-center tablet:gap-2 desktop:gap-4">
           <ButtonDropdown

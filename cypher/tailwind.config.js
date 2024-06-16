@@ -22,7 +22,8 @@ export default {
       orange: '#F99417',
       authSubHeading: '#4F709C',
       red:'#8B0000',
-      green:'#008000'
+      green:'#008000',
+      skillPurple:'#EFE3FF'
 
     },
     fontSize: {
