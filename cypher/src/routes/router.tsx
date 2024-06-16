@@ -7,11 +7,12 @@ import ClientSignInPage from '../pages/Authentication/ClientSignInPage';
 import CypherSignUpPage from '../pages/Authentication/CypherSignUpPage';
 import CypherSignInPage from '../pages/Authentication/CypherSignInPage';
 import ClientLayout from '../layouts/ClientLayout';
+import ClientDashboard from '../pages/Client/ClientDashboard';
+import Error404Page from '../pages/Error404Page';
 import ClientDashboard from '../pages/Client/ClientDashboardPage';
 import PostWorkPage from '../pages/Client/PostWorkPage';
 import ResetPasswordPage from '../pages/Client/ResetPasswordPage';
 import ManageProjectsPage from '../pages/Client/ManageProjectsPage';
-
 
 
 const router = createBrowserRouter([
@@ -56,6 +57,7 @@ const router = createBrowserRouter([
                         path:'dashboard',
                         element: <ClientDashboard/>
                     },
+
                     {
                         path:'post-work',
                         element:<PostWorkPage/>
@@ -69,6 +71,11 @@ const router = createBrowserRouter([
                         element: <ManageProjectsPage/>
                     }
                 ]
+            },
+            //404 Error
+            {
+                path:'*',
+                element:<Error404Page/>
             }
         ]
     }
