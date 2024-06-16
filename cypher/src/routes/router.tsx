@@ -12,6 +12,9 @@ import PostWorkPage from '../pages/Client/PostWorkPage';
 import ResetPasswordPage from '../pages/Client/ResetPasswordPage';
 import ManageProjectsPage from '../pages/Client/ManageProjectsPage';
 
+import PostWorkPage from '../pages/Client/PostWorkPage';
+
+
 const router = createBrowserRouter([
         {
         path:'/',

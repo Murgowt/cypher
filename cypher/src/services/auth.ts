@@ -21,7 +21,6 @@ export const CLIENT_SIGNUP_REQUEST = (postData:{first_name:string,last_name:stri
         return 0;
     })
     return promise
-    // return axios.post(CLIENT_SIGNUP_ENDPOINT,postData)
  }
 
 
