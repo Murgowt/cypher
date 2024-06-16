@@ -1,32 +1,71 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { AllOrdersResponse } from '../../interfaces/apis/client';
 
-export interface PaymentCardProps {}
+export interface PaymentCardProps {
+    completedOrders: AllOrdersResponse['completedOrders'];
+}
 
+const PaymentCard: FC<PaymentCardProps> = ({ completedOrders }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-const PaymentCard: FC<PaymentCardProps> = () => {
-    let details ={ Wizard: 'Jane Cooper', Time: '2 days', Payment: '$20' };
-  
+    const nextOrder = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % completedOrders.length);
+    };
 
-  return (
-    <div className="p-2 tablet:px-8 pb-4 h-1/2">
-        <div className="flex justify-between font-abhaya px-4 monitor:pb-2">
-            <p className="text-md text-secondary monitor:text-lg">Payment</p>
-        </div>
-        <div className="shadow-md p-8 bg-white rounded-md">
-            <div className="flex justify-between items-center py-2 w-full">
-                <p className="w-1/2 truncate font-abhaya text-xs text-orange pl-10 monitor:text-lg monitor:pt-16">Project Name</p>
+    const previousOrder = () => {
+        setCurrentIndex((prevIndex) =>
+            prevIndex === 0 ? completedOrders.length - 1 : prevIndex - 1
+        );
+    };
+
+    const currentOrder = completedOrders[currentIndex];
+
+    return (
+        <div className="p-2 tablet:px-8 pb-4 h-1/2">
+            <div className="flex justify-between font-abhaya px-4 monitor:pb-2">
+                <p className="text-md text-secondary monitor:text-lg">Payment</p>
+                <div className="flex items-center">
+                    <button
+                        onClick={previousOrder}
+                        className="text-grey hover:text-black text-gray-600 font-bold py-2 px-4 rounded-l"
+                        disabled={completedOrders.length <= 1}
+                    >
+                        &lt;
+                    </button>
+                    <button
+                        onClick={nextOrder}
+                        className="text-grey hover:text-black text-gray-600 font-bold py-2 px-4 rounded-r"
+                        disabled={completedOrders.length <= 1}
+                    >
+                        &gt;
+                    </button>
+                </div>
             </div>
-            <div className="grid grid-cols-1 gap-3 tablet:px-1 py-4 monitor:pb-16">
-                {Object.entries(details).map(([key, value]) => (
-                    <div key={key} className="flex">
-                        <p className="w-1/2 truncate font-abhaya text-xs text-black pl-10 monitor:text-md">{key}</p>
-                        <p className="w-1/2 truncate font-abhaya text-xs text-black text-right pr-10 monitor:text-md">{value}</p>
+            {completedOrders.length === 0 ? (
+                <div className="shadow-md p-8 bg-white rounded-md">
+                    <p className="text-center font-abhaya text-xs text-black monitor:text-md">No payments done yet.</p>
+                </div>
+            ) : (
+                <div className="shadow-md p-8 bg-white rounded-md">
+                    <div className="flex justify-between items-center py-2 w-full">
+                        <p className="w-1/2 truncate font-abhaya text-xs text-orange pl-10 monitor:text-lg monitor:pt-16">
+                            Project Name: {currentOrder.title}
+                        </p>
                     </div>
-                ))}
-            </div>
+                    <div className="grid grid-cols-1 gap-3 tablet:px-1 py-4 monitor:pb-16">
+                        <div className="flex">
+                            <p className="w-1/2 truncate font-abhaya text-xs text-black pl-10 monitor:text-md">Cypher</p>
+                            <p className="w-1/2 truncate font-abhaya text-xs text-black text-right pr-10 monitor:text-md">{currentOrder.wizardId}</p>
+                        </div>
+                        <div className="flex">
+                            <p className="w-1/2 truncate font-abhaya text-xs text-black pl-10 monitor:text-md">Payment</p>
+                            <p className="w-1/2 truncate font-abhaya text-xs text-black text-right pr-10 monitor:text-md">{currentOrder.budget}</p>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-    </div>
-  );
+    );
 };
 
 export default PaymentCard;

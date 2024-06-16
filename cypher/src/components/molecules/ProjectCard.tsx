@@ -4,7 +4,7 @@ export interface ProjectCardProps {
   name: string;
   task: string;
   status: string;
-  budget: string;
+  budget: number;
 }
 
 const ProjectCard: FC<ProjectCardProps> = ({ name, task, status, budget }) => {
