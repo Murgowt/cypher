@@ -15,6 +15,7 @@ import ManageProjectsPage from '../pages/Client/ManageProjectsPage';
 import CypherDashboard from '../pages/Cypher/CypherDashboard';
 import CypherLayout from '../layouts/CypherLayout';
 import FindWorkPage from '../pages/Cypher/FindWorkPage'
+import EnrollmentTest from '../pages/Cypher/EnrollmentTest';
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
                         path:'cypher-signin',
                         element:<CypherSignInPage/>
                     },
+                    {
+                        path:'enrollment_test',
+                        element:<EnrollmentTest/>
+                    },
                 ]
             },
             //CLIENT 
@@ -74,11 +79,7 @@ const router = createBrowserRouter([
                     }
                 ]
             },
-            //404 Error
-            {
-                path:'*',
-                element:<Error404Page/>
-            },
+            //CYHPER
             {
                 path:'cypher',
                 element:<CypherLayout/>,
@@ -96,7 +97,12 @@ const router = createBrowserRouter([
                         element:<ManageProjectsPage/> //Todo: Change it accordingly
                     }
                 ]
-            }
+            },
+             //404 Error
+             {
+                path:'*',
+                element:<Error404Page/>
+            },
         ]
     }
 ])

@@ -1,9 +1,21 @@
 import {FC,useState} from 'react';
  import FormElement from '../../components/atoms/FormElement';
+import { useNavigate } from 'react-router-dom';
+import { ENROLLMENT_TEST } from '../../constants/routes.ui';
+
 interface CypherSignUpPageProps{}
+interface PostDataDeclaration{
+        first_name:string,
+        last_name:string,
+        email:string,
+        password:string,
+        confirmPassword: string,
+        PAN?:File
+}
 
 const CypherSignUpPage: FC<CypherSignUpPageProps> =()=>{
-    const [postData, setPostData] = useState({
+    const navigate = useNavigate();
+    const [postData, setPostData] = useState<PostDataDeclaration>({
         first_name:'',
         last_name:'',
         email:'',
@@ -13,7 +25,12 @@ const CypherSignUpPage: FC<CypherSignUpPageProps> =()=>{
     const [errorMsg, setErrorMsg] = useState('');
     const [success,toggleSuccess] = useState(false);
     const handleChange = (e:any) =>{
-
+        if(e.target.name=="PAN"){
+            let data = postData
+            data["PAN"]= e.target.files[0]
+            setPostData(data)
+            return
+        }
         setPostData({...postData,[e.target.name]:e.target.value})
     }
 
@@ -46,17 +63,8 @@ const CypherSignUpPage: FC<CypherSignUpPageProps> =()=>{
         }
         let {confirmPassword,...rest}=postData
         setErrorMsg('');
-        const result = 2
-        if(result==2){
-            console.log('success')
-            toggleSuccess(true);
-        }
-        else if(result==1){
-            setErrorMsg('Account with email already exists.');
-        }
-        else{
-            setErrorMsg('Something went wrong, please try again later.');
-        }
+        navigate(ENROLLMENT_TEST,{state:postData})
+        
     }
     return (
     <div className='flex items-start justify-center '>
@@ -97,11 +105,11 @@ const CypherSignUpPage: FC<CypherSignUpPageProps> =()=>{
                     type="password" id="confirmPassword" />
                 <div>
                     <label  className="block mb-2 text-sm font-medium text-secondary">{"Upload PAN Card*"}</label>
-                    <input  className="mb-5" type="file"/>
+                    <input  className="mb-5" type="file" name="PAN"/>
                 </div>
                 
             <div className='w-full'>
-                <button className="bg-primary text-white px-5 py-3 w-full rounded-lg shadow-lg" onClick={handleSubmit}>Submit</button>
+                <button className="bg-primary text-white px-5 py-3 w-full rounded-lg shadow-lg" onClick={handleSubmit}>Take the Test</button>
             </div>
             </form>
             {
