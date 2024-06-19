@@ -1,7 +1,9 @@
 import {FC, useEffect, useState} from 'react'
-import { useLocation } from 'react-router-dom';
+import { redirect, useLocation, useNavigate } from 'react-router-dom';
 import questions from '../../constants/enrollmentQuestions';
 import QuestionItem from '../../components/molecules/QuestionItem';
+import { CYPHER_SIGNUP_REQUEST } from '../../services/auth';
+import { CYPHER_TEST_RESULT_PAGE } from '../../constants/routes.ui';
 
 interface EnrollmentTestProps {}
 interface StateDeclaration {
@@ -10,6 +12,7 @@ interface StateDeclaration {
 
 const EnrollmentTest:FC<EnrollmentTestProps> = () =>{
     const [answers,SetAnswers]= useState<StateDeclaration>({}); 
+    const navigate = useNavigate();
     var location = useLocation();
     const [errorMsg,setErrorMsg] = useState('');
     useEffect(()=>{
@@ -18,30 +21,30 @@ const EnrollmentTest:FC<EnrollmentTestProps> = () =>{
             data[String(questions[i].questionId)]=questions[i].options[0]
         }
         SetAnswers(data);
-        console.log(location)
     },[])
 
     const handleChange = (key:string,value:string) =>{
         SetAnswers({...answers,[key]:value})
     }
     
-    const handleSubmit = (e:any)=>{
+    const handleSubmit = async (e:any)=>{
         e.preventDefault()
         for (const key in answers)
             {
                if(answers[key]==""){
-
+                setErrorMsg("Please answer all questions");
+                return
                }
             }
-        setErrorMsg("Please answer all questions");
-        return
+        var result = await CYPHER_SIGNUP_REQUEST(location.state,answers);
+        console.log(result)
+        navigate(CYPHER_TEST_RESULT_PAGE,{state:{code:result}})
+        
     }
-    //BACKEND CALL HERE
-
-    useEffect(()=>{
-        console.log(answers)
-    },[answers])
-
+    
+   
+   
+ 
     return (
         <div className='flex items-start justify-center '>
             <div className='tablet:px-[5rem]  bg-white border-secondary shadow-xl rounded overflow-hidden 

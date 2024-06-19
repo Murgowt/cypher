@@ -16,6 +16,7 @@ import CypherDashboard from '../pages/Cypher/CypherDashboard';
 import CypherLayout from '../layouts/CypherLayout';
 import FindWorkPage from '../pages/Cypher/FindWorkPage'
 import EnrollmentTest from '../pages/Cypher/EnrollmentTest';
+import TestResultPage from '../pages/Cypher/TestResultPage';
 
 
 const router = createBrowserRouter([
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
                         path:'enrollment_test',
                         element:<EnrollmentTest/>
                     },
+                    {
+                        path:'enrollment_test_result',
+                        element:<TestResultPage/>
+                    }
                 ]
             },
             //CLIENT 

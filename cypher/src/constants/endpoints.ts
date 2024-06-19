@@ -1,3 +1,4 @@
+//Backend Endpoints
 export const CLIENT_SIGNUP_ENDPOINT      = "client/register";
 export const CLIENT_SIGNIN_ENDPOINT      = "client/login";
 export const ALLORDERS_ENDPOINT          = "client/allorders";
@@ -6,4 +7,4 @@ export const CLIENT_CREATE_PROJECT       = "client/order";
 
 export const CYPHERORDERS_ENDPOINT       = "wizard/allorders";
 export const FINDWORK_ENDPOINT           = "wizard/allorders";
-
+export const CYPHER_ENROLL               = "wizard/register";
