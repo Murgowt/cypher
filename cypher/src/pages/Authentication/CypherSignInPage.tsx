@@ -1,9 +1,17 @@
 import {FC, useState} from 'react';
 import FormElement from '../../components/atoms/FormElement';
+import { useAuthStore } from '../../helpers/authStore';
+import { CYPHER_SIGNIN_REQUEST } from '../../services/auth';
+import { LoginResponse } from '../../interfaces/apis/auth';
+import { CYPHER_DASHBOARD } from '../../constants/routes.ui';
+import { useNavigate } from 'react-router-dom';
 
 interface CypherSignInPageProps{}
 
 const CypherSignInPage: FC<CypherSignInPageProps> =()=>{
+    const setAuthToken = useAuthStore((state) => state.setAuthToken);
+    const navigate = useNavigate();
+    const setUser = useAuthStore((state) => state.setUser);
     const [errorMsg, setErrorMsg] = useState('');
     const [postData, setPostData] = useState({
         email:'',
@@ -11,7 +19,6 @@ const CypherSignInPage: FC<CypherSignInPageProps> =()=>{
     })
     const [success,toggleSuccess] = useState(false);
     const handleChange = (e:any) =>{
-        console.log(e.target.value)
         setPostData({...postData,[e.target.name]:e.target.value})
     }
 
@@ -32,7 +39,37 @@ const CypherSignInPage: FC<CypherSignInPageProps> =()=>{
         }
        
         setErrorMsg('');
-       
+        const result = await CYPHER_SIGNIN_REQUEST(postData)
+        console.log(result)
+        if(result == "Something went wrong, please try again later."){
+            setErrorMsg("Something went wrong, please try again later.");
+            return
+        }
+        if(result == "User doesn't exist"){
+            setErrorMsg(result);
+            return
+        }
+        if(result == "Password doesn't match"){
+            setErrorMsg(result);
+            return
+        }
+        else{
+            toggleSuccess(true);
+            const loginResponse: LoginResponse = result;
+
+            setAuthToken(loginResponse.token);
+            setUser({
+            name: {
+                first: loginResponse.first_name,
+                last: loginResponse.last_name,
+            },
+            email: loginResponse.email,
+            username: loginResponse.username,
+            role: 'cypher',
+            });
+
+            navigate(CYPHER_DASHBOARD)
+        }
     }
 
     return (
@@ -47,8 +84,6 @@ const CypherSignInPage: FC<CypherSignInPageProps> =()=>{
                 </div>
                 
                 <form className="py-8 mx-auto">
-    
-        
     
                     <FormElement 
                         labelText="Your Email*" helperFunction={handleChange} 

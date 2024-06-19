@@ -8,3 +8,4 @@ export const CLIENT_CREATE_PROJECT       = "client/order";
 export const CYPHERORDERS_ENDPOINT       = "wizard/allorders";
 export const FINDWORK_ENDPOINT           = "wizard/allorders";
 export const CYPHER_ENROLL               = "wizard/register";
+export const CYPHER_SIGNIN_ENDPOINT      = "wizard/login";
