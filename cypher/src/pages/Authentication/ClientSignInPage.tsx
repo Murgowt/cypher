@@ -110,7 +110,7 @@ const ClientSignInPage: FC<ClientSignInPageProps> =()=>{
                 <h1 className='relative items-center justify-center   text-green'>{"*Login Succesful, loading..."}</h1>
             </div>:<></>
             }
-
+ 
             </div>
         </div>
     </div>)
