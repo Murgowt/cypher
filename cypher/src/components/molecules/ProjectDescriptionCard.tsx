@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ProjectDescriptionCardProps {
     project: {
@@ -6,10 +7,19 @@ interface ProjectDescriptionCardProps {
         title: string;
         description: string;
         tech: string[];
+        budget: string;
+        milestones: string;
     };
 }
 
 const ProjectDescriptionCard: FC<ProjectDescriptionCardProps> = ({ project }) => {
+
+    const navigate = useNavigate();
+
+    const handleViewMore = () => {
+        navigate(`/cypher/view-project`, { state: { project } });
+    };
+
     return (
         <div className="p-8 rounded-md bg-white shadow-md font-abhaya">
             <h2 className="text-xl font-bold pb-2 text-secondary">{project.title}</h2>
@@ -24,7 +34,7 @@ const ProjectDescriptionCard: FC<ProjectDescriptionCardProps> = ({ project }) =>
                         </span>
                     ))}
                 </div>
-                <a className="text-xs text-primary hover:underline">View More</a>
+                <a onClick={handleViewMore} className="text-xs text-primary hover:underline">View More</a>
             </div>
         </div>
     );
