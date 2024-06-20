@@ -4,7 +4,7 @@ import { useAuthStore } from '../../helpers/authStore';
 import { ERRORS } from '../../constants/app';
 import { isAxiosError } from 'axios';
 import { ALLORDERS_REQUEST } from '../../services/client';
-import { AllOrdersResponse } from '../../interfaces/apis/client';
+import { AllOrdersResponse } from '../../interfaces/apis/clientapis';
 
 interface ClientDashboardProps{}
 
@@ -15,7 +15,7 @@ const ClientDashboard: FC<ClientDashboardProps> =()=>{
 
     const [apiError, setApiError] = useState<string | null>(null);
     
-    const [allOrders, setallOrders] = useState<AllOrdersResponse>({ openOrders: [], activeOrders: [], completedOrders: []});
+    const [allOrders, setallOrders] = useState<AllOrdersResponse>({ pendingOrders: [], activeOrders: [], completedOrders: []});
 
     useEffect(() => {
         const getDashboardData = async () => {
@@ -46,7 +46,7 @@ const ClientDashboard: FC<ClientDashboardProps> =()=>{
         getDashboardData();
       }, [authToken, isAuthenticated]);
 
-      const allOrdersArray = [...allOrders.openOrders,...allOrders.activeOrders,...allOrders.completedOrders];
+      const allOrdersArray = [...allOrders.pendingOrders,...allOrders.activeOrders,...allOrders.completedOrders];
       const sortedOrders = allOrdersArray.sort((a, b) => b.creationtimestamp - a.creationtimestamp);
       const recentOrders = sortedOrders.slice(0, 6);
 

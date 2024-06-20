@@ -10,8 +10,8 @@ import ClientLayout from '../layouts/ClientLayout';
 import Error404Page from '../pages/Error404Page';
 import ClientDashboard from '../pages/Client/ClientDashboardPage';
 import PostWorkPage from '../pages/Client/PostWorkPage';
-import ResetPasswordPage from '../pages/Client/ResetPasswordPage';
-import ManageProjectsPage from '../pages/Client/ManageProjectsPage';
+import ResetPasswordPage from '../pages/Common/ResetPasswordPage';
+import ManageProjectsPage from '../pages/Common/ManageProjectsPage';
 import CypherDashboard from '../pages/Cypher/CypherDashboard';
 import CypherLayout from '../layouts/CypherLayout';
 import FindWorkPage from '../pages/Cypher/FindWorkPage'

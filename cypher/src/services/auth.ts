@@ -1,5 +1,5 @@
 import axios from "../helpers/axios";
-import { CLIENT_SIGNIN_ENDPOINT, CLIENT_SIGNUP_ENDPOINT, CYPHER_ENROLL, RESET_PASSWORD_ENDPOINT } from "../constants/endpoints";
+import { CLIENT_SIGNIN_ENDPOINT, CLIENT_SIGNUP_ENDPOINT, CYPHER_ENROLL, RESET_PASSWORD_ENDPOINT, CYPHER_SIGNIN_ENDPOINT } from "../constants/endpoints";
 
 export const CYPHER_SIGNUP_REQUEST =  (location:Object,answers:Object) =>{
     let postData ={...location,...answers}
@@ -64,7 +64,7 @@ export const CLIENT_SIGNUP_REQUEST = (postData:{first_name:string,last_name:stri
  }
 
  export const CYPHER_SIGNIN_REQUEST = (postData:{email:string,password:string}) =>{
-    let promise = axios.post(CLIENT_SIGNIN_ENDPOINT,postData)
+    let promise = axios.post(CYPHER_SIGNIN_ENDPOINT,postData)
                 .then(response=>{
                     if('data' in response){
                         return response.data

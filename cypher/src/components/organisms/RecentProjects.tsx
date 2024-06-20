@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import ProjectCard from '../molecules/ProjectCard';
 import ProgressCounts from '../molecules/ProgressCounts';
-import { AllOrdersResponse, Order } from '../../interfaces/apis/client';
+import { AllOrdersResponse, Order } from '../../interfaces/apis/clientapis';
 import { CLIENT_PROJECTS } from '../../constants/routes.ui';
 
 
@@ -10,12 +10,12 @@ export interface ClientProjectsProps {
   recentOrders: Order[];
 }
 
-const ClientProjects: FC<ClientProjectsProps> = ({ allOrders, recentOrders }) => {
+const RecentProjects: FC<ClientProjectsProps> = ({ allOrders, recentOrders }) => {
 
   const progressCounts: number[] = [
-    allOrders.activeOrders?.length + allOrders.completedOrders?.length + allOrders.openOrders?.length,
+    allOrders.activeOrders?.length + allOrders.completedOrders?.length + allOrders.pendingOrders?.length,
     allOrders.completedOrders?.length,
-    allOrders.activeOrders?.length + allOrders.openOrders?.length
+    allOrders.activeOrders?.length + allOrders.pendingOrders?.length
   ];
 
   return (
@@ -36,6 +36,7 @@ const ClientProjects: FC<ClientProjectsProps> = ({ allOrders, recentOrders }) =>
         </div>
         <div className="flex flex-col">
           <div className="pb-4 grid grid-cols-1 gap-1 tablet:px-1 monitor:gap-4">
+            {recentOrders.length === 0 ? <div className="flex justify-center p-3 w-full text-xs mt-20 monitor:text-md">No Projects yet</div>: <></>}
             {recentOrders.map((i) => (
               <div key={i.id} className="col-span-1">
                 <ProjectCard name={i.title} task={i.description} status={i.status === 'open' ? 'Pending' : i.status} budget={i.budget} />
@@ -48,4 +49,4 @@ const ClientProjects: FC<ClientProjectsProps> = ({ allOrders, recentOrders }) =>
   );
 };
 
-export default ClientProjects;
+export default RecentProjects;

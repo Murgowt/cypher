@@ -19,10 +19,16 @@ export const OrderSchema = z.object({
 
 export type Order = z.infer<typeof OrderSchema>;
 
-export const AllOrdersResponseSchema = z.object({
-    openOrders: z.array(OrderSchema),
+export const CypherOrdersResponseSchema = z.object({
+    pendingOrders: z.array(OrderSchema),
     activeOrders: z.array(OrderSchema),
     completedOrders: z.array(OrderSchema)
   });
 
-export type AllOrdersResponse = z.infer<typeof AllOrdersResponseSchema>;
+export type CypherOrdersResponse = z.infer<typeof CypherOrdersResponseSchema>;
+
+export const FindOrdersResponseSchema = z.object({
+    openOrders: z.array(OrderSchema)
+  });
+
+export type FindOrdersResponse = z.infer<typeof FindOrdersResponseSchema>;

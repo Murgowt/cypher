@@ -5,7 +5,7 @@ import BrandLogo from '../atoms/BrandLogo';
 import NavLink from '../atoms/NavLink';
 import ButtonDropdown from '../atoms/ButtonDropdown';
 
-import { HOME_PAGE } from '../../constants/routes.ui';
+import { CLIENT_SIGNIN, CLIENT_SIGNUP, CYPHER_SIGNIN, CYPHER_SIGNUP, HOME_PAGE } from '../../constants/routes.ui';
 
 import {
   navbarSignupButton,
@@ -29,10 +29,9 @@ const Navbar: FC<NavbarProps> = () => {
         </div>
         <div className="items-center justify-between hidden w-full tablet:flex desktop:flex">
           <div className="flex items-center tablet:gap-4 desktop:gap-10">
-            {/* TODO: Change href attributes */}
             <NavLink href={HOME_PAGE}>Home</NavLink>
-            <NavLink href={HOME_PAGE}>Find Work</NavLink>
-            <NavLink href={HOME_PAGE}>Request Cypher</NavLink>
+            <NavLink href={CYPHER_SIGNIN}>Find Work</NavLink>
+            <NavLink href={CLIENT_SIGNIN}>Request Cypher</NavLink>
           </div>
           <div className="flex items-center tablet:gap-2 desktop:gap-4">
           <ButtonDropdown
@@ -73,12 +72,12 @@ const Navbar: FC<NavbarProps> = () => {
           </div>
           <div className="flex flex-col gap-4">
             <NavLink href={HOME_PAGE}>Home</NavLink>
-            <NavLink href={HOME_PAGE}>Find Work</NavLink>
-            <NavLink href={HOME_PAGE}>Request Wizard</NavLink>
-            <NavLink href={HOME_PAGE}>Client Login</NavLink>
-            <NavLink href={HOME_PAGE}>Client Signup</NavLink>
-            <NavLink href={HOME_PAGE}>Cypher Login</NavLink>
-            <NavLink href={HOME_PAGE}>Cypher Signup</NavLink>
+            <NavLink href={CYPHER_SIGNIN}>Find Work</NavLink>
+            <NavLink href={CLIENT_SIGNIN}>Request Wizard</NavLink>
+            <NavLink href={CLIENT_SIGNIN}>Client Login</NavLink>
+            <NavLink href={CLIENT_SIGNUP}>Client Signup</NavLink>
+            <NavLink href={CYPHER_SIGNIN}>Cypher Login</NavLink>
+            <NavLink href={CYPHER_SIGNUP}>Cypher Signup</NavLink>
           </div>
         </div>
       </div>

@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Navigate } from 'react-router-dom';
 import { Outlet } from "react-router-dom";
-import { validAuthToken } from '../helpers/auth';
+import { validAuthToken } from '../helpers/authDetails';
 import { useAuthStore } from '../helpers/authStore';
-import ClientNavbar from "../components/molecules/ClientNavbar";
+import DashboardNavbar from "../components/molecules/DashboardNavbar";
 import Footer from "../components/molecules/Footer";
 import { CLIENT_SIGNIN } from '../constants/routes.ui';
 
@@ -22,7 +22,7 @@ const ClientLayout: FC<ClientLayoutProps> = () =>{
 
     return(
         <div className="flex flex-col min-h-screen">
-            <ClientNavbar/>
+            <DashboardNavbar/>
             <Outlet/>
             <Footer />
         </div>

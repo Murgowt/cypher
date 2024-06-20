@@ -4,14 +4,15 @@ import Image from "../atoms/Image";
 import BrandLogo from '../atoms/BrandLogo';
 import NavLink from '../atoms/NavLink';
 
-import { CLIENT_DASHBOARD, CLIENT_PROJECTS, CLIENT_SIGNIN, POST_WORK } from '../../constants/routes.ui';
+import { CYPHER_DASHBOARD, CYPHER_PROJECTS, CYPHER_SIGNIN, FIND_WORK,CLIENT_DASHBOARD, CLIENT_PROJECTS, CLIENT_SIGNIN, POST_WORK } from '../../constants/routes.ui';
 import CypherButton from '../atoms/CypherButton';
 import { useAuthStore } from '../../helpers/authStore';
 
-export interface ClientNavbarProps {}
+export interface DashboardNavbarProps {}
 
-const ClientNavbar: FC<ClientNavbarProps> = () => {
+const DashboardNavbar: FC<DashboardNavbarProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
 
   const handleMenuClick = () => {
@@ -22,6 +23,8 @@ const ClientNavbar: FC<ClientNavbarProps> = () => {
     console.log("Clicked on Helper Function.")
   }
 
+  const fallBackLink = user?.role === 'client' ? CLIENT_SIGNIN : CYPHER_SIGNIN;
+
   let ProfilePath='/images/ProfilePhoto.png'
 
   return (
@@ -31,17 +34,26 @@ const ClientNavbar: FC<ClientNavbarProps> = () => {
           <BrandLogo/>
         </div>
         <div className="items-center justify-between hidden w-full tablet:flex desktop:flex">
-          <div className="flex items-center tablet:gap-4 desktop:gap-10">
+          
             {/* TODO: Change href attributes */}
-            <NavLink href={CLIENT_DASHBOARD}>Dashboard</NavLink>
-            <NavLink href={POST_WORK}>Post Work</NavLink>
-            <NavLink href={CLIENT_PROJECTS}>Manage Projects</NavLink>
-          </div>
+            { user?.role === 'client' ? 
+            <div className="flex items-center tablet:gap-4 desktop:gap-10">
+              <NavLink href={CLIENT_DASHBOARD}>Dashboard</NavLink>
+              <NavLink href={POST_WORK}>Post Work</NavLink>
+              <NavLink href={CLIENT_PROJECTS}>Manage Projects</NavLink>
+            </div>
+            :
+            <div className="flex items-center tablet:gap-4 desktop:gap-10">
+              <NavLink href={CYPHER_DASHBOARD}>Dashboard</NavLink>
+              <NavLink href={FIND_WORK}>Find Work</NavLink>
+              <NavLink href={CYPHER_PROJECTS}>Manage Projects</NavLink>
+            </div>
+            }
+            
           <div className="flex items-center tablet:gap-8">
-            <NavLink href={CLIENT_SIGNIN} onclick={logout}>
+            <NavLink href={fallBackLink} onclick={logout}>
             <CypherButton placeHolder='Log Out' helperFunction={helperFunction}/>
             </NavLink>
-            
             <Image path={ProfilePath} altText={'Profile Photo'}/>
           </div>
         </div>
@@ -69,16 +81,25 @@ const ClientNavbar: FC<ClientNavbarProps> = () => {
               <AiOutlineClose size={28} className="text-black" />
             </button>
           </div>
-          <div className="flex flex-col gap-4">
-            <NavLink href={CLIENT_DASHBOARD}>Dashboard</NavLink>
-            <NavLink href={POST_WORK}>Post Work</NavLink>
-            <NavLink href={CLIENT_PROJECTS}>Manage Projects</NavLink>
-            <CypherButton placeHolder='Log Out' helperFunction={helperFunction}/>
-          </div>
+          { user?.role === 'client' ? 
+            <div className="flex flex-col gap-4">
+              <NavLink href={CLIENT_DASHBOARD}>Dashboard</NavLink>
+              <NavLink href={POST_WORK}>Post Work</NavLink>
+              <NavLink href={CLIENT_PROJECTS}>Manage Projects</NavLink>
+              <CypherButton placeHolder='Log Out' helperFunction={logout}/>
+            </div>
+            :
+            <div className="flex flex-col gap-4">
+              <NavLink href={CYPHER_DASHBOARD}>Dashboard</NavLink>
+              <NavLink href={FIND_WORK}>Find Work</NavLink>
+              <NavLink href={CYPHER_PROJECTS}>Manage Projects</NavLink>
+              <CypherButton placeHolder='Log Out' helperFunction={logout}/>
+            </div>
+            }
         </div>
       </div>
     </div>
   );
 };
 
-export default ClientNavbar;
+export default DashboardNavbar;

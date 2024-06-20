@@ -17,5 +17,5 @@ export const CLIENT_PROJECTS = `${CLIENT_ROUTE}/manage-projects`;
 
 export const CYPHER_ROUTE = '/cypher';
 export const CYPHER_DASHBOARD = `${CYPHER_ROUTE}/dashboard`;
-export const FIND_WORK = `${CYPHER_ROUTE}/post-work`;
+export const FIND_WORK = `${CYPHER_ROUTE}/find-work`;
 export const CYPHER_PROJECTS = `${CYPHER_ROUTE}/manage-projects`;

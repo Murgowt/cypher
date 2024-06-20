@@ -1,5 +1,5 @@
 import {FC, useEffect, useState} from 'react'
-import { redirect, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import questions from '../../constants/enrollmentQuestions';
 import QuestionItem from '../../components/molecules/QuestionItem';
 import { CYPHER_SIGNUP_REQUEST } from '../../services/auth';

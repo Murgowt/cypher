@@ -4,7 +4,7 @@ import { useAuthStore } from '../../helpers/authStore';
 import { ERRORS } from '../../constants/app';
 import { isAxiosError } from 'axios';
 import { CYPHERORDERS_REQUEST } from '../../services/cypher';
-import { AllOrdersResponse } from '../../interfaces/apis/client';
+import { CypherOrdersResponse } from '../../interfaces/apis/cypherapis';
 
 interface CypherDashboardProps{}
 
@@ -15,7 +15,7 @@ const CypherDashboard: FC<CypherDashboardProps> =()=>{
 
     const [apiError, setApiError] = useState<string | null>(null);
     
-    const [allOrders, setallOrders] = useState<AllOrdersResponse>({ openOrders: [], activeOrders: [], completedOrders: []});
+    const [allOrders, setallOrders] = useState<CypherOrdersResponse>({ pendingOrders: [], activeOrders: [], completedOrders: []});
 
     useEffect(() => {
         const getDashboardData = async () => {
@@ -23,7 +23,8 @@ const CypherDashboard: FC<CypherDashboardProps> =()=>{
             try {
               const res = await CYPHERORDERS_REQUEST(authToken!, user!.role);
               if (res.status === 200) {
-                const allOrdersResponse: AllOrdersResponse = res.data;
+                const allOrdersResponse: CypherOrdersResponse = res.data;
+                console.log(allOrdersResponse)
                 setallOrders(allOrdersResponse)
                 setApiError(null);
               }
@@ -49,7 +50,7 @@ const CypherDashboard: FC<CypherDashboardProps> =()=>{
       [authToken, isAuthenticated]
       );
 
-      const allOrdersArray = [...allOrders.openOrders,...allOrders.activeOrders,...allOrders.completedOrders];
+      const allOrdersArray = [...allOrders.pendingOrders,...allOrders.activeOrders,...allOrders.completedOrders];
       const sortedOrders = allOrdersArray.sort((a, b) => b.creationtimestamp - a.creationtimestamp);
       const recentOrders = sortedOrders.slice(0, 6);
 

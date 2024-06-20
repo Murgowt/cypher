@@ -4,7 +4,7 @@ import { useAuthStore } from '../../helpers/authStore';
 import { ERRORS } from '../../constants/app';
 import { isAxiosError } from 'axios';
 import { ALLORDERS_REQUEST } from '../../services/client';
-import { AllOrdersResponse } from '../../interfaces/apis/client';
+import { AllOrdersResponse } from '../../interfaces/apis/clientapis';
 
 interface ManageProjectsPageProps{}
 
@@ -16,7 +16,7 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
 
     const [apiError, setApiError] = useState<string | null>(null);
     
-    const [allOrders, setallOrders] = useState<AllOrdersResponse>({ openOrders: [], activeOrders: [], completedOrders: []
+    const [allOrders, setallOrders] = useState<AllOrdersResponse>({ pendingOrders: [], activeOrders: [], completedOrders: []
     });
 
     useEffect(() => {
@@ -57,7 +57,7 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
 
     useEffect(() => {
             switch (selectedStatus) {
-                case 'open': setProjects(allOrders.openOrders);
+                case 'open': setProjects(allOrders.pendingOrders);
                     break;
                 case 'active': setProjects(allOrders.activeOrders);
                     break;
