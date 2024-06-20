@@ -5,19 +5,20 @@ import { validAuthToken } from '../helpers/authDetails';
 import { useAuthStore } from '../helpers/authStore';
 import DashboardNavbar from "../components/molecules/DashboardNavbar";
 import Footer from "../components/molecules/Footer";
-import { CLIENT_SIGNIN } from '../constants/routes.ui';
+import { CYPHER_SIGNIN } from '../constants/routes.ui';
 
-interface ClientLayoutProps {}
+interface CypherLayoutProps {}
 
 
-const ClientLayout: FC<ClientLayoutProps> = () =>{
+const CypherLayout: FC<CypherLayoutProps> = () =>{
     const authToken = useAuthStore((state) => state.authToken);
     const user = useAuthStore((state) => state.user);
     const logout = useAuthStore((state) => state.logout);
 
-    if (!authToken || !user || (user && user.role !== 'client') || !validAuthToken(authToken!)) {
+    if (!authToken || !user || (user && user.role !== 'wizard') || !validAuthToken(authToken!)) {
       logout();
-      return <Navigate to={CLIENT_SIGNIN} />;
+      console.log('here')
+      return <Navigate to={CYPHER_SIGNIN} />;
     }
 
     return(
@@ -29,4 +30,4 @@ const ClientLayout: FC<ClientLayoutProps> = () =>{
     )
 }
 
-export default ClientLayout;
+export default CypherLayout;

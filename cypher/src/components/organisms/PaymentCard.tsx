@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { AllOrdersResponse } from '../../interfaces/apis/client';
+import { AllOrdersResponse } from '../../interfaces/apis/clientapis';
 
 export interface PaymentCardProps {
     completedOrders: AllOrdersResponse['completedOrders'];

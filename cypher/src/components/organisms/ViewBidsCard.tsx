@@ -3,28 +3,25 @@ import ActiveProjectsCard from '../molecules/ActiveProjectsCard';
 import CypherButton from '../atoms/CypherButton';
 import { AllOrdersResponse } from '../../interfaces/apis/clientapis';
 import { useNavigate } from 'react-router-dom';
-import { CLIENT_PROJECTS, POST_WORK } from '../../constants/routes.ui';
+import { FIND_WORK } from '../../constants/routes.ui';
 
-export interface ActiveProjectsProps {
+export interface ViewBidsCardProps {
   activeOrders: AllOrdersResponse['activeOrders'],
   pendingOrders: AllOrdersResponse['pendingOrders']
 }
 
 
-const ActiveProjects: FC<ActiveProjectsProps> = ({activeOrders = [], pendingOrders = []}) => {
+const ViewBidsCard: FC<ViewBidsCardProps> = ({activeOrders = [], pendingOrders = []}) => {
   const navigate=useNavigate()
 
   const helperFunction =() =>{
-    navigate(POST_WORK)
+    navigate(FIND_WORK)
 }
 
   return (
     <div className="p-2 tablet:pl-8 pb-4">
       <div className="flex justify-between font-abhaya px-4">
-        <p className="text-md text-secondary monitor:text-lg">Active Projects</p>
-        <a href={CLIENT_PROJECTS}>
-        <p className="text-sm text-orange monitor:text-md">View All</p>
-        </a>
+        <p className="text-md text-secondary monitor:text-lg">My Bids ({[...activeOrders,...pendingOrders].length})</p>
       </div>
       <div className="shadow-md p-4 bg-white rounded-md overflow-y-auto monitor:py-8">
         <div className="flex justify-between items-center py-2 w-full">
@@ -33,7 +30,7 @@ const ActiveProjects: FC<ActiveProjectsProps> = ({activeOrders = [], pendingOrde
         </div>
         <div className="flex flex-col">
         {(activeOrders.length === 0 && pendingOrders.length === 0) ? (
-            <p className="text-center text-xs text-black font-abhaya my-10">No active projects found.</p>
+            <p className="text-center text-xs text-black font-abhaya my-10">No current bids.</p>
           ) : (
             <div className="pb-4 grid grid-cols-1 gap-1 tablet:px-1">
               {[...activeOrders,...pendingOrders].map((i) => (
@@ -44,7 +41,7 @@ const ActiveProjects: FC<ActiveProjectsProps> = ({activeOrders = [], pendingOrde
             </div>
           )}
           <div className='sticky bottom-0 bg-white py-2 flex justify-center'>
-              <CypherButton placeHolder='Create New Project' helperFunction={helperFunction}/>
+              <CypherButton placeHolder='Place a bid' helperFunction={helperFunction}/>
             </div>
         </div>
       </div>
@@ -52,4 +49,4 @@ const ActiveProjects: FC<ActiveProjectsProps> = ({activeOrders = [], pendingOrde
   );
 };
 
-export default ActiveProjects;
+export default ViewBidsCard;
