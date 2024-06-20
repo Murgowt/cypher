@@ -61,7 +61,6 @@ const CypherSignUpPage: FC<CypherSignUpPageProps> =()=>{
             setErrorMsg('Passwords do not match');
             return
         }
-        let {confirmPassword,...rest}=postData
         setErrorMsg('');
         navigate(ENROLLMENT_TEST,{state:postData})
         
