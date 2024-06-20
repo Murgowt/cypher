@@ -10,8 +10,13 @@ import ClientLayout from '../layouts/ClientLayout';
 import Error404Page from '../pages/Error404Page';
 import ClientDashboard from '../pages/Client/ClientDashboardPage';
 import PostWorkPage from '../pages/Client/PostWorkPage';
-import ResetPasswordPage from '../pages/Client/ResetPasswordPage';
-import ManageProjectsPage from '../pages/Client/ManageProjectsPage';
+import ResetPasswordPage from '../pages/Common/ResetPasswordPage';
+import ManageProjectsPage from '../pages/Common/ManageProjectsPage';
+import CypherDashboard from '../pages/Cypher/CypherDashboard';
+import CypherLayout from '../layouts/CypherLayout';
+import FindWorkPage from '../pages/Cypher/FindWorkPage'
+import EnrollmentTest from '../pages/Cypher/EnrollmentTest';
+import TestResultPage from '../pages/Cypher/TestResultPage';
 
 
 const router = createBrowserRouter([
@@ -45,6 +50,14 @@ const router = createBrowserRouter([
                         path:'cypher-signin',
                         element:<CypherSignInPage/>
                     },
+                    {
+                        path:'enrollment_test',
+                        element:<EnrollmentTest/>
+                    },
+                    {
+                        path:'enrollment_test_result',
+                        element:<TestResultPage/>
+                    }
                 ]
             },
             //CLIENT 
@@ -71,11 +84,30 @@ const router = createBrowserRouter([
                     }
                 ]
             },
-            //404 Error
+            //CYHPER
             {
+                path:'cypher',
+                element:<CypherLayout/>,
+                children:[
+                    {
+                        path:'dashboard',
+                        element:<CypherDashboard/>
+                    },
+                    {
+                        path:'find-work',
+                        element:<FindWorkPage/>
+                    },
+                    {
+                        path:'manage-projects',
+                        element:<ManageProjectsPage/> //Todo: Change it accordingly
+                    }
+                ]
+            },
+             //404 Error
+             {
                 path:'*',
                 element:<Error404Page/>
-            }
+            },
         ]
     }
 ])

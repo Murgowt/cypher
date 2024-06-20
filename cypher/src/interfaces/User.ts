@@ -5,6 +5,6 @@ export interface User {
     };
     email: string;
     username: string;
-    role: 'client' | 'cypher';
+    role: 'client' | 'wizard';
   }
   

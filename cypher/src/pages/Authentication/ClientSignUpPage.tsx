@@ -16,7 +16,7 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
     const [errorMsg, setErrorMsg] = useState('');
     const [success,toggleSuccess] = useState(false);
     const handleChange = (e:any) =>{
-        console.log(e.target.value)
+
         setPostData({...postData,[e.target.name]:e.target.value})
     }
 
@@ -110,7 +110,7 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
             }
             {
                 success?<div >
-                <h1 className='relative items-center justify-center text-green'>{"*Password changed successfully"}</h1>
+                <h1 className='relative items-center justify-center text-green'>{"*Account created successfully! Please check you email."}</h1>
             </div>:<></>
             }
 

@@ -1,10 +1,10 @@
 import { FC } from "react";
-import ClientProjects from "../../components/organisms/ClientProjects";
+import RecentProjects from "../organisms/RecentProjects";
 import ActiveProjects from "../../components/organisms/ActiveProjects";
 import ProfileCard from "../../components/organisms/ProfileCard";
 import PaymentCard from "../../components/organisms/PaymentCard";
-import { AllOrdersResponse } from "../../interfaces/apis/client";
-import { Order } from "../../interfaces/apis/client";
+import { AllOrdersResponse } from "../../interfaces/apis/clientapis";
+import { Order } from "../../interfaces/apis/clientapis";
 
 interface ClientDashboardSectionProps{
     allOrders: AllOrdersResponse;
@@ -15,10 +15,10 @@ const ClientDashboardSection: FC<ClientDashboardSectionProps> =({ allOrders, rec
     return(
         <div className="grid grid-cols-1 flex-grow desktop:grid-cols-7 pt-4">
                 <div className="col-span-3">
-                    <ClientProjects allOrders={allOrders} recentOrders={recentOrders}/>
+                    <RecentProjects allOrders={allOrders} recentOrders={recentOrders}/>
                 </div>
                 <div className="col-span-2">
-                    <ActiveProjects activeOrders={allOrders.activeOrders} openOrders={allOrders.openOrders}/>
+                    <ActiveProjects activeOrders={allOrders.activeOrders} pendingOrders={allOrders.pendingOrders}/>
                 </div>
                 <div className="flex flex-col col-span-2">
                     <ProfileCard/>
