@@ -18,7 +18,6 @@ export const CYPHER_SIGNUP_REQUEST =  (location:Object,answers:Object) =>{
                     return 500
                   })
     return promise
-    
 }
 
 export const CLIENT_SIGNUP_REQUEST = (postData:{first_name:string,last_name:string, email:string, password:string}) =>{

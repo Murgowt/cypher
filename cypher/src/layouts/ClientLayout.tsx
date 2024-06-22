@@ -21,11 +21,16 @@ const ClientLayout: FC<ClientLayoutProps> = () =>{
     }
 
     return(
+        <>
         <div className="flex flex-col min-h-screen">
             <DashboardNavbar/>
             <Outlet/>
+        </div>
+        <div>
             <Footer />
         </div>
+        </>
+        
     )
 }
 

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../../helpers/authStore';
 
 interface ProjectDescriptionCardProps {
     project: {
@@ -7,17 +8,23 @@ interface ProjectDescriptionCardProps {
         title: string;
         description: string;
         tech: string[];
-        budget: string;
+        budget: number;
         milestones: string;
     };
 }
 
 const ProjectDescriptionCard: FC<ProjectDescriptionCardProps> = ({ project }) => {
-
+    const user = useAuthStore((state) => state.user);
     const navigate = useNavigate();
 
     const handleViewMore = () => {
-        navigate(`/cypher/view-project`, { state: { project } });
+        if(user?.role === 'wizard'){
+            navigate(`/cypher/view-project`, { state: { project } });
+        }
+        else{
+            navigate(`/client/view-project`, { state: { project } });
+        }
+        
     };
 
     return (
@@ -34,7 +41,7 @@ const ProjectDescriptionCard: FC<ProjectDescriptionCardProps> = ({ project }) =>
                         </span>
                     ))}
                 </div>
-                <a onClick={handleViewMore} className="text-xs text-primary hover:underline">View More</a>
+                <a onClick={handleViewMore} className="text-xs text-primary">View More</a>
             </div>
         </div>
     );

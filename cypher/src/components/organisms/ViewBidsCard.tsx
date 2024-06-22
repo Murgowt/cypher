@@ -23,11 +23,7 @@ const ViewBidsCard: FC<ViewBidsCardProps> = ({activeOrders = [], pendingOrders =
       <div className="flex justify-between font-abhaya px-4">
         <p className="text-md text-secondary monitor:text-lg">My Bids ({[...activeOrders,...pendingOrders].length})</p>
       </div>
-      <div className="shadow-md p-4 bg-white rounded-md overflow-y-auto monitor:py-8">
-        <div className="flex justify-between items-center py-2 w-full">
-            <p className="w-1/2 truncate font-abhaya text-xs text-secondary pl-10 monitor:text-lg">Project Name</p>
-            <p className="w-1/2 truncate font-abhaya text-xs text-secondary text-right pr-16 monitor:text-lg">Status</p>
-        </div>
+      <div className="shadow-md p-5 bg-white rounded-md overflow-y-auto monitor:py-8">
         <div className="flex flex-col">
         {(activeOrders.length === 0 && pendingOrders.length === 0) ? (
             <p className="text-center text-xs text-black font-abhaya my-10">No current bids.</p>

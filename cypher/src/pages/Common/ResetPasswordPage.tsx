@@ -8,7 +8,6 @@ export interface ResetPasswordPageProps{}
 const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
     const user = useAuthStore((state) => state.user);
     const authToken = useAuthStore((state) => state.authToken);
-    console.log(authToken)
     const [postData, setPostData] = useState({
         email: user!.email,
         password:'',
@@ -17,7 +16,6 @@ const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
     const [errorMsg, setErrorMsg] = useState('');
     const [success,toggleSuccess] = useState(false);
     const handleChange = (e:any) =>{
-        console.log(e.target.value)
         setPostData({...postData,[e.target.name]:e.target.value})
     }
 
@@ -40,7 +38,6 @@ const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
         setErrorMsg('');
         const result = await RESET_PASSWORD_REQUEST(rest, authToken!, user!.role)
         if(result === 'OK'){
-            console.log('success')
             toggleSuccess(true);
         }
         else{
