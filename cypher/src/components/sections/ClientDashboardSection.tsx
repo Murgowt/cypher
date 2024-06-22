@@ -17,7 +17,7 @@ const ClientDashboardSection: FC<ClientDashboardSectionProps> =({ allOrders, rec
                 <div className="col-span-3">
                     <RecentProjects allOrders={allOrders} recentOrders={recentOrders}/>
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-2 overflow-y-auto">
                     <ActiveProjects activeOrders={allOrders.activeOrders} pendingOrders={allOrders.pendingOrders}/>
                 </div>
                 <div className="flex flex-col col-span-2">

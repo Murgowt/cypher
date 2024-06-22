@@ -34,7 +34,7 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient
     const chatid = "clientId-"+clientId+"-projectId-"+projectId+'-CypherId-'+cypherId 
     const chatID = chatid.split(' ').join('_')
 
-    console.log(chatID)
+    // console.log(chatID)
     const chatsRef = collection(db,chatID)
     const handleChange = (e:any)=>{
         setNewMessage(e.target.value)
@@ -89,7 +89,7 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient
 
 
     return(
-        <div className="fixed p-4 w-full max-w-md h-3/4 bg-white shadow-lg rounded-t-md flex flex-col">
+        <div className="fixed p-4 w-full max-w-3xl h-1/2 desktop:h-3/4 desktop:max-w-md bg-white shadow-lg rounded-t-md flex flex-col">
             <div className="text-secondary border-b-2 border-lightgrey p-4 mb-2 font-abhaya">
                 {isClient ? clientUserName : cypherUserName}
             </div>

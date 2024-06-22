@@ -17,9 +17,10 @@ export interface CypherProjectDetailsProps {
         milestones: string;
         status: string;
     };
+    bidPlaced: boolean
 }
 
-const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project }) => {
+const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlaced }) => {
     const user = useAuthStore((state) => state.user);
     const authToken = useAuthStore((state) => state.authToken);
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -36,36 +37,36 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project }) => {
         setToggleOpen(false);
     };
 
-    useEffect(() => {
-        const getDashboardData = async () => {
-            if (isAuthenticated) {
-                try {
-                    const res = await CYPHERORDERS_REQUEST(authToken!, user!.role);
-                    if (res.status === 200) {
-                        const allOrdersResponse: CypherOrdersResponse = res.data;
-                        setAllOrders(allOrdersResponse);
-                        setApiError(null);
-                    }
-                } catch (error) {
-                    if (isAxiosError(error)) {
-                        const status = error.response?.status;
-                        if (status === 401) {
-                            setApiError(error.response?.data?.error || error.response?.data?.message || ERRORS.SERVER_ERROR);
-                        } else {
-                            setApiError(ERRORS.SERVER_ERROR);
-                        }
-                    } else {
-                        setApiError(ERRORS.SERVER_ERROR);
-                    }
-                }
-            } else {
-                setApiError(ERRORS.AUTHENTICATION_ERROR);
-            }
-        };
-        getDashboardData();
-    });
+    // useEffect(() => {
+    //     const getDashboardData = async () => {
+    //         if (isAuthenticated) {
+    //             try {
+    //                 const res = await CYPHERORDERS_REQUEST(authToken!, user!.role);
+    //                 if (res.status === 200) {
+    //                     const allOrdersResponse: CypherOrdersResponse = res.data;
+    //                     setAllOrders(allOrdersResponse);
+    //                     setApiError(null);
+    //                 }
+    //             } catch (error) {
+    //                 if (isAxiosError(error)) {
+    //                     const status = error.response?.status;
+    //                     if (status === 401) {
+    //                         setApiError(error.response?.data?.error || error.response?.data?.message || ERRORS.SERVER_ERROR);
+    //                     } else {
+    //                         setApiError(ERRORS.SERVER_ERROR);
+    //                     }
+    //                 } else {
+    //                     setApiError(ERRORS.SERVER_ERROR);
+    //                 }
+    //             }
+    //         } else {
+    //             setApiError(ERRORS.AUTHENTICATION_ERROR);
+    //         }
+    //     };
+    //     getDashboardData();
+    // });
 
-    const isPendingOrder = allOrders.pendingOrders.some(order => order.id === project.id);
+    // const isPendingOrder = allOrders.pendingOrders.some(order => order.id === project.id);
 
     return (<>
         {apiError ? (
@@ -77,7 +78,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project }) => {
                 <h2 className="text-xl font-bold pb-2 text-secondary">{project.title}</h2>
                 {project.status === 'open' && (
                     <div>
-                        {isPendingOrder ? (
+                        {bidPlaced ? (
                             <div className="flex justify-between items-center px-5 py-2 bg-buttonGrey rounded-sm text-white">
                                 <p>Pending</p>
                             </div>

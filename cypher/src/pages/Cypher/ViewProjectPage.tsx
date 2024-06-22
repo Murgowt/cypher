@@ -40,7 +40,7 @@ const ViewProjectPage: FC<ViewProjectPageProps> = () => {
 
     useEffect(() => {
         const getDashboardData = async () => {
-            if (isAuthenticated) {
+            if (isAuthenticated && user?.role === 'wizard') {
                 try {
                     const res = await CYPHERORDERS_REQUEST(authToken!, user!.role);
                     if (res.status === 200) {
@@ -60,12 +60,12 @@ const ViewProjectPage: FC<ViewProjectPageProps> = () => {
                         setApiError(ERRORS.SERVER_ERROR);
                     }
                 }
-            } else {
-                setApiError(ERRORS.AUTHENTICATION_ERROR);
             }
         };
+    
         getDashboardData();
     });
+    
 
     const isPendingOrder = allOrders.pendingOrders.some(order => order.id === project.id);
 
@@ -88,7 +88,7 @@ const ViewProjectPage: FC<ViewProjectPageProps> = () => {
             <div className="grid desktop:grid-cols-3 gap-6 py-8">
                 <div className="col-span-1 desktop:col-span-2">
                     {user?.role === 'wizard' ? (
-                        <CypherProjectDetails key={project.id} project={project} />
+                        <CypherProjectDetails key={project.id} project={project} bidPlaced={isPendingOrder}/>
                     ) : (
                         <ClientProjectDetails key={project.id} project={project} />
                     )}
