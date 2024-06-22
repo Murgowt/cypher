@@ -41,7 +41,7 @@ const ProjectDescriptionCard: FC<ProjectDescriptionCardProps> = ({ project }) =>
                         </span>
                     ))}
                 </div>
-                <a onClick={handleViewMore} className="text-xs text-primary">View More</a>
+                <a onClick={handleViewMore} className="text-xs text-primary cursor-pointer">View More</a>
             </div>
         </div>
     );

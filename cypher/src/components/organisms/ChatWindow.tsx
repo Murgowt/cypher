@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react'
+import {FC, useEffect, useRef } from 'react'
 import firebase from 'firebase/compat/app';
 import 'firebase/firestore'
 import 'firebase/auth'
@@ -22,9 +22,11 @@ interface ChatWindowProps {
     clientId: string,
     projectId : string,
     cypherId: string,
-    isClient : boolean
+    isClient : boolean,
+    disabled: boolean,
+    placeholder: string
 }
-const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient}) =>{
+const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient, disabled, placeholder}) =>{
     const clientUserName = clientId.split('-')[1]
     const cypherUserName = cypherId.split('-')[1]
     const [newMessage,setNewMessage] = useState('')
@@ -75,23 +77,50 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient
         })
     },[])
 
+    const messagesEndRef = useRef<HTMLElement>(null)
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [messages])
+
 
     return(
-        <div className="p-8 rounded-md bg-white shadow-lg font-abhaya overflow-y-auto h-[60%] w-full justify-end">
-            <div className='text-secondary border-b-2 border-lightgrey p-4 mb-2' >
-                {isClient?clientUserName:cypherUserName}
+        <div className="fixed p-4 w-full max-w-md h-3/4 bg-white shadow-lg rounded-t-md flex flex-col">
+            <div className="text-secondary border-b-2 border-lightgrey p-4 mb-2 font-abhaya">
+                {isClient ? clientUserName : cypherUserName}
             </div>
-                <div className='overflow-scroll'>
-                    {messages.map((msg,index)=> {console.log(msg.user==cypherId) 
-                    return(msg.user == clientId? 
-                        isClient? <SelfChat key={index} msg={msg.text}/>: <OppositeChat key={index} msg={msg.text}/>
-                        : isClient?<OppositeChat key={index} msg={msg.text}/> : <SelfChat key={index} msg={msg.text}/>)}
-                    )}
-                </div>
-                <div className='flex justify-between'>
-                    <input className={"w-full outline-none"}placeholder='Start typing ...' onChange={handleChange} value={newMessage}/>
-                    <button className={"bg-secondary rounded-lg text-white p-2 text-md w-[20%]"} onClick={handleSubmit}>Send</button>
-                </div>
+            <div className="flex-1 overflow-y-scroll mb-2 no-scrollbar">
+                {messages.map((msg, index) => (
+                    msg.user === clientId
+                        ? (isClient
+                            ? <SelfChat key={index} msg={msg.text} />
+                            : <OppositeChat key={index} msg={msg.text} />)
+                        : (isClient
+                            ? <OppositeChat key={index} msg={msg.text} />
+                            : <SelfChat key={index} msg={msg.text} />)
+                ))}
+                <div ref={messagesEndRef} />
+            </div>
+            <div className="flex">
+                <input
+                    className="flex-1 p-2 rounded-l-md"
+                    placeholder={placeholder}
+                    onChange={handleChange}
+                    value={newMessage}
+                    disabled={disabled}
+                />
+                <button
+                    className="bg-secondary text-white p-2 rounded-r-md"
+                    onClick={handleSubmit}
+                    hidden={disabled}
+                >
+                    Send
+                </button>
+            </div>
         </div>
     )
 }

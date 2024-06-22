@@ -52,6 +52,7 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
     }, [authToken, isAuthenticated]);
 
     useEffect(() => {
+        allOrders.openOrders.sort((a,b)=>(b.creationtimestamp - a.creationtimestamp))
         setProjects(allOrders.openOrders);
     }, [allOrders]);
 

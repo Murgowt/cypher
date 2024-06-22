@@ -46,7 +46,7 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
         };
 
         fetchBids();
-    }, [project.id, authToken, user?.role]);
+    });
 
     if (chat && selectedBid) {
         return (

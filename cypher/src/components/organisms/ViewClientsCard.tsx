@@ -8,7 +8,6 @@ export interface ViewClientsCardProps {
 
 const ViewClientsCard: FC<ViewClientsCardProps> = ({ activeOrders = [] }) => {
   const imgPath = '/images/ProfilePhoto.png';
-  const chatImgPath = '/images/Chat.png';
 
   return (
     <div className="p-2 tablet:pl-8 pb-4">
@@ -36,7 +35,6 @@ const ViewClientsCard: FC<ViewClientsCardProps> = ({ activeOrders = [] }) => {
                       <p className="font-abhaya text-sm">{i.title}</p>
                     </div>
                   </div>
-                  <img src={chatImgPath} alt="Chat Icon" className="w-8 h-8 rounded-md ml-auto"/>
                 </div>
               ))}
             </div>

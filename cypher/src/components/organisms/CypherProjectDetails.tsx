@@ -75,13 +75,27 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project }) => {
               <div className="p-4 tablet:p-8 rounded-md bg-white shadow-md font-abhaya">
             <div className='flex justify-between'>
                 <h2 className="text-xl font-bold pb-2 text-secondary">{project.title}</h2>
-                {isPendingOrder ? <div className="flex justify-between items-center px-5 bg-buttonGrey rounded-sm text-white">
-                    <p>Pending</p>
-                </div> : <div className="flex justify-between items-center pb-4">
-                    <CypherButton 
-                        placeHolder={isPendingOrder ? 'Pending' : 'Bid On Project'} 
-                        helperFunction={handleBid}  
-                    />
+                {project.status === 'open' && (
+                    <div>
+                        {isPendingOrder ? (
+                            <div className="flex justify-between items-center px-5 py-2 bg-buttonGrey rounded-sm text-white">
+                                <p>Pending</p>
+                            </div>
+                        ) : (
+                            <div className="flex justify-between items-center pb-4">
+                                <CypherButton 
+                                    placeHolder="Bid On Project"
+                                    helperFunction={handleBid}  
+                                />
+                            </div>
+                        )}
+                    </div>
+                )}
+                {project.status === 'active' &&  <div className="flex justify-between items-center px-5 bg-primary rounded-sm text-white">
+                    <p>Active</p>
+                </div>} 
+                {project.status === 'completed' &&  <div className="flex justify-between items-center px-5 bg-green rounded-sm text-white">
+                    <p>Completed</p>
                 </div>} 
             </div>
             
