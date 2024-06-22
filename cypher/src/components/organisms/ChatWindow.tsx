@@ -32,6 +32,7 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient
     const chatid = "clientId-"+clientId+"-projectId-"+projectId+'-CypherId-'+cypherId 
     const chatID = chatid.split(' ').join('_')
 
+    console.log(chatID)
     const chatsRef = collection(db,chatID)
     const handleChange = (e:any)=>{
         setNewMessage(e.target.value)

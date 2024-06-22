@@ -20,12 +20,14 @@ export interface BidsListProps {
 const BidsList: FC<BidsListProps> = ({ project }) => {
     const [bids, setBids] = useState<Bid[]>([]);
     const [chat, setChat] = useState(false);
+    const [selectedBid, setSelectedBid] = useState<Bid | null>(null);
     const user = useAuthStore((state) => state.user);
     const authToken = useAuthStore((state) => state.authToken);
     const chatImgPath = '/images/Chat.png';
     const imgPath = '/images/ProfilePhoto.png';
 
-    const handleChat = () => {
+    const handleChat = (bid: Bid) => {
+        setSelectedBid(bid);
         setChat(true);
     };
 
@@ -46,12 +48,12 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
         fetchBids();
     }, [project.id, authToken, user?.role]);
 
-    if (chat) {
+    if (chat && selectedBid) {
         return (
             <ChatWindow
                 clientId={user!.id}
                 projectId={project.id}
-                cypherId={project.wizardId}
+                cypherId={selectedBid.wizardId}
                 isClient={true}
             />
         );
@@ -71,7 +73,7 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
                         </div>
                     </div>
                     <div className="flex space-x-2 text-xs">
-                        <img src={chatImgPath} alt="Chat Icon" className="w-8 h-8 rounded-md ml-auto" onClick={handleChat} />
+                        <img src={chatImgPath} alt="Chat Icon" className="w-8 h-8 rounded-md ml-auto" onClick={() => handleChat(bid)} />
                         <button className="border border-secondary text-secondary px-3 py-1 rounded font-abhaya">Accept</button>
                         <button className="border border-red text-red px-3 py-1 rounded font-abhaya">Reject</button>
                     </div>
