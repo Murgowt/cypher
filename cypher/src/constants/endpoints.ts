@@ -11,3 +11,4 @@ export const FINDWORK_ENDPOINT           = "wizard/market";
 export const CYPHER_ENROLL               = "wizard/register";
 export const CYPHER_SIGNIN_ENDPOINT      = "wizard/login";
 export const PLACE_BID_ENDPOINT          = "wizard/bid";
+export const ATTACHMENTS_ENDPOINT           = (key: string) => `wizard/orderattachment/${key}`;

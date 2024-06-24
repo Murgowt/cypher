@@ -1,5 +1,5 @@
 import axios from "../helpers/axios";
-import { CYPHERORDERS_ENDPOINT, FINDWORK_ENDPOINT, PLACE_BID_ENDPOINT } from "../constants/endpoints";
+import { ATTACHMENTS_ENDPOINT, CYPHERORDERS_ENDPOINT, FINDWORK_ENDPOINT, PLACE_BID_ENDPOINT } from "../constants/endpoints";
 
 export const CYPHERORDERS_REQUEST = async (token: string, role: string) =>{
     let promise = axios.get(CYPHERORDERS_ENDPOINT, {
@@ -12,6 +12,14 @@ export const CYPHERORDERS_REQUEST = async (token: string, role: string) =>{
   let promise = axios.get(FINDWORK_ENDPOINT, {
       headers: { 'token': token, 'user': role },
     });
+  return promise;
+};
+
+export const ATTACHMENTS_REQUEST = async (key: string, token: string, role: string) =>{
+  let promise = axios.get(ATTACHMENTS_ENDPOINT(key), {
+      headers: { 'token': token, 'user': role },
+    });
+    console.log(promise)
   return promise;
 };
 

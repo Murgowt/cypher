@@ -13,17 +13,18 @@ const CREATE_PROJECT_REQUEST =  (data:DataDeclaration,authToken:string, role:str
     
     var formData = new FormData();
     if(data.file){
-        formData.append('file',data.file)
+        formData.append('files',data.file)
     }
     formData.append('title',data.title)
     formData.append('description',data.description)
     formData.append('milestones',String(data.milestones))
     formData.append('budget',String(data.budget))
     formData.append('tech',JSON.stringify(data.tech))
+    console.log('request',data)
    
-    let promise = axios.post(CLIENT_CREATE_PROJECT,data,{
+    let promise = axios.post(CLIENT_CREATE_PROJECT,formData,{
         headers: {
-        //   'Content-Type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data',
           'token':authToken,
           'user':role
           

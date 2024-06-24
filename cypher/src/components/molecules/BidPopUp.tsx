@@ -9,7 +9,7 @@ interface BidPopUpProps {
         id: string;
         title: string;
         description: string;
-        tech: string[];
+        tech: string;
         budget: number;
         milestones: string;
         status: string;

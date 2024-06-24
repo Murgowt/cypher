@@ -98,7 +98,7 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
         if(file){
             data.file = file
         }
-
+        console.log(data)
         const result = await CREATE_PROJECT_REQUEST(data,authToken!,user!.role)
         if(result == "Something went wrong, please try again later."){
             setErrorMsg("Something went wrong, please try again later.");
