@@ -2,7 +2,7 @@ import {FC, useEffect, useRef } from 'react'
 import firebase from 'firebase/compat/app';
 import 'firebase/firestore'
 import 'firebase/auth'
-import { collection, getFirestore, serverTimestamp, onSnapshot, query,where, orderBy } from 'firebase/firestore';
+import { collection, getFirestore, serverTimestamp, onSnapshot, query,where } from 'firebase/firestore';
 import { useState } from 'react';
 import { addDoc } from 'firebase/firestore';
 import SelfChat from '../molecules/SelfChat';
