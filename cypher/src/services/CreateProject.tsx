@@ -12,7 +12,7 @@ interface DataDeclaration {
 const CREATE_PROJECT_REQUEST =  (data:DataDeclaration,authToken:string, role:string) =>{
     
     var formData = new FormData();
-    data.file.forEach((fileName,index)=>{
+    data.file.forEach((fileName)=>{
         formData.append('files',fileName)
     })
     formData.append('title',data.title)

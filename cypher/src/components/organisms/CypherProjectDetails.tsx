@@ -1,9 +1,8 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState } from 'react';
 import CypherButton from '../atoms/CypherButton';
 import BidPopUp from '../molecules/BidPopUp';
 import { useAuthStore } from '../../helpers/authStore';
 import { ATTACHMENTS_REQUEST } from '../../services/cypher';
-import { CypherOrdersResponse } from '../../interfaces/apis/cypherapis';
 import { isAxiosError } from 'axios';
 import { ERRORS } from '../../constants/app';
 
