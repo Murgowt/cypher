@@ -9,7 +9,7 @@ export interface BidsListProps {
         id: string;
         title: string;
         description: string;
-        tech: string[];
+        tech: string;
         budget: number;
         milestones: string;
         status: string;
@@ -55,6 +55,8 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
                 projectId={project.id}
                 cypherId={selectedBid.wizardId}
                 isClient={true}
+                disabled={false}
+                placeholder='Start typing...'
             />
         );
     }

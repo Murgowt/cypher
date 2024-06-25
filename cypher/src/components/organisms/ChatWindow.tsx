@@ -30,7 +30,7 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient
     const clientUserName = clientId.split('-')[1]
     const cypherUserName = cypherId.split('-')[1]
     const [newMessage,setNewMessage] = useState('')
-    const [messages, setMessages] = useState([])
+    const [messages, setMessages] = useState<any>([])
     const chatid = "clientId-"+clientId+"-projectId-"+projectId+'-CypherId-'+cypherId 
     const chatID = chatid.split(' ').join('_')
 
@@ -52,11 +52,11 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient
     useEffect(()=>{
         const queryMessage = query(chatsRef,where('user','in',[clientId,cypherId]))
         onSnapshot(queryMessage,(snapshot)=>{
-            let Newmessages = []
+            let Newmessages : any[] =[]
             let textMsg=""
             let createTime=String(Math.floor(Date.now() / 1000))
             let user = ''
-            snapshot.forEach((doc)=>{
+            snapshot.forEach((doc: any)=>{
                 try{
                     textMsg = doc._document.data.value.mapValue.fields.text.stringValue
                     createTime =  doc._document.data.value.mapValue.fields.createAt.timestampValue
@@ -94,7 +94,7 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient
                 {isClient ? clientUserName : cypherUserName}
             </div>
             <div className="flex-1 overflow-y-scroll mb-2 no-scrollbar">
-                {messages.map((msg, index) => (
+                {messages.map((msg: any, index: any) => (
                     msg.user === clientId
                         ? (isClient
                             ? <SelfChat key={index} msg={msg.text} />
@@ -103,7 +103,7 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient
                             ? <OppositeChat key={index} msg={msg.text} />
                             : <SelfChat key={index} msg={msg.text} />)
                 ))}
-                <div ref={messagesEndRef} />
+                <div ref={messagesEndRef as React.RefObject<HTMLDivElement>} />
             </div>
             <div className="flex">
                 <input
