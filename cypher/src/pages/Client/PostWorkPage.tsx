@@ -14,13 +14,13 @@ interface OrderSataDeclaration {
     budget:number,
     tech:string[],
     milestones:number,
-    file? : File
+    file? : File[]
 }
 const PostWorkPage: FC<PostWorkPageProps> =() =>{
     const navigate = useNavigate();
     const user = useAuthStore((state) => state.user);
     const authToken = useAuthStore((state) => state.authToken);
-    const [file,setFile ] = useState<File|undefined>();
+    const [file,setFile ] = useState<File[]>([]);
     const [techs,EditTechs] =  useState<StateDeclaration>({values:[]})
     const [errorMsg,setErrorMsg] = useState('');
     const [success,toggleSuccess] = useState(false);
@@ -34,7 +34,14 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
     })
 
     const handleFileUpload = (e:any) =>{
-        setFile(e.target.files[0])
+        const filesVar = e.target.files
+        let uploaded = file
+        console.log(filesVar)
+        for (var i = 0; i < filesVar.length; i++) {
+            uploaded.push(filesVar[i]);
+        }
+        console.log("uploaded",uploaded)
+        setFile(uploaded)
     }
 
     const handleChange = (e:any) =>{
@@ -95,9 +102,9 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
         }
         setErrorMsg('');
         const data = orderData;
-        if(file){
-            data.file = file
-        }
+        
+        data.file = file
+        
         console.log(data)
         const result = await CREATE_PROJECT_REQUEST(data,authToken!,user!.role)
         if(result == "Something went wrong, please try again later."){
@@ -142,7 +149,7 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
                 </div>
                 <div>
                 <h1 className='text-secondary text-lg mb-2'>Attachment</h1>
-                <input className="mb-10" type='file' onChange={handleFileUpload}/>
+                <input className="mb-10" type='file' onChange={handleFileUpload} multiple/>
                 <h1 className='text-secondary text-lg mb-2'>Number of Milestones</h1>
                 <input className='border-b-2 border-primary mb-10 outline-none text-xl w-10 text-secondary' onChange={handleChange} name={"milestones"} placeholder='#' type='number'/>
 

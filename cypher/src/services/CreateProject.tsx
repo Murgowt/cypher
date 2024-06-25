@@ -7,21 +7,23 @@ interface DataDeclaration {
     budget:number,
     tech:string[],
     milestones:number,
-    file? : File
+    file? : File[]
 }
 const CREATE_PROJECT_REQUEST =  (data:DataDeclaration,authToken:string, role:string) =>{
     
     var formData = new FormData();
-    if(data.file){
-        formData.append('files',data.file)
-    }
+    data.file.forEach((fileName,index)=>{
+        formData.append('files',fileName)
+    })
     formData.append('title',data.title)
     formData.append('description',data.description)
     formData.append('milestones',String(data.milestones))
     formData.append('budget',String(data.budget))
     formData.append('tech',JSON.stringify(data.tech))
     console.log('request',data)
-   
+    for (var pair of formData.entries()) {
+        console.log(pair[0]+ ', ' + pair[1]); 
+    }
     let promise = axios.post(CLIENT_CREATE_PROJECT,formData,{
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -30,6 +32,7 @@ const CREATE_PROJECT_REQUEST =  (data:DataDeclaration,authToken:string, role:str
           
         }
     })
+    
     .then(response=>{
         if('data' in response){
             return response.data
