@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useAuthStore } from '../../helpers/authStore';
-import { RESET_PASSWORD_PAGE } from '../../constants/routes.ui';
+import { CYPHER_RESET_PASSWORD_PAGE, RESET_PASSWORD_PAGE } from '../../constants/routes.ui';
 
 export interface ProfileCardProps {}
 
@@ -8,6 +8,7 @@ const ProfileCard: FC<ProfileCardProps> = ({ }) => {
   const user = useAuthStore((state) => state.user);
   let details = { Username: user!.username, Email: user!.email, Password: '*******' };
   let ProfilePath = '/images/ProfilePhoto.png';
+  let resetpage = user?.role === 'wizard' ? CYPHER_RESET_PASSWORD_PAGE : RESET_PASSWORD_PAGE
 
   return (
     <>
@@ -28,7 +29,7 @@ const ProfileCard: FC<ProfileCardProps> = ({ }) => {
                   <p className="w-1/2 truncate font-abhaya text-xs text-black text-right pr-10 monitor:text-md">{value}</p>
                 </div>
               ))}
-              <a href={RESET_PASSWORD_PAGE}>
+              <a href={resetpage}>
               <p className="truncate font-abhaya text-xxs text-primary text-right pr-10 monitor:text-sm">Change password</p>
               </a>
             </div>

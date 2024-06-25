@@ -17,6 +17,7 @@ import CypherLayout from '../layouts/CypherLayout';
 import FindWorkPage from '../pages/Cypher/FindWorkPage'
 import EnrollmentTest from '../pages/Cypher/EnrollmentTest';
 import TestResultPage from '../pages/Cypher/TestResultPage';
+import ViewProjectPage from '../pages/Cypher/ViewProjectPage';
 
 
 const router = createBrowserRouter([
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
                     {
                         path:'manage-projects',
                         element: <ManageProjectsPage/>
+                    },
+                    {
+                        path:'view-project',
+                        element:<ViewProjectPage/>
                     }
                 ]
             },
@@ -100,6 +105,14 @@ const router = createBrowserRouter([
                     {
                         path:'manage-projects',
                         element:<ManageProjectsPage/> //Todo: Change it accordingly
+                    },
+                    {
+                        path:'view-project',
+                        element:<ViewProjectPage/>
+                    },
+                    {
+                        path:'reset-password',
+                        element:<ResetPasswordPage/>
                     }
                 ]
             },

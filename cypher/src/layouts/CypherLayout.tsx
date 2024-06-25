@@ -17,16 +17,19 @@ const CypherLayout: FC<CypherLayoutProps> = () =>{
 
     if (!authToken || !user || (user && user.role !== 'wizard') || !validAuthToken(authToken!)) {
       logout();
-      console.log('here')
       return <Navigate to={CYPHER_SIGNIN} />;
     }
 
     return(
-        <div className="flex flex-col min-h-screen">
-            <DashboardNavbar/>
-            <Outlet/>
-            <Footer />
-        </div>
+        <>
+            <div className="flex flex-col min-h-screen">
+                <DashboardNavbar/>
+                <Outlet/>
+            </div>
+            <div>
+                <Footer />
+            </div>
+        </> 
     )
 }
 

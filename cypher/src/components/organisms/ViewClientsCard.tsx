@@ -8,123 +8,6 @@ export interface ViewClientsCardProps {
 
 const ViewClientsCard: FC<ViewClientsCardProps> = ({ activeOrders = [] }) => {
   const imgPath = '/images/ProfilePhoto.png';
-  const chatImgPath = '/images/Chat.png';
-  const activeOrderss = [
-    {
-      budget: 10,
-      milestones: 4,
-      status: 'open',
-      wizardRating: 0,
-      clientId: '1717956501214-Syble Mosciski',
-      tech: ['Java', 'NLP', 'Python'],
-      completedMilestones: 0,
-      clientRating: 0,
-      creationtimestamp: 1718492829012,
-      description: 'def',
-      id: '1718492829012-abc',
-      wizardId: 'NA',
-      title: 'abc',
-    },
-    {
-      budget: 10,
-      milestones: 4,
-      status: 'open',
-      wizardRating: 0,
-      clientId: 'Syble Mosciskiiiiiii',
-      tech: ['Java', 'NLP', 'Python'],
-      completedMilestones: 0,
-      clientRating: 0,
-      creationtimestamp: 1718492829012,
-      description: 'def',
-      id: '1718492829012-abc',
-      wizardId: 'NA',
-      title: 'abc',
-    }, {
-      budget: 10,
-      milestones: 4,
-      status: 'open',
-      wizardRating: 0,
-      clientId: 'Syble Mosciskiiiiiii',
-      tech: ['Java', 'NLP', 'Python'],
-      completedMilestones: 0,
-      clientRating: 0,
-      creationtimestamp: 1718492829012,
-      description: 'def',
-      id: '1718492829012-abc',
-      wizardId: 'NA',
-      title: 'abc',
-    }, {
-      budget: 10,
-      milestones: 4,
-      status: 'open',
-      wizardRating: 0,
-      clientId: 'Syble Mosciskiiiiiii',
-      tech: ['Java', 'NLP', 'Python'],
-      completedMilestones: 0,
-      clientRating: 0,
-      creationtimestamp: 1718492829012,
-      description: 'def',
-      id: '1718492829012-abc',
-      wizardId: 'NA',
-      title: 'abc',
-    }, {
-      budget: 10,
-      milestones: 4,
-      status: 'open',
-      wizardRating: 0,
-      clientId: 'Syble Mosciskiiiiiii',
-      tech: ['Java', 'NLP', 'Python'],
-      completedMilestones: 0,
-      clientRating: 0,
-      creationtimestamp: 1718492829012,
-      description: 'def',
-      id: '1718492829012-abc',
-      wizardId: 'NA',
-      title: 'abc',
-    },{
-      budget: 10,
-      milestones: 4,
-      status: 'open',
-      wizardRating: 0,
-      clientId: 'Syble Mosciskiiiiiii',
-      tech: ['Java', 'NLP', 'Python'],
-      completedMilestones: 0,
-      clientRating: 0,
-      creationtimestamp: 1718492829012,
-      description: 'def',
-      id: '1718492829012-abc',
-      wizardId: 'NA',
-      title: 'abc',
-    },{
-      budget: 10,
-      milestones: 4,
-      status: 'open',
-      wizardRating: 0,
-      clientId: 'Syble Mosciskiiiiiii',
-      tech: ['Java', 'NLP', 'Python'],
-      completedMilestones: 0,
-      clientRating: 0,
-      creationtimestamp: 1718492829012,
-      description: 'def',
-      id: '1718492829012-abc',
-      wizardId: 'NA',
-      title: 'abc',
-    },{
-      budget: 10,
-      milestones: 4,
-      status: 'open',
-      wizardRating: 0,
-      clientId: 'Syble Mosciskiiiiiii',
-      tech: ['Java', 'NLP', 'Python'],
-      completedMilestones: 0,
-      clientRating: 0,
-      creationtimestamp: 1718492829012,
-      description: 'def',
-      id: '1718492829012-abc',
-      wizardId: 'NA',
-      title: 'abc',
-    },
-  ];
 
   return (
     <div className="p-2 tablet:pl-8 pb-4">
@@ -137,13 +20,13 @@ const ViewClientsCard: FC<ViewClientsCardProps> = ({ activeOrders = [] }) => {
         </a>
       </div>
       <div className="shadow-md p-4 bg-white rounded-md overflow-y-auto monitor:py-8" style={{ maxHeight: '250px' }}>
-          {activeOrderss.length === 0 ? (
+          {activeOrders.length === 0 ? (
             <p className="text-center text-xs text-black font-abhaya my-10">
               No clients yet
             </p>
           ) : (
             <div className="flex flex-col px-4">
-              {activeOrderss.map((i) => (
+              {activeOrders.map((i) => (
                 <div className="flex justify-between items-center my-4">
                   <div key={i.id} className="flex items-center">
                     <img src={imgPath} alt="Profile Image" className="w-12 h-12 rounded-md"/>
@@ -152,7 +35,6 @@ const ViewClientsCard: FC<ViewClientsCardProps> = ({ activeOrders = [] }) => {
                       <p className="font-abhaya text-sm">{i.title}</p>
                     </div>
                   </div>
-                  <img src={chatImgPath} alt="Chat Icon" className="w-8 h-8 rounded-md ml-auto"/>
                 </div>
               ))}
             </div>

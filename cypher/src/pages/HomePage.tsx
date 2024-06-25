@@ -1,7 +1,7 @@
 import { FC } from "react";
-import HeroSection from "../components/organisms/HeroSection";
+import HeroSection from "../components/sections/HeroSection";
 import TestimonialSection from "../components/sections/TestimonialSection";
-import PerfectFitSection from "../components/organisms/PerfectFitSection";
+import PerfectFitSection from "../components/sections/PerfectFitSection";
 import LandingFooter from "../components/molecules/LandingFooter";
 
 interface HomePageProps {}

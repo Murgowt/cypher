@@ -2,13 +2,13 @@ import {FC, useState} from 'react';
 import FormElement from '../../components/atoms/FormElement';
 import { RESET_PASSWORD_REQUEST } from '../../services/auth';
 import { useAuthStore } from '../../helpers/authStore';
+import { CYPHER_RESET_PASSWORD_REQUEST } from '../../services/cypher';
 
 export interface ResetPasswordPageProps{}
 
 const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
     const user = useAuthStore((state) => state.user);
     const authToken = useAuthStore((state) => state.authToken);
-    console.log(authToken)
     const [postData, setPostData] = useState({
         email: user!.email,
         password:'',
@@ -17,7 +17,6 @@ const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
     const [errorMsg, setErrorMsg] = useState('');
     const [success,toggleSuccess] = useState(false);
     const handleChange = (e:any) =>{
-        console.log(e.target.value)
         setPostData({...postData,[e.target.name]:e.target.value})
     }
 
@@ -38,12 +37,18 @@ const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
         }
         let {confirmPassword,...rest}=postData
         setErrorMsg('');
-        const result = await RESET_PASSWORD_REQUEST(rest, authToken!, user!.role)
-        if(result === 'OK'){
-            console.log('success')
-            toggleSuccess(true);
+        let result;
+
+        if (user?.role === 'wizard') {
+            result = await CYPHER_RESET_PASSWORD_REQUEST(rest, authToken!, user!.role);
         }
-        else{
+        else {
+            result = await RESET_PASSWORD_REQUEST(rest, authToken!, user!.role);
+        }
+
+        if (result === 'OK') {
+            toggleSuccess(true);
+        } else {
             setErrorMsg('Something went wrong, please try again later.');
         }
     }
@@ -72,12 +77,12 @@ const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
             </form>
             {
                 errorMsg.length==0?<></>:<div >
-                <h1 className='relative items-center justify-center   text-red'>*{errorMsg}</h1>
+                <h1 className='relative items-center justify-center text-red'>*{errorMsg}</h1>
             </div>
             }
             {
                 success?<div >
-                <h1 className='relative items-center justify-center   text-green'>{"*Check your email and verify your account."}</h1>
+                <h1 className='relative items-center justify-center text-green'>{"*Check your email and verify your account."}</h1>
             </div>:<></>
             }
 

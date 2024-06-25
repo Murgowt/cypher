@@ -66,6 +66,7 @@ const CypherSignInPage: FC<CypherSignInPageProps> =()=>{
             email: loginResponse.email,
             username: loginResponse.username,
             role: 'wizard',
+            id: loginResponse.id
             });
 
             navigate(CYPHER_DASHBOARD)

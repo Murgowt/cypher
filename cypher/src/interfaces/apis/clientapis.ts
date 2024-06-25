@@ -14,7 +14,8 @@ export const OrderSchema = z.object({
     id: z.string(),
     wizardId: z.string(),
     title: z.string(),
-    creationtimestamp: z.number()
+    creationtimestamp: z.number(),
+    filesCount: z.number()
   });
 
 export type Order = z.infer<typeof OrderSchema>;
@@ -26,3 +27,13 @@ export const AllOrdersResponseSchema = z.object({
   });
 
 export type AllOrdersResponse = z.infer<typeof AllOrdersResponseSchema>;
+
+export const BidSchema = z.object({
+  id: z.string(),
+  wizardId: z.string(),
+  orderId: z.string(),
+  budget: z.string(),
+  status: z.string(),
+});
+
+export type Bid = z.infer<typeof BidSchema>

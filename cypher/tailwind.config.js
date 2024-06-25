@@ -23,8 +23,8 @@ export default {
       authSubHeading: '#4F709C',
       red:'#8B0000',
       green:'#008000',
-      skillPurple:'#EFE3FF'
-
+      skillPurple:'#EFE3FF',
+      buttonGrey: '#999999'
     },
     fontSize: {
       xxs: ['10px', { lineHeight: '20px', letterSpacing: '-0.005em' }],
@@ -46,5 +46,18 @@ export default {
       'manrope': ['Manrope']
     },
   },
-  plugins: [],
+  plugins: [
+    function ({addUtilities}){
+      const newUtilities = {
+        ".no-scrollbar::-webkit-scrollbar":{
+          display: "none",
+        },
+        ".no-scrollbar": {
+          "-ms-overflow-style": "none",
+          "scrollbar-width": "none"
+        }
+      };
+      addUtilities(newUtilities);
+    }
+  ],
 }

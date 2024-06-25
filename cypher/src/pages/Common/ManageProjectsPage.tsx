@@ -4,6 +4,7 @@ import { useAuthStore } from '../../helpers/authStore';
 import { ERRORS } from '../../constants/app';
 import { isAxiosError } from 'axios';
 import { ALLORDERS_REQUEST } from '../../services/client';
+import { CYPHERORDERS_REQUEST } from '../../services/cypher';
 import { AllOrdersResponse } from '../../interfaces/apis/clientapis';
 
 interface ManageProjectsPageProps{}
@@ -23,7 +24,12 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
         const getDashboardData = async () => {
           if (isAuthenticated) {
             try {
-              const res = await ALLORDERS_REQUEST(authToken!, user!.role);
+                let res;
+                if (user?.role === 'wizard') {
+                    res = await CYPHERORDERS_REQUEST(authToken!, user!.role);
+                } else {
+                    res = await ALLORDERS_REQUEST(authToken!, user!.role);
+                }
               if (res.status === 200) {
                 const allOrdersResponse: AllOrdersResponse = res.data;
                 setallOrders(allOrdersResponse)

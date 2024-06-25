@@ -66,6 +66,7 @@ const ClientSignInPage: FC<ClientSignInPageProps> =()=>{
             email: loginResponse.email,
             username: loginResponse.username,
             role: 'client',
+            id: loginResponse.id
             });
 
             navigate(CLIENT_DASHBOARD)

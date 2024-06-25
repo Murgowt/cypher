@@ -26,6 +26,7 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
             if (isAuthenticated) {
                 try {
                     const res = await FINDWORK_REQUEST(authToken!, user!.role);
+                    console.log(res.data)
                     if (res.status === 200) {
                         const findOrdersResponse: FindOrdersResponse = res.data;
                         setAllOrders(findOrdersResponse);
@@ -52,6 +53,7 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
     }, [authToken, isAuthenticated]);
 
     useEffect(() => {
+        allOrders.openOrders.sort((a,b)=>(b.creationtimestamp - a.creationtimestamp))
         setProjects(allOrders.openOrders);
     }, [allOrders]);
 
