@@ -107,7 +107,7 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient
             </div>
             <div className="flex">
                 <input
-                    className="flex-1 p-2 rounded-l-md"
+                    className="flex-1 p-2 rounded-l-md border-2 border-lightgrey"
                     placeholder={placeholder}
                     onChange={handleChange}
                     value={newMessage}

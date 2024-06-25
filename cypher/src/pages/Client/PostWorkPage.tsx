@@ -14,7 +14,7 @@ interface OrderSataDeclaration {
     budget:number,
     tech:string[],
     milestones:number,
-    file? : File[]
+    file : File[]
 }
 const PostWorkPage: FC<PostWorkPageProps> =() =>{
     const navigate = useNavigate();
@@ -30,7 +30,8 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
         description:"",
         budget:0,
         tech:[],
-        milestones:0
+        milestones:0,
+        file:[]
     })
 
     const handleFileUpload = (e:any) =>{

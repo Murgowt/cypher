@@ -7,7 +7,7 @@ interface DataDeclaration {
     budget:number,
     tech:string[],
     milestones:number,
-    file? : File[]
+    file : File[]
 }
 const CREATE_PROJECT_REQUEST =  (data:DataDeclaration,authToken:string, role:string) =>{
     

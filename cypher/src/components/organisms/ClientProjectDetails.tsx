@@ -6,7 +6,7 @@ export interface ClientProjectDetailsProps {
         id: string;
         title: string;
         description: string;
-        tech: string[];
+        tech: string;
         budget: number;
         milestones: string;
         status: string;
@@ -15,6 +15,7 @@ export interface ClientProjectDetailsProps {
 
 const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
 
+    const techArray = JSON.parse(project.tech)
     const renderButton = () => {
         if (project.status === 'completed') {
             return <div className="flex justify-between items-center px-5 bg-green rounded-sm text-white">
@@ -53,7 +54,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
                     
                     <p className="text-md pb-4 text-secondary">Skills</p>
                     <div className="flex gap-4 flex-wrap pb-4">
-                        {project.tech.map((skill, index) => (
+                        {techArray.map((skill:any, index:any) => (
                             <span key={index} className="inline-block bg-skillPurple text-secondary text-sm px-2 py-1 rounded-md">
                                 {skill}
                             </span>
