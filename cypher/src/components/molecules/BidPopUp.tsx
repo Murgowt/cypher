@@ -21,10 +21,10 @@ const BidPopUp: FC<BidPopUpProps> = ({ isOpen, onClose, project }) => {
     const user = useAuthStore((state) => state.user);
     const authToken = useAuthStore((state) => state.authToken);
 
-    const [bidAmount, setBidAmount] = useState<number>(0);
+    const [bidAmount, setBidAmount] = useState<number>(10);
 
     const calculateAmounts = (amount: number) => {
-        const convenienceFee = amount * 0.025;
+        const convenienceFee = amount * 0.050;
         const finalAmount = amount - convenienceFee;
         return { convenienceFee, finalAmount };
     };
@@ -42,9 +42,10 @@ const BidPopUp: FC<BidPopUpProps> = ({ isOpen, onClose, project }) => {
         event.stopPropagation();
     };
 
-    const handleBidAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = parseFloat(event.target.value);
-        setBidAmount(isNaN(value) ? 0 : value);
+    const handleBidAmountChange = (e: any) => {
+        const value = e.target.value;
+        console.log(value)
+        setBidAmount(Number(value));
     };
 
     const handleBid = async(e:any) => {
@@ -73,7 +74,7 @@ const BidPopUp: FC<BidPopUpProps> = ({ isOpen, onClose, project }) => {
                         value={bidAmount}
                         onChange={handleBidAmountChange}
                         className="w-[15%] p-2 border border-grey rounded"
-                        min="0"
+                        min="10"
                     />
                 </div>
 
