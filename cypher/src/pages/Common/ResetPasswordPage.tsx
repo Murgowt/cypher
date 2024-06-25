@@ -39,17 +39,18 @@ const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
         setErrorMsg('');
         let result;
 
-    if (user?.role === 'wizard') {
-        result = await CYPHER_RESET_PASSWORD_REQUEST(rest, authToken!, user!.role);
-    } else {
-        result = await RESET_PASSWORD_REQUEST(rest, authToken!, user!.role);
-    }
+        if (user?.role === 'wizard') {
+            result = await CYPHER_RESET_PASSWORD_REQUEST(rest, authToken!, user!.role);
+        }
+        else {
+            result = await RESET_PASSWORD_REQUEST(rest, authToken!, user!.role);
+        }
 
-    if (result === 'OK') {
-        toggleSuccess(true);
-    } else {
-        setErrorMsg('Something went wrong, please try again later.');
-    }
+        if (result === 'OK') {
+            toggleSuccess(true);
+        } else {
+            setErrorMsg('Something went wrong, please try again later.');
+        }
     }
     return (
     <div className='flex items-start justify-center '>
@@ -76,12 +77,12 @@ const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
             </form>
             {
                 errorMsg.length==0?<></>:<div >
-                <h1 className='relative items-center justify-center   text-red'>*{errorMsg}</h1>
+                <h1 className='relative items-center justify-center text-red'>*{errorMsg}</h1>
             </div>
             }
             {
                 success?<div >
-                <h1 className='relative items-center justify-center   text-green'>{"*Check your email and verify your account."}</h1>
+                <h1 className='relative items-center justify-center text-green'>{"*Check your email and verify your account."}</h1>
             </div>:<></>
             }
 
