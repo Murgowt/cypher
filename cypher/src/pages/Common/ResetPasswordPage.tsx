@@ -82,7 +82,7 @@ const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
             }
             {
                 success?<div >
-                <h1 className='relative items-center justify-center text-green'>{"*Check your email and verify your account."}</h1>
+                <h1 className='relative items-center justify-center text-green'>{"*Password changed successfully"}</h1>
             </div>:<></>
             }
 
