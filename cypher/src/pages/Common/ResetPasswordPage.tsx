@@ -2,6 +2,7 @@ import {FC, useState} from 'react';
 import FormElement from '../../components/atoms/FormElement';
 import { RESET_PASSWORD_REQUEST } from '../../services/auth';
 import { useAuthStore } from '../../helpers/authStore';
+import { CYPHER_RESET_PASSWORD_REQUEST } from '../../services/cypher';
 
 export interface ResetPasswordPageProps{}
 
@@ -36,13 +37,19 @@ const ResetPasswordPage: FC<ResetPasswordPageProps> =()=>{
         }
         let {confirmPassword,...rest}=postData
         setErrorMsg('');
-        const result = await RESET_PASSWORD_REQUEST(rest, authToken!, user!.role)
-        if(result === 'OK'){
-            toggleSuccess(true);
-        }
-        else{
-            setErrorMsg('Something went wrong, please try again later.');
-        }
+        let result;
+
+    if (user?.role === 'wizard') {
+        result = await CYPHER_RESET_PASSWORD_REQUEST(rest, authToken!, user!.role);
+    } else {
+        result = await RESET_PASSWORD_REQUEST(rest, authToken!, user!.role);
+    }
+
+    if (result === 'OK') {
+        toggleSuccess(true);
+    } else {
+        setErrorMsg('Something went wrong, please try again later.');
+    }
     }
     return (
     <div className='flex items-start justify-center '>

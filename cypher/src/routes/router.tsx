@@ -109,6 +109,10 @@ const router = createBrowserRouter([
                     {
                         path:'view-project',
                         element:<ViewProjectPage/>
+                    },
+                    {
+                        path:'reset-password',
+                        element:<ResetPasswordPage/>
                     }
                 ]
             },
