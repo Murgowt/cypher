@@ -56,7 +56,7 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
 
 
     const [projects, setProjects] = useState<any[]>(allOrders.activeOrders);
-    const [selectedStatus, setSelectedStatus] = useState('active');
+    const [selectedStatus, setSelectedStatus] = useState('open');
     const [currentPage, setCurrentPage] = useState(1);
     const projectsPerPage = 3;
     
@@ -69,7 +69,7 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
                     break;
                 case 'completed': setProjects(allOrders.completedOrders);
                     break;
-                default: setProjects(allOrders.activeOrders);
+                default: setProjects(allOrders.pendingOrders);
             }
     }, [selectedStatus]);
 
@@ -104,6 +104,10 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
         <div className="px-20">
             <h1 className="text-2xl text-secondary font-abhaya pb-6">Projects</h1>
             <div className="flex">
+                <button onClick={() => handleStatusChange('open')} 
+                    className={`px-4 py-2 rounded text-secondary font-abhaya border border-grey border-opacity-10 ${selectedStatus === 'open' ? 'bg-skillPurple' : 'bg-white'}`}>
+                    Pending Projects
+                </button>
                 <button onClick={() => handleStatusChange('active')} 
                     className={`px-4 py-2 rounded text-secondary font-abhaya border border-grey border-opacity-10 ${selectedStatus === 'active' ? 'bg-skillPurple' : 'bg-white'}`}>
                     Active Projects
@@ -112,10 +116,7 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
                     className={`px-4 py-2 rounded text-secondary font-abhaya border border-grey border-opacity-10 ${selectedStatus === 'completed' ? 'bg-skillPurple' : 'bg-white'}`}>
                     Completed Projects
                 </button>
-                <button onClick={() => handleStatusChange('open')} 
-                    className={`px-4 py-2 rounded text-secondary font-abhaya border border-grey border-opacity-10 ${selectedStatus === 'open' ? 'bg-skillPurple' : 'bg-white'}`}>
-                    Pending Projects
-                </button>
+                
             </div>
             <div className="grid grid-cols-1 gap-6 bg-skillPurple p-8">
                 {currentProjects.length > 0 ? (currentProjects.map(project => (<ProjectDescriptionCard key={project.id} project={project} />))) : (<p className="p-8 rounded-md bg-white shadow-md font-abhaya"> No projects yet </p>)}

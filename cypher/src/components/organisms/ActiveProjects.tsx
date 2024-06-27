@@ -28,12 +28,12 @@ const ActiveProjects: FC<ActiveProjectsProps> = ({activeOrders = [], pendingOrde
       </div>
       <div className="shadow-md p-4 bg-white rounded-md monitor:py-8">
         <div className="flex justify-between items-center py-2 w-full">
-            <p className="w-1/2 truncate font-abhaya text-xs text-secondary pl-10 monitor:text-lg">Project Name</p>
-            <p className="w-1/2 truncate font-abhaya text-xs text-secondary text-right pr-16 monitor:text-lg">Status</p>
+            <p className="w-1/2 truncate font-abhaya text-sm text-secondary pl-10 monitor:text-lg">Project Name</p>
+            <p className="w-1/2 truncate font-abhaya text-sm text-secondary text-right pr-16 monitor:text-lg">Status</p>
         </div>
         <div className="flex flex-col">
         {(activeOrders.length === 0 && pendingOrders.length === 0) ? (
-            <p className="text-center text-xs text-black font-abhaya my-10">No active projects found.</p>
+            <p className="text-center text-sm text-black font-abhaya my-10">No active projects found.</p>
           ) : (
             <div className="pb-4 grid grid-cols-1 gap-1 tablet:px-1">
               {[...activeOrders,...pendingOrders].map((i) => (
