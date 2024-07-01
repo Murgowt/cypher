@@ -37,8 +37,12 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
     const handleAccept = (bid: Bid) => {
         setSelectedBid(bid);
         navigate(PAYMENTS_PAGE, { state: { bid }, replace: true });
-      };
-    
+    };
+
+    const handleBack = () => {
+        setChat(false);
+        setSelectedBid(null);
+    };
 
     useEffect(() => {
         const fetchBids = async () => {
@@ -55,7 +59,7 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
         };
 
         fetchBids();
-    },[project.id, authToken, user?.role]);
+    }, [project.id, authToken, user?.role]);
 
     if (chat && selectedBid) {
         return (
@@ -66,6 +70,7 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
                 isClient={true}
                 disabled={false}
                 placeholder='Start typing...'
+                onBack={handleBack}
             />
         );
     }
@@ -86,7 +91,6 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
                     <div className="flex space-x-2 text-xs">
                         <img src={chatImgPath} alt="Chat Icon" className="w-8 h-8 rounded-md ml-auto" onClick={() => handleChat(bid)} />
                         <button className="border border-secondary text-secondary px-3 py-1 rounded font-abhaya" onClick={() => handleAccept(bid)}>Accept</button>
-                        <button className="border border-red text-red px-3 py-1 rounded font-abhaya">Reject</button>
                     </div>
                 </div>
             ))}
