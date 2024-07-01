@@ -3,6 +3,8 @@ import { VIEWBIDS_REQUEST } from '../../services/client';
 import { useAuthStore } from '../../helpers/authStore';
 import { Bid } from '../../interfaces/apis/clientapis';
 import ChatWindow from '../../components/organisms/ChatWindow';
+import { useNavigate } from 'react-router-dom';
+import { PAYMENTS_PAGE } from '../../constants/routes.ui';
 
 export interface BidsListProps {
     project: {
@@ -25,11 +27,19 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
     const authToken = useAuthStore((state) => state.authToken);
     const chatImgPath = '/images/Chat.png';
     const imgPath = '/images/ProfilePhoto.png';
+    const navigate = useNavigate();
 
     const handleChat = (bid: Bid) => {
         setSelectedBid(bid);
         setChat(true);
     };
+
+    const handleAccept = (bid: Bid) => {
+        setSelectedBid(bid);
+        navigate(PAYMENTS_PAGE, { state: { bid } });
+        console.log('hiii')
+      };
+    
 
     useEffect(() => {
         const fetchBids = async () => {
@@ -46,7 +56,7 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
         };
 
         fetchBids();
-    });
+    },[]);
 
     if (chat && selectedBid) {
         return (
@@ -76,7 +86,7 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
                     </div>
                     <div className="flex space-x-2 text-xs">
                         <img src={chatImgPath} alt="Chat Icon" className="w-8 h-8 rounded-md ml-auto" onClick={() => handleChat(bid)} />
-                        <button className="border border-secondary text-secondary px-3 py-1 rounded font-abhaya">Accept</button>
+                        <button className="border border-secondary text-secondary px-3 py-1 rounded font-abhaya" onClick={() => handleAccept(bid)}>Accept</button>
                         <button className="border border-red text-red px-3 py-1 rounded font-abhaya">Reject</button>
                     </div>
                 </div>

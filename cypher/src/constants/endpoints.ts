@@ -5,6 +5,8 @@ export const ALLORDERS_ENDPOINT          = "client/allorders";
 export const RESET_PASSWORD_ENDPOINT     = "client/editprofile";
 export const CLIENT_CREATE_PROJECT       = "client/order";
 export const VIEWBIDS_ENDPOINT           = (orderId: string) => `client/bids/${orderId}`;
+export const PAYMENT_ENDPOINT            = "client/pay";
+export const ACCEPT_BID_ENDPOINT         = "client/acceptbid";
 
 export const CYPHERORDERS_ENDPOINT       = "wizard/allorders";
 export const FINDWORK_ENDPOINT           = "wizard/market";
