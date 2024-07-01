@@ -36,8 +36,7 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
 
     const handleAccept = (bid: Bid) => {
         setSelectedBid(bid);
-        navigate(PAYMENTS_PAGE, { state: { bid } });
-        console.log('hiii')
+        navigate(PAYMENTS_PAGE, { state: { bid }, replace: true });
       };
     
 
@@ -56,7 +55,7 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
         };
 
         fetchBids();
-    },[]);
+    },[project.id, authToken, user?.role]);
 
     if (chat && selectedBid) {
         return (

@@ -44,7 +44,6 @@ const BidPopUp: FC<BidPopUpProps> = ({ isOpen, onClose, project }) => {
 
     const handleBidAmountChange = (e: any) => {
         const value = e.target.value;
-        console.log(value)
         setBidAmount(Number(value));
     };
 

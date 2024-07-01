@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import axios from "../../helpers/axios";
-import { PAYMENT_ENDPOINT, ACCEPT_BID_ENDPOINT } from '../../constants/endpoints';
+import React, { useEffect, useRef, useCallback } from 'react';
+import { CREATEORDER_REQUEST, ACCEPTBID_REQUEST } from '../../services/client';
 import { useAuthStore } from '../../helpers/authStore';
+import { useNavigate } from 'react-router-dom';
 
 interface PayPalButtonProps {
   bid: {
@@ -17,44 +17,39 @@ const PayPalButton: React.FC<PayPalButtonProps> = ({ bid }) => {
   const paypalRef = useRef<HTMLDivElement>(null);
   const user = useAuthStore((state) => state.user);
   const authToken = useAuthStore((state) => state.authToken);
+  const buttonRendered = useRef(false);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log('hi')
-    if (paypalRef.current) {
-      (window as any).paypal.Buttons({
-        createOrder: async function(data: any, actions: any) {
-          try {
-            const response = await axios.post(PAYMENT_ENDPOINT, {
-              amount: 1
-            }, {
-              headers: { 'token': authToken, 'user': user!.role },
-            });
-            console.log('Order created:', response.data);
-            return response.data.id;
-          } catch (error) {
-            console.error('Error creating order:', error);
-          }
-        },
-        onApprove: async function(data: any, actions: any) {
-          try {
-            const acceptBidResponse = await axios.post(ACCEPT_BID_ENDPOINT, {
-              paymentId: data.orderID,
-              bidId: bid.id,
-              wizardId: bid.wizardId,
-              finalBudget: bid.budget,
-            }, {
-              headers: { 'token': authToken, 'user': user!.role },
-            });
-            console.log(acceptBidResponse)
-          } catch (error) {
-            console.error('Error approving payment:', error);
-          }
-        },
-      }).render(paypalRef.current);
+  const handleCreateOrder = useCallback(async () => {
+    try {
+      return await CREATEORDER_REQUEST(authToken!, user!.role);
+    } catch (error) {
+      console.error('Error creating order:', error);
+      throw error;
+    }
+  }, []);
+
+  const handleApprove = useCallback(async (data: any) => {
+    try {
+      await ACCEPTBID_REQUEST(data, bid, authToken!, user!.role);
+      navigate(-1)
+    } catch (error) {
+      console.error('Error approving payment:', error);
+      throw error;
     }
   }, [bid]);
 
-  return <div ref={paypalRef}>Hello</div>;
+  useEffect(() => {
+    if (paypalRef.current && !buttonRendered.current && (window as any).paypal) {
+      buttonRendered.current = true;
+      (window as any).paypal.Buttons({
+        createOrder: handleCreateOrder,
+        onApprove: handleApprove,
+      }).render(paypalRef.current);
+    }
+  }, [handleCreateOrder, handleApprove]);
+
+  return <div ref={paypalRef}></div>;
 };
 
-export default PayPalButton;
+export default React.memo(PayPalButton);

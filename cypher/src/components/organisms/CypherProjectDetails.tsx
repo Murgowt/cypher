@@ -50,7 +50,6 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
 
         try {
             const responses = await Promise.all(attachmentPromises);
-            console.log('Responses',responses)
             const attachmentUrls = responses.map(response => response.data.url);
             setAttachments(attachmentUrls);
         } catch (error) {

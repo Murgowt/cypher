@@ -8,10 +8,12 @@ const PaymentPage: React.FC = () => {
   const bid: Bid = location.state.bid;
 
   return (
-    <div className="p-4 shadow-md">
+    <div className="p-10">
       <h2 className="text-lg font-abhaya text-secondary mb-4">Payment</h2>
       <hr className="pb-4 border-t-2 border-primary w-24 border-opacity-50" />
-      <PayPalButton bid={bid} />
+      <div className="flex justify-center items-center mt-[10%]">
+        <PayPalButton bid={bid} />
+      </div>
     </div>
   );
 };
