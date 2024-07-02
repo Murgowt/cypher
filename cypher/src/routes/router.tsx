@@ -18,6 +18,7 @@ import FindWorkPage from '../pages/Cypher/FindWorkPage'
 import EnrollmentTest from '../pages/Cypher/EnrollmentTest';
 import TestResultPage from '../pages/Cypher/TestResultPage';
 import ViewProjectPage from '../pages/Cypher/ViewProjectPage';
+import PaymentPage from '../pages/Client/PaymentPage';
 
 
 const router = createBrowserRouter([
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
                     {
                         path:'view-project',
                         element:<ViewProjectPage/>
+                    },
+                    {
+                        path:'payment',
+                        element:<PaymentPage/>
                     }
                 ]
             },

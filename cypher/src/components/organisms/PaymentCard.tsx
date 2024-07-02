@@ -48,14 +48,14 @@ const PaymentCard: FC<PaymentCardProps> = ({ completedOrders }) => {
             ) : (
                 <div className="shadow-md p-8 bg-white rounded-md">
                     <div className="flex justify-between items-center py-2 w-full">
-                        <p className="w-1/2 truncate font-abhaya text-xs text-orange pl-10 monitor:text-lg monitor:pt-16">
-                            Project Name: {currentOrder.title}
+                        <p className="w-1/2 truncate font-abhaya text-sm text-orange pl-10 monitor:text-lg monitor:pt-16">
+                            {currentOrder.title}
                         </p>
                     </div>
                     <div className="grid grid-cols-1 gap-3 tablet:px-1 py-4 monitor:pb-16">
                         <div className="flex">
                             <p className="w-1/2 truncate font-abhaya text-xs text-black pl-10 monitor:text-md">Cypher</p>
-                            <p className="w-1/2 truncate font-abhaya text-xs text-black text-right pr-10 monitor:text-md">{currentOrder.wizardId}</p>
+                            <p className="w-1/2 truncate font-abhaya text-xs text-black text-right pr-10 monitor:text-md">{currentOrder.wizardId.split('-')[1]}</p>
                         </div>
                         <div className="flex">
                             <p className="w-1/2 truncate font-abhaya text-xs text-black pl-10 monitor:text-md">Payment</p>

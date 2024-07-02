@@ -19,7 +19,6 @@ const ClientSignInPage: FC<ClientSignInPageProps> =()=>{
     const setAuthToken = useAuthStore((state) => state.setAuthToken);
     const setUser = useAuthStore((state) => state.setUser);
     const handleChange = (e:any) =>{
-        console.log(e.target.value)
         setPostData({...postData,[e.target.name]:e.target.value})
     }
 

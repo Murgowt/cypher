@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { addDoc } from 'firebase/firestore';
 import SelfChat from '../molecules/SelfChat';
 import OppositeChat from '../molecules/OppositeChat';
+import { IoMdArrowRoundBack } from "react-icons/io";
+
 //Firebase Initializations
 const app = firebase.initializeApp({
     apiKey: "AIzaSyBZHHJ_OZMiORvgvHULc8JaHSufiia3TAs",
@@ -24,9 +26,10 @@ interface ChatWindowProps {
     cypherId: string,
     isClient : boolean,
     disabled: boolean,
-    placeholder: string
+    placeholder: string,
+    onBack?: () => void
 }
-const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient, disabled, placeholder}) =>{
+const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId, cypherId, isClient, disabled, placeholder, onBack}) =>{
     const clientUserName = clientId.split('-')[1]
     const cypherUserName = cypherId.split('-')[1]
     const [newMessage,setNewMessage] = useState('')
@@ -90,7 +93,8 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId,cypherId,isClient
 
     return(
         <div className="fixed p-4 w-full max-w-3xl h-1/2 desktop:h-3/4 desktop:max-w-md bg-white shadow-lg rounded-t-md flex flex-col">
-            <div className="text-secondary border-b-2 border-lightgrey p-4 mb-2 font-abhaya">
+            <div className="flex gap-2 items-center text-secondary border-b-2 border-lightgrey p-4 mb-2 font-abhaya">
+                {onBack && <IoMdArrowRoundBack onClick={onBack}/>}
                 {isClient ? clientUserName : cypherUserName}
             </div>
             <div className="flex-1 overflow-y-scroll mb-2 no-scrollbar">

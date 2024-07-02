@@ -29,17 +29,17 @@ const RecentProjects: FC<ClientProjectsProps> = ({ allOrders, recentOrders }) =>
       <div className="shadow-md p-4 bg-white rounded-md desktop:h-[70vh] monitor:h-[80vh]">
         <ProgressCounts progressCounts={progressCounts} />
         <div className="flex justify-between items-center px-4 py-2 w-full text-center monitor:p-8">
-          <p className="w-1/4 truncate font-abhaya text-xs text-secondary monitor:text-lg">Project Name</p>
-          <p className="w-1/4 truncate font-abhaya text-xs text-secondary monitor:text-lg">Task</p>
-          <p className="w-1/4 truncate font-abhaya text-xs text-secondary monitor:text-lg">Status</p>
-          <p className="w-1/4 truncate font-abhaya text-xs text-secondary monitor:text-lg">Budget</p>
+          <p className="w-1/4 truncate font-abhaya text-sm text-secondary monitor:text-lg">Project Name</p>
+          <p className="w-1/4 truncate font-abhaya text-sm text-secondary monitor:text-lg">Task</p>
+          <p className="w-1/4 truncate font-abhaya text-sm text-secondary monitor:text-lg">Status</p>
+          <p className="w-1/4 truncate font-abhaya text-sm text-secondary monitor:text-lg">Budget</p>
         </div>
         <div className="flex flex-col">
           <div className="pb-4 grid grid-cols-1 gap-1 tablet:px-1 monitor:gap-4">
-            {recentOrders.length === 0 ? <div className="flex justify-center p-3 w-full text-xs mt-20 monitor:text-md">No Projects yet</div>: <></>}
+            {recentOrders.length === 0 ? <div className="flex justify-center p-3 w-full text-sm mt-20 monitor:text-md">No Projects yet</div>: <></>}
             {recentOrders.map((i) => (
               <div key={i.id} className="col-span-1">
-                <ProjectCard name={i.title} task={i.description} status={i.status === 'open' ? 'Pending' : i.status} budget={i.budget} />
+                <ProjectCard project={i} />
               </div>
             ))}
           </div>

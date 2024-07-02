@@ -6,7 +6,6 @@ interface ImageCard {
 }
 
 const ImageCard:FC<ImageCard> =({imgPath,text})=>{
-    console.log(imgPath)
     return (
     <div >
         <Image path={imgPath} altText="Cypher" />

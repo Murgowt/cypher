@@ -50,7 +50,6 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
 
         try {
             const responses = await Promise.all(attachmentPromises);
-            console.log('Responses',responses)
             const attachmentUrls = responses.map(response => response.data.url);
             setAttachments(attachmentUrls);
         } catch (error) {
@@ -97,7 +96,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
             </div>
             
             <hr className="pb-4 border-t-2 border-primary w-24 border-opacity-50" />
-            <p className="text-xs pb-4 text-secondary">{project.description}</p>
+            <p className="text-sm pb-4 text-secondary">{project.description}</p>
             
             <p className="text-md pb-4 text-secondary">Skills</p>
             <div className="flex gap-4 flex-wrap pb-4">
