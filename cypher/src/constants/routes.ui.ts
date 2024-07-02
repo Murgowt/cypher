@@ -21,3 +21,5 @@ export const CYPHER_DASHBOARD = `${CYPHER_ROUTE}/dashboard`;
 export const FIND_WORK = `${CYPHER_ROUTE}/find-work`;
 export const CYPHER_PROJECTS = `${CYPHER_ROUTE}/manage-projects`;
 export const CYPHER_RESET_PASSWORD_PAGE = `${CYPHER_ROUTE}/reset-password`;
+
+export const CONTACT_US_ROUTE = '/contact-us'

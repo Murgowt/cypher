@@ -2,7 +2,8 @@ import { FC } from 'react';
 import CypherButton from "../atoms/CypherButton";
 import BrandLogo from '../atoms/BrandLogo';
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
-
+import { useNavigate } from 'react-router-dom';
+import { CONTACT_US_ROUTE } from '../../constants/routes.ui';
 import {
   SOCIAL_FACEBOOK,
   SOCIAL_INSTAGRAM,
@@ -11,11 +12,15 @@ import {
 
 export interface LandingFooterProps {}
 
-const helperFunction =() =>{
-    console.log("Clicked on Helper Function.")
-}
+
 
 const LandingFooter: FC<LandingFooterProps> = () => {
+  const navigate = useNavigate();
+  const helperFunction =() =>{
+    console.log('contact us button')
+    navigate(CONTACT_US_ROUTE)
+}
+
   return (
     <div className="bg-secondary py-8">
         <div className="flex flex-col gap-8 justify-center items-center border-b border-primary pb-8 border-opacity-50 mx-24">

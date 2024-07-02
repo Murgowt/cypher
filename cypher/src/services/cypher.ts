@@ -1,5 +1,5 @@
 import axios from "../helpers/axios";
-import { ATTACHMENTS_ENDPOINT, CYPHERORDERS_ENDPOINT, CYPHER_RESET_PASSWORD_ENDPOINT, FINDWORK_ENDPOINT, PLACE_BID_ENDPOINT } from "../constants/endpoints";
+import { ATTACHMENTS_ENDPOINT, CYPHERORDERS_ENDPOINT, CYPHER_FILE_UPLOAD, CYPHER_RESET_PASSWORD_ENDPOINT, FINDWORK_ENDPOINT, PLACE_BID_ENDPOINT } from "../constants/endpoints";
 
 export const CYPHERORDERS_REQUEST = async (token: string, role: string) =>{
     let promise = axios.get(CYPHERORDERS_ENDPOINT, {
@@ -61,4 +61,41 @@ export const CYPHER_RESET_PASSWORD_REQUEST = async (postData:{email:string,passw
               })
   console.log(promise)
   return promise;
+}
+
+
+
+
+//Cypher File Upload Call
+export const CYPHER_FILE_UPLOAD_REQUEST = async(file: File[],authToken:string, role:string) =>{
+  if(file.length==0){
+    return
+  }
+  var formData = new FormData();
+  for (var i = 0; i < file.length; i++){
+    let fileName = file[i]
+      formData.append('files',fileName)
+  }
+  let promise = axios.post(CYPHER_FILE_UPLOAD,formData,{
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'token':authToken,
+      'user':role
+    }
+})
+
+.then(response=>{
+  console.log("GOWTHAM", response)
+  if('data' in response){
+      return response.data
+    }
+    else{
+        return "Something went wrong, please try again later."
+    }
+  })
+  .catch(err=>{
+    console.log("pollam",err)
+    return "Something went wrong, please try again later."
+  })
+return promise
 }

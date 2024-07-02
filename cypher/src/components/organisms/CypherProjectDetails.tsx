@@ -5,6 +5,7 @@ import { useAuthStore } from '../../helpers/authStore';
 import { ATTACHMENTS_REQUEST } from '../../services/cypher';
 import { isAxiosError } from 'axios';
 import { ERRORS } from '../../constants/app';
+import { CYPHER_FILE_UPLOAD_REQUEST } from '../../services/cypher';
 
 export interface CypherProjectDetailsProps {
     project: {
@@ -63,12 +64,24 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
         }
     };
 
+    const handleFileUpload = (e:any) =>{
+        let file:File[] = []
+        const filesVar = e.target.files
+        let uploaded = file
+        console.log(filesVar)
+        for (var i = 0; i < filesVar.length; i++) {
+            uploaded.push(filesVar[i]);
+        }
+        CYPHER_FILE_UPLOAD_REQUEST(filesVar,authToken!,user!.role)
+        
+    }
+
     return (<>
         {apiError ? (
             <p>Something went wrong</p>
           ) : (
             <>
-              <div className="p-4 tablet:p-8 rounded-md bg-white shadow-md font-abhaya">
+              <div className="p-4 tablet:p-8 rounded-md bg-white shadow-md font-abhaya overflow-hidden">
             <div className='flex justify-between'>
                 <h2 className="text-xl font-bold pb-2 text-secondary">{project.title}</h2>
                 {project.status === 'open' && (
@@ -107,16 +120,16 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                 ))}
             </div>
             <hr className="my-10 border-t-2 border-black border-opacity-5" />
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1  tablet:grid-cols-4  gap-4">
                 <div>
                     <h3 className="text-md text-secondary pb-4">Attachments</h3>
                     <span 
                 className="inline-block bg-skillPurple text-secondary text-sm px-12 py-2 rounded-sm cursor-pointer" 
                 onClick={handleAttachments}
-            >
+                >
                 {isLoadingAttachments ? 'Loading...' : project.filesCount}
-            </span>
-            {attachments.length > 0 && (
+                </span>
+                {attachments.length > 0 && (
                 <div className="mt-4">
                     <h4 className="text-md text-secondary pb-2">Attachment List:</h4>
                     <ul>
@@ -129,7 +142,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                         ))}
                     </ul>
                 </div>
-            )}
+                )}
                 </div>
                 <div>
                     <h3 className="text-md text-secondary pb-4">Budget</h3>
@@ -142,6 +155,11 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                     <span className="inline-block bg-skillPurple text-secondary text-sm px-12 py-2 rounded-sm">
                         {project.milestones}
                     </span>
+                </div>
+                <div>
+                    <h3 className="text-md text-secondary pb-4">Upload Files</h3>
+                    <input className="mb-10" type='file' onChange={handleFileUpload} multiple/>
+                    
                 </div>
             </div>
 
