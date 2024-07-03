@@ -13,7 +13,7 @@ export interface BidsListProps {
         description: string;
         tech: string;
         budget: number;
-        milestones: string;
+        milestones: number;
         status: string;
         wizardId: string;
     };

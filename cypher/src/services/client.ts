@@ -1,5 +1,5 @@
 import axios from "../helpers/axios";
-import { ALLORDERS_ENDPOINT, VIEWBIDS_ENDPOINT, PAYMENT_ENDPOINT, ACCEPT_BID_ENDPOINT } from "../constants/endpoints";
+import { ALLORDERS_ENDPOINT, VIEWBIDS_ENDPOINT, PAYMENT_ENDPOINT, ACCEPT_BID_ENDPOINT, UPDATEMILESTONE_ENDPOINT, CLOSEORDER_ENDPOINT } from "../constants/endpoints";
 
 export const ALLORDERS_REQUEST = async (token: string, role: string) =>{
     let promise = axios.get(ALLORDERS_ENDPOINT, {
@@ -45,3 +45,43 @@ export const ACCEPTBID_REQUEST = async (data: any, bid: any, token: string, role
     throw error;
   }
 };
+
+export const UPDATEMILESTONE_REQUEST = async (postData:{orderId:string}, token: string, role: string ) =>{
+  let promise = axios.post(UPDATEMILESTONE_ENDPOINT,postData,{
+      headers: { 'token': token, 'user': role },
+    })
+              .then(response=>{
+                  if('data' in response){
+                      return response.data
+                  }
+                  else{
+                      return "Something went wrong, please try again later."
+                  }
+              })
+              .catch(err=>{
+                  console.log(err)
+                  return "Something went wrong, please try again later."
+              })
+  console.log(promise)
+  return promise;
+}
+
+export const CLOSEORDER_REQUEST = async (postData:{orderId:string}, token: string, role: string ) =>{
+  let promise = axios.post(CLOSEORDER_ENDPOINT,postData,{
+      headers: { 'token': token, 'user': role },
+    })
+              .then(response=>{
+                  if('data' in response){
+                      return response.data
+                  }
+                  else{
+                      return "Something went wrong, please try again later."
+                  }
+              })
+              .catch(err=>{
+                  console.log(err)
+                  return "Something went wrong, please try again later."
+              })
+  console.log(promise)
+  return promise;
+}

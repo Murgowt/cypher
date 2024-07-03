@@ -13,7 +13,7 @@ export interface CypherProjectDetailsProps {
         description: string;
         tech: string;
         budget: number;
-        milestones: string;
+        milestones: number;
         status: string;
         filesCount: number
     };
