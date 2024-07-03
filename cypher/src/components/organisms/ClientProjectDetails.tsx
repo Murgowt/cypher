@@ -50,10 +50,11 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
             if(result==='OK')
             {
                 setMessage('Order closed successfully.')
+                setToggleOpen(true)
             }
             else{
                 setMessage('Something went wrong')
-                setToggleOpen(true)
+                
             }
         } catch (error) {
             setMessage('Failed to close order.');
