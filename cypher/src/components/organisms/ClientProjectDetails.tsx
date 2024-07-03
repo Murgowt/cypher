@@ -46,6 +46,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
     const handleComplete = async () => {
         try {
             const result = await CLOSEORDER_REQUEST({ orderId: project.id }, authToken!, user!.role);
+            console.log(result)
             if(result==='OK')
             {
                 setMessage('Order closed successfully.')
