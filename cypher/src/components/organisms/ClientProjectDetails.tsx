@@ -20,6 +20,8 @@ export interface ClientProjectDetailsProps {
 const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
     const [message, setMessage] = useState<string | null>(null);
     const [toggleOpen, setToggleOpen] = useState(false);
+    const [completedMilestones, setCompletedMilestones] = useState(project.completedMilestones);
+    const [projectStatus, setProjectStatus] = useState(project.status);
 
     const handleClosePopup = () => {
         setToggleOpen(false);
@@ -32,11 +34,11 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
     const handleReleaseMilestone = async () => {
         try {
             const result = await UPDATEMILESTONE_REQUEST({ orderId: project.id }, authToken!, user!.role);
-            if(result==='OK'){
-                setMessage('Milestone released successfully.')
-            }
-            else{
-                setMessage('Something went wrong')
+            if (result === 'OK') {
+                setCompletedMilestones(prev => prev + 1);
+                setMessage('Milestone released successfully.');
+            } else {
+                setMessage('Something went wrong');
             }
         } catch (error) {
             setMessage('Failed to release milestone.');
@@ -46,15 +48,12 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
     const handleComplete = async () => {
         try {
             const result = await CLOSEORDER_REQUEST({ orderId: project.id }, authToken!, user!.role);
-            console.log(result)
-            if(result==='OK')
-            {
-                setMessage('Order closed successfully.')
-                setToggleOpen(true)
-            }
-            else{
-                setMessage('Something went wrong')
-                
+            if (result === 'OK') {
+                setMessage('Order closed successfully.');
+                setToggleOpen(true);
+                setProjectStatus('completed');
+            } else {
+                setMessage('Something went wrong');
             }
         } catch (error) {
             setMessage('Failed to close order.');
@@ -62,7 +61,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
     };
 
     const renderButton = () => {
-        if (project.status === 'completed') {
+        if (projectStatus === 'completed') {
             return (
                 <div className="flex justify-between items-center px-5 bg-green rounded-sm text-white">
                     <p>Completed</p>
@@ -70,9 +69,8 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
             );
         }
 
-        if (project.status === 'active') {
-            if (Number(project.milestones) !== Number(project.completedMilestones)) {
-                console.log('not equal');
+        if (projectStatus === 'active') {
+            if (completedMilestones < project.milestones) {
                 return (
                     <div className="flex justify-between items-center pb-4">
                         <CypherButton placeHolder="Release Milestone" helperFunction={handleReleaseMilestone} />
@@ -87,7 +85,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
             }
         }
 
-        if (project.status === 'open') {
+        if (projectStatus === 'open') {
             return (
                 <div className="flex justify-between items-center px-5 bg-buttonGrey rounded-sm text-white">
                     <p>Pending</p>
@@ -98,6 +96,8 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
         return null;
     };
 
+    const milestoneCompletionPercentage = (completedMilestones / project.milestones) * 100;
+
     return (
         <div className="p-4 tablet:p-8 rounded-md bg-white shadow-md font-abhaya">
             <div className="flex justify-between">
@@ -106,7 +106,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
             </div>
 
             {message && (
-                <div className={`mt-4 flex items-end ${message.startsWith('Something') ? 'text-red' : 'text-green'}`}>
+                <div className={`flex justify-end ${message.startsWith('Something') ? 'text-red' : 'text-green'}`}>
                     {message}
                 </div>
             )}
@@ -139,7 +139,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
                 <div>
                     <h3 className="text-md text-secondary pb-4">Milestones</h3>
                     <span className="inline-block bg-skillPurple text-secondary text-sm px-12 py-2 rounded-sm">
-                        {project.milestones}
+                        {milestoneCompletionPercentage.toFixed(2)}%
                     </span>
                 </div>
             </div>
