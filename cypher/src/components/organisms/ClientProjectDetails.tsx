@@ -96,8 +96,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
         return null;
     };
 
-    const milestoneCompletionPercentage = (completedMilestones / project.milestones) * 100;
-
+    const completionPercentage = (completedMilestones / project.milestones) * 100;
     return (
         <div className="p-4 tablet:p-8 rounded-md bg-white shadow-md font-abhaya">
             <div className="flex justify-between">
@@ -125,7 +124,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
             <hr className="my-10 border-t-2 border-black border-opacity-5" />
             <div className="grid grid-cols-3 gap-4">
                 <div>
-                    <h3 className="text-md text-secondary pb-4">Attachment</h3>
+                    <h3 className="text-md text-secondary pb-4">Attachments</h3>
                     <span className="inline-block bg-skillPurple text-secondary text-sm px-12 py-2 rounded-sm">
                         {project.budget}
                     </span>
@@ -137,10 +136,16 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
                     </span>
                 </div>
                 <div>
-                    <h3 className="text-md text-secondary pb-4">Milestones</h3>
-                    <span className="inline-block bg-skillPurple text-secondary text-sm px-12 py-2 rounded-sm">
-                        {milestoneCompletionPercentage.toFixed(2)}%
-                    </span>
+                    <h3 className="text-md text-secondary pb-4">Milestones completed</h3>
+                    <div className="relative w-32 bg-purple rounded-sm px-12 py-2">
+                        <div
+                            className="absolute top-0 left-0 h-full bg-secondary rounded-sm"
+                            style={{ width: `${completionPercentage}%` }}
+                        ></div>
+                        <div className="relative text-sm text-center text-primary font-bold">
+                            {completionPercentage.toFixed(0)}%
+                        </div>
+                    </div>
                 </div>
             </div>
             <RatingPopUp isOpen={toggleOpen} onClose={handleClosePopup} />
