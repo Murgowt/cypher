@@ -26,7 +26,7 @@ const ActiveProjects: FC<ActiveProjectsProps> = ({activeOrders = [], pendingOrde
         <p className="text-sm text-orange monitor:text-md">View All</p>
         </a>
       </div>
-      <div className="shadow-md p-4 bg-white rounded-md monitor:py-8">
+      <div className="shadow-md p-4 bg-white rounded-md monitor:py-8 desktop:min-h-96">
         <div className="flex justify-between items-center py-2 w-full">
             <p className="w-1/2 truncate font-abhaya text-sm text-secondary pl-10 monitor:text-lg">Project Name</p>
             <p className="w-1/2 truncate font-abhaya text-sm text-secondary text-right pr-16 monitor:text-lg">Status</p>

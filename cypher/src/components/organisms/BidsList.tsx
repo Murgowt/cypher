@@ -13,7 +13,7 @@ export interface BidsListProps {
         description: string;
         tech: string;
         budget: number;
-        milestones: string;
+        milestones: number;
         status: string;
         wizardId: string;
     };
@@ -84,7 +84,7 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
                     <div className="flex items-center gap-4">
                         <img src={imgPath} alt="Profile Image" className="w-12 h-12 rounded-md" />
                         <div>
-                            <h3 className="text-sm font-abhaya text-secondary">{bid.wizardId.split('-')[1]}</h3>
+                            <h3 className="text-sm font-abhaya text-secondary">{bid.wizardId.split('_')[1]+' '+bid.wizardId.split('_')[2]}</h3>
                             <p className="text-xs font-abhaya text-secondary">${bid.budget}</p>
                         </div>
                     </div>
