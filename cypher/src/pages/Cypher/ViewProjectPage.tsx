@@ -46,7 +46,7 @@ const ViewProjectPage: FC<ViewProjectPageProps> = () => {
                 } 
         };
         getDashboardData();
-    });
+    },[]);
     
 
     const isPendingOrder = allOrders.pendingOrders.some(order => order.id === project.id);

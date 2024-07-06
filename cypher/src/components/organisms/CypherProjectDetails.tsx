@@ -24,7 +24,7 @@ export interface CypherProjectDetailsProps {
 const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlaced }) => {
     const user = useAuthStore((state) => state.user);
     const authToken = useAuthStore((state) => state.authToken);
-    
+    const [fileUploadMsg,setMsg] = useState(0);
     const [toggleOpen, setToggleOpen] = useState(false);
     const [apiError, setApiError] = useState<string | null>(null);
     
@@ -64,16 +64,21 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
         }
     };
 
-    const handleFileUpload = (e:any) =>{
+    const handleFileUpload = async (e:any) =>{
         let file:File[] = []
         const filesVar = e.target.files
         let uploaded = file
-        console.log(filesVar)
         for (var i = 0; i < filesVar.length; i++) {
             uploaded.push(filesVar[i]);
         }
-        CYPHER_FILE_UPLOAD_REQUEST(filesVar,authToken!,user!.role)
-        
+
+        let result = await CYPHER_FILE_UPLOAD_REQUEST(filesVar,authToken!,user!.role,project.id)
+        if(result == "Something went wrong, please try again later."){
+            setMsg(2)
+        }
+        else{
+            setMsg(1)
+        }
     }
 
     return (<>
@@ -162,7 +167,8 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                     
                 </div>
             </div>
-
+            {fileUploadMsg==1 && <h1 className='text-green'>File Uploaded Successfully!</h1>}
+            {fileUploadMsg==2 && <h1 className='text-red'>Couldn't upload file</h1>}
             <BidPopUp isOpen={toggleOpen} onClose={handleClosePopup} project={project} />
         </div>
             </>
