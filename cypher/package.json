@@ -16,6 +16,7 @@
     "@tanstack/react-router": "^1.35.1",
     "autoprefixer": "^10.4.19",
     "axios": "^1.7.2",
+    "emailjs-com": "^3.2.0",
     "firebase": "^10.12.2",
     "jwt-decode": "^4.0.0",
     "postcss": "^8.4.38",

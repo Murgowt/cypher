@@ -46,14 +46,14 @@ const ViewProjectPage: FC<ViewProjectPageProps> = () => {
                 } 
         };
         getDashboardData();
-    });
+    },[]);
     
 
     const isPendingOrder = allOrders.pendingOrders.some(order => order.id === project.id);
 
     let chatWindowPlaceholder = '';
     if (user?.role === 'wizard') {
-        if (!isPendingOrder && project.status !== 'completed') {
+        if (!isPendingOrder && project.status !== 'completed' && project.status !== 'active') {
             chatWindowPlaceholder = 'Bid On Project to Start Chat';
         } else if (project.status === 'completed') {
             chatWindowPlaceholder = 'Order is Closed';
@@ -82,7 +82,7 @@ const ViewProjectPage: FC<ViewProjectPageProps> = () => {
                             projectId={project.id}
                             cypherId={user.id}
                             isClient={false}
-                            disabled={!isPendingOrder || project.status==='completed'}
+                            disabled={(!isPendingOrder && project.status==='open') || project.status==='completed' }
                             placeholder={chatWindowPlaceholder}
                         />
                     ) : project.status === 'open' ? (

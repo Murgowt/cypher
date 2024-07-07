@@ -19,6 +19,7 @@ import EnrollmentTest from '../pages/Cypher/EnrollmentTest';
 import TestResultPage from '../pages/Cypher/TestResultPage';
 import ViewProjectPage from '../pages/Cypher/ViewProjectPage';
 import PaymentPage from '../pages/Client/PaymentPage';
+import ContactUsForm from '../pages/ContactUsPage';
 
 
 const router = createBrowserRouter([
@@ -120,6 +121,11 @@ const router = createBrowserRouter([
                         element:<ResetPasswordPage/>
                     }
                 ]
+            },
+            //Contact Us Form
+            {
+              path:'contact-us',
+              element:<ContactUsForm/>  
             },
              //404 Error
              {

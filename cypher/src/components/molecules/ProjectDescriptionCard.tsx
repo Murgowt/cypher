@@ -9,7 +9,7 @@ interface ProjectDescriptionCardProps {
         description: string;
         tech: string;
         budget: number;
-        milestones: string;
+        milestones: number;
         filesCount: number;
     };
 }

@@ -30,8 +30,8 @@ interface ChatWindowProps {
     onBack?: () => void
 }
 const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId, cypherId, isClient, disabled, placeholder, onBack}) =>{
-    const clientUserName = clientId.split('-')[1]
-    const cypherUserName = cypherId.split('-')[1]
+    const clientUserName = clientId.split('_')[1]+' '+clientId.split('_')[2]
+    const cypherUserName = cypherId.split('_')[1]+' '+cypherId.split('_')[2]
     const [newMessage,setNewMessage] = useState('')
     const [messages, setMessages] = useState<any>([])
     const chatid = "clientId-"+clientId+"-projectId-"+projectId+'-CypherId-'+cypherId 
