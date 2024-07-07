@@ -16,7 +16,7 @@ export interface CypherProjectDetailsProps {
         milestones: number;
         status: string;
         filesCount: number;
-        completedMilestones: number
+        completedMilestones: number;
     };
     bidPlaced: boolean;
 }
@@ -24,7 +24,7 @@ export interface CypherProjectDetailsProps {
 const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlaced }) => {
     const user = useAuthStore((state) => state.user);
     const authToken = useAuthStore((state) => state.authToken);
-    const [fileUploadMsg,setMsg] = useState(0);
+    const [fileUploadMsg, setFileUploadMsg] = useState<number | null>(null);
 
     const [toggleOpen, setToggleOpen] = useState(false);
     const [apiError, setApiError] = useState<string | null>(null);
@@ -59,38 +59,24 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
         }
     };
 
-
-    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const filesVar = e.target.files;
-        if (filesVar) {
-            const fileArray = Array.from(filesVar);
-            try {
-                await CYPHER_FILE_UPLOAD_REQUEST(fileArray, authToken!, user!.role);
-            } catch (error) {
-                console.error("File upload failed:", error);
-            }
-        }
-    };
-
     const completionPercentage = (project.completedMilestones / project.milestones) * 100;
 
-    const handleFileUpload = async (e:any) =>{
-        let file:File[] = []
-        const filesVar = e.target.files
-        let uploaded = file
-        for (var i = 0; i < filesVar.length; i++) {
-            uploaded.push(filesVar[i]);
-        }
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files) return;
 
-        let result = await CYPHER_FILE_UPLOAD_REQUEST(filesVar,authToken!,user!.role,project.id)
-        if(result == "Something went wrong, please try again later."){
-            setMsg(2)
-        }
-        else{
-            setMsg(1)
-        }
-    }
+        const filesArray = Array.from(e.target.files);
 
+        try {
+            const result = await CYPHER_FILE_UPLOAD_REQUEST(filesArray, authToken!, user!.role, project.id);
+            if (result === "Something went wrong, please try again later.") {
+                setFileUploadMsg(2);
+            } else {
+                setFileUploadMsg(1);
+            }
+        } catch (error) {
+            setFileUploadMsg(2);
+        }
+    };
 
     return (
         <>
@@ -196,18 +182,14 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                         <div>
                             <h3 className="text-md text-secondary pb-4">Upload Files</h3>
                             <input className="mb-10" type='file' onChange={handleFileUpload} multiple />
+                            {fileUploadMsg === 1 && <p className="text-green-500">Files uploaded successfully</p>}
+                            {fileUploadMsg === 2 && <p className="text-red-500">File upload failed</p>}
                         </div>
                     </div>
                     <BidPopUp isOpen={toggleOpen} onClose={handleClosePopup} project={project} />
                 </div>
-            </div>
-            {fileUploadMsg==1 && <h1 className='text-green'>File Uploaded Successfully!</h1>}
-            {fileUploadMsg==2 && <h1 className='text-red'>Couldn't upload file</h1>}
-            <BidPopUp isOpen={toggleOpen} onClose={handleClosePopup} project={project} />
-        </div>
-            </>
-          )}
-    </>
+            )}
+        </>
     );
 };
 
