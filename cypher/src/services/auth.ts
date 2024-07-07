@@ -1,10 +1,23 @@
 import axios from "../helpers/axios";
 import { CLIENT_SIGNIN_ENDPOINT, CLIENT_SIGNUP_ENDPOINT, CYPHER_ENROLL, RESET_PASSWORD_ENDPOINT, CYPHER_SIGNIN_ENDPOINT } from "../constants/endpoints";
 
-export const CYPHER_SIGNUP_REQUEST =  (location:Object,answers:Object) =>{
-    let postData ={...location,...answers}
-    console.log(postData)
-    let promise = axios.post(CYPHER_ENROLL,postData)
+export const CYPHER_SIGNUP_REQUEST =  (location:any,answers:any) =>{
+    console.log(location)
+    // let postData ={...location,...answers}
+    var formData = new FormData();
+    for(var key in location){
+        formData.append(key,location[key])
+    }
+    for(var key in answers){
+        formData.append(key,answers[key])
+    }
+    for (var pair of formData.entries()) {
+        console.log(pair[0]+ ', ' + pair[1]); 
+    }
+    let promise = axios.post(CYPHER_ENROLL,formData,{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }})
                   .then(response=>{
                     if("status" in response){
                         let status = response.status

@@ -21,11 +21,14 @@ const ManageProjectsPage: FC<ManageProjectsPageProps> = () => {
     });
 
     useEffect(() => {
+
         const getDashboardData = async () => {
+            console.log("GET DASHBOARDDATA")
           if (isAuthenticated) {
             try {
                 let res;
                 if (user?.role === 'wizard') {
+
                     res = await CYPHERORDERS_REQUEST(authToken!, user!.role);
                 } else {
                     res = await ALLORDERS_REQUEST(authToken!, user!.role);

@@ -20,4 +20,4 @@ export const CYPHER_SIGNIN_ENDPOINT      = "wizard/login";
 export const PLACE_BID_ENDPOINT          = "wizard/bid";
 export const ATTACHMENTS_ENDPOINT           = (key: string) => `wizard/orderattachments/${key}`;
 export const CYPHER_RESET_PASSWORD_ENDPOINT     = "wizard/editprofile";
-export const CYPHER_FILE_UPLOAD                 = "wizard/order"
+export const CYPHER_FILE_UPLOAD                 = "wizard/orderattachments"

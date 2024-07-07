@@ -67,15 +67,25 @@ export const CYPHER_RESET_PASSWORD_REQUEST = async (postData:{email:string,passw
 
 
 //Cypher File Upload Call
-export const CYPHER_FILE_UPLOAD_REQUEST = async(file: File[],authToken:string, role:string) =>{
+export const CYPHER_FILE_UPLOAD_REQUEST = async(file: File[],authToken:string, role:string,orderID:string) =>{
+  console.log("CYPHER_FILE_UPLOAD_REQUEST",orderID)
+  console.log("Auth Token",authToken)
+  console.log("Role",role)
+  console.log('Orde')
   if(file.length==0){
     return
   }
+
   var formData = new FormData();
   for (var i = 0; i < file.length; i++){
     let fileName = file[i]
-      formData.append('files',fileName)
+    formData.append('files',fileName)
   }
+  // Display the key/value pairs
+  for (var pair of formData.entries()) {
+    console.log(pair[0]+ ', ' + pair[1]); 
+  }
+  formData.append('orderId',orderID)
   let promise = axios.post(CYPHER_FILE_UPLOAD,formData,{
     headers: {
       'Content-Type': 'multipart/form-data',

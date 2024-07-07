@@ -10,7 +10,7 @@ interface PostDataDeclaration{
         email:string,
         password:string,
         confirmPassword: string,
-        PAN?:File
+        pan?:File
 }
 
 const CypherSignUpPage: FC<CypherSignUpPageProps> =()=>{
@@ -20,14 +20,15 @@ const CypherSignUpPage: FC<CypherSignUpPageProps> =()=>{
         last_name:'',
         email:'',
         password:'',
-        confirmPassword: ''
+        confirmPassword: '',
     })
     const [errorMsg, setErrorMsg] = useState('');
     const [success,toggleSuccess] = useState(false);
+    const [fileUploaded,setFileUploaded] = useState(false);
     const handleChange = (e:any) =>{
-        if(e.target.name=="PAN"){
+        if(e.target.name=="pan"){
             let data = postData
-            data["PAN"]= e.target.files[0]
+            data["pan"]= e.target.files[0]
             setPostData(data)
             return
         }
@@ -60,11 +61,25 @@ const CypherSignUpPage: FC<CypherSignUpPageProps> =()=>{
         if(postData['confirmPassword']!= postData['password']){
             setErrorMsg('Passwords do not match');
             return
+        }   
+        if(!fileUploaded){
+            setErrorMsg('Upload a valid PAN Card');
+            return
         }
  
         setErrorMsg('');
         navigate(ENROLLMENT_TEST,{state:postData})
         
+    }
+    const handleFileUpload = (e:any) =>{
+        let files = e.target.files
+        if(files.length>0){
+            setFileUploaded(true)
+            setPostData({...postData,['pan']:files[0]})
+        }
+        else{
+            setFileUploaded(false)
+        }
     }
     return (
     <div className='flex items-start justify-center mb-10'>
@@ -105,7 +120,7 @@ const CypherSignUpPage: FC<CypherSignUpPageProps> =()=>{
                     type="password" id="confirmPassword" />
                 <div>
                     <label  className="block mb-2 text-sm font-medium text-secondary">{"Upload PAN Card*"}</label>
-                    <input  className="mb-5" type="file" name="PAN"/>
+                    <input  className="mb-5" type="file" name="pan" required onChange={handleFileUpload}/>
                 </div>
                 
             <div className='w-full'>
