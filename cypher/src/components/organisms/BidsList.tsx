@@ -5,6 +5,7 @@ import { Bid } from '../../interfaces/apis/clientapis';
 import ChatWindow from '../../components/organisms/ChatWindow';
 import { useNavigate } from 'react-router-dom';
 import { PAYMENTS_PAGE } from '../../constants/routes.ui';
+import { IoMdStar } from "react-icons/io";
 
 export interface BidsListProps {
     project: {
@@ -50,6 +51,7 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
                 const response = await VIEWBIDS_REQUEST(project.id, authToken!, user?.role!);
                 if (Array.isArray(response.data.bids)) {
                     setBids(response.data.bids);
+                    console.log(response.data.bids)
                 } else {
                     console.error('Expected an array of bids but received:', response.data);
                 }
@@ -86,6 +88,10 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
                         <div>
                             <h3 className="text-sm font-abhaya text-secondary">{bid.wizardId.split('_')[1]+' '+bid.wizardId.split('_')[2]}</h3>
                             <p className="text-xs font-abhaya text-secondary">${bid.budget}</p>
+                            <div className="flex items-center">
+                                <IoMdStar className="text-yellow" />
+                                <p className="text-xs font-abhaya text-secondary ml-1">{bid.wizardRating}</p>
+                            </div>
                         </div>
                     </div>
                     <div className="flex space-x-2 text-xs">
