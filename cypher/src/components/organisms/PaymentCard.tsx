@@ -55,7 +55,7 @@ const PaymentCard: FC<PaymentCardProps> = ({ completedOrders }) => {
                     <div className="grid grid-cols-1 gap-3 tablet:px-1 py-4 monitor:pb-16">
                         <div className="flex">
                             <p className="w-1/2 truncate font-abhaya text-xs text-black pl-10 monitor:text-md">Cypher</p>
-                            <p className="w-1/2 truncate font-abhaya text-xs text-black text-right pr-10 monitor:text-md">{currentOrder.wizardId.split('-')[1]}</p>
+                            <p className="w-1/2 truncate font-abhaya text-xs text-black text-right pr-10 monitor:text-md">{currentOrder.wizardId.split('_')[1]}+' '+{currentOrder.wizardId.split('_')[2]}</p>
                         </div>
                         <div className="flex">
                             <p className="w-1/2 truncate font-abhaya text-xs text-black pl-10 monitor:text-md">Payment</p>

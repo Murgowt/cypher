@@ -14,7 +14,7 @@ export interface CypherProjectDetailsProps {
         description: string;
         tech: string;
         budget: number;
-        milestones: string;
+        milestones: number;
         status: string;
         filesCount: number
     };
@@ -52,6 +52,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
         try {
             const responses = await Promise.all(attachmentPromises);
             const attachmentUrls = responses.map(response => response.data.url);
+            console.log(attachmentUrls)
             setAttachments(attachmentUrls);
         } catch (error) {
             if (isAxiosError(error)) {

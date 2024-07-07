@@ -10,7 +10,7 @@ const AuthLayout: FC<AuthLayoutProps> = () =>{
         <>
         <div className="flex flex-col min-h-screen">
             <Navbar/>
-            <div className="mt-32">
+            <div className="mt-20">
                 <Outlet/>
             </div>
         </div>
