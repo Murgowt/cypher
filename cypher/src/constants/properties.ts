@@ -9,8 +9,8 @@ export const aboutUsDetails = [
   },
   {
     img: PiTrophy,
-    title: 'Quality Work',
-    info: 'Rigorous verification ensures you hire skilled, experienced coders who deliver pixel-perfect solutions.'
+    title: 'Plagarism Free  Work',
+    info: 'All works are plagiarism checked, to ensure genuinity and originality of work delivered.'
   },
   {
     img: GoVerified,
