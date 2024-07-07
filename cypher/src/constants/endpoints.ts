@@ -9,7 +9,9 @@ export const PAYMENT_ENDPOINT            = "client/pay";
 export const ACCEPT_BID_ENDPOINT         = "client/acceptbid";
 export const UPDATEMILESTONE_ENDPOINT    = "client/updatemilestone";
 export const CLOSEORDER_ENDPOINT         = "client/closeorder";
+export const GIVERATING_ENDPOINT         = "client/rating";
 export const GETPROJECTDETAILS_ENDPOINT  = (orderId: string) => `client/order/${orderId}`;
+export const CLIENT_ATTACHMENTS_ENDPOINT = (key: string) => `client/orderattachments/${key}`;
 
 export const CYPHERORDERS_ENDPOINT       = "wizard/allorders";
 export const FINDWORK_ENDPOINT           = "wizard/market";

@@ -34,6 +34,7 @@ export const BidSchema = z.object({
   orderId: z.string(),
   budget: z.string(),
   status: z.string(),
+  wizardRating: z.string()
 });
 
 export type Bid = z.infer<typeof BidSchema>

@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import CypherButton from '../atoms/CypherButton';
-import { UPDATEMILESTONE_REQUEST, CLOSEORDER_REQUEST } from '../../services/client';
+import { ATTACHMENTS_REQUEST, UPDATEMILESTONE_REQUEST, CLOSEORDER_REQUEST } from '../../services/client';
 import { useAuthStore } from '../../helpers/authStore';
 import RatingPopUp from '../molecules/RatingPopUp';
 
@@ -14,6 +14,8 @@ export interface ClientProjectDetailsProps {
         milestones: number;
         status: string;
         completedMilestones: number;
+        wizardId: string;
+        filesCount: string
     };
 }
 
@@ -22,6 +24,8 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
     const [toggleOpen, setToggleOpen] = useState(false);
     const [completedMilestones, setCompletedMilestones] = useState(project.completedMilestones);
     const [projectStatus, setProjectStatus] = useState(project.status);
+    const [attachments, setAttachments] = useState<string[]>([]);
+    const [isLoadingAttachments, setIsLoadingAttachments] = useState(false);
 
     const handleClosePopup = () => {
         setToggleOpen(false);
@@ -96,6 +100,19 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
         return null;
     };
 
+    const handleAttachments = async () => {
+        setIsLoadingAttachments(true);
+        try {
+            const response = await ATTACHMENTS_REQUEST(project.id, authToken!, user!.role);
+            const attachmentUrls = response.data.urls;
+            setAttachments(attachmentUrls);
+        } catch (error) {
+            setMessage('Something went wrong')
+            setIsLoadingAttachments(false);
+        }
+    };
+
+
     const completionPercentage = (completedMilestones / project.milestones) * 100;
     return (
         <div className="p-4 tablet:p-8 rounded-md bg-white shadow-md font-abhaya">
@@ -125,10 +142,27 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
             <div className="grid grid-cols-3 gap-4">
                 <div>
                     <h3 className="text-md text-secondary pb-4">Attachments</h3>
-                    <span className="inline-block bg-skillPurple text-secondary text-sm px-12 py-2 rounded-sm">
-                        {project.budget}
-                    </span>
-                </div>
+                                <span 
+                                    className="inline-block bg-skillPurple text-secondary text-sm px-12 py-2 rounded-sm cursor-pointer" 
+                                    onClick={handleAttachments}
+                                >
+                                    {isLoadingAttachments ? 'Loading...' : 'Download'}
+                                </span>
+                                {attachments.length > 0 && (
+                                    <div className="mt-4">
+                                        <h4 className="text-md text-secondary pb-2">Attachment List:</h4>
+                                        <ul>
+                                            {attachments.map((url, index) => (
+                                                <li key={index}>
+                                                    <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                                        Attachment {index + 1}
+                                                    </a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                    </div>
                 <div>
                     <h3 className="text-md text-secondary pb-4">Budget</h3>
                     <span className="inline-block bg-skillPurple text-secondary text-sm px-12 py-2 rounded-sm">
@@ -136,7 +170,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
                     </span>
                 </div>
                 <div>
-                    <h3 className="text-md text-secondary pb-4">Milestones completed</h3>
+                    <h3 className="text-md text-secondary pb-4">Milestones</h3>
                     <div className="relative w-32 bg-purple rounded-sm px-12 py-2">
                         <div
                             className="absolute top-0 left-0 h-full bg-secondary rounded-sm"
@@ -148,7 +182,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
                     </div>
                 </div>
             </div>
-            <RatingPopUp isOpen={toggleOpen} onClose={handleClosePopup} />
+            <RatingPopUp isOpen={toggleOpen} onClose={handleClosePopup} project={project}/>
         </div>
     );
 };

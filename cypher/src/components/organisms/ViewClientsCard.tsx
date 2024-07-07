@@ -31,8 +31,8 @@ const ViewClientsCard: FC<ViewClientsCardProps> = ({ activeOrders = [] }) => {
                   <div key={i.id} className="flex items-center">
                     <img src={imgPath} alt="Profile Image" className="w-12 h-12 rounded-md"/>
                     <div className="ml-4">
-                      <p className="font-abhaya text-xs">{i.clientId}</p>
-                      <p className="font-abhaya text-sm">{i.title}</p>
+                      <p className="font-abhaya text-sm">{i.clientId.split('_')[1]+' '+i.clientId.split('_')[2]}</p>
+                      <p className="font-abhaya text-xs">{i.title}</p>
                     </div>
                   </div>
                 </div>

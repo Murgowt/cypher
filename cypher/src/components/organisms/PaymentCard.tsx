@@ -27,14 +27,14 @@ const PaymentCard: FC<PaymentCardProps> = ({ completedOrders }) => {
                 <div className="flex items-center">
                     <button
                         onClick={previousOrder}
-                        className="text-grey hover:text-black text-gray-600 font-bold py-2 px-4 rounded-l"
+                        className="text-grey hover:text-black font-bold py-2 px-4 rounded-l"
                         disabled={completedOrders.length <= 1}
                     >
                         &lt;
                     </button>
                     <button
                         onClick={nextOrder}
-                        className="text-grey hover:text-black text-gray-600 font-bold py-2 px-4 rounded-r"
+                        className="text-grey hover:text-black font-bold py-2 px-4 rounded-r"
                         disabled={completedOrders.length <= 1}
                     >
                         &gt;
@@ -48,14 +48,14 @@ const PaymentCard: FC<PaymentCardProps> = ({ completedOrders }) => {
             ) : (
                 <div className="shadow-md p-8 bg-white rounded-md">
                     <div className="flex justify-between items-center py-2 w-full">
-                        <p className="w-1/2 truncate font-abhaya text-sm text-orange pl-10 monitor:text-lg monitor:pt-16">
+                        <p className="font-abhaya text-sm text-orange pl-10 monitor:text-lg monitor:pt-16">
                             {currentOrder.title}
                         </p>
                     </div>
                     <div className="grid grid-cols-1 gap-3 tablet:px-1 py-4 monitor:pb-16">
                         <div className="flex">
                             <p className="w-1/2 truncate font-abhaya text-xs text-black pl-10 monitor:text-md">Cypher</p>
-                            <p className="w-1/2 truncate font-abhaya text-xs text-black text-right pr-10 monitor:text-md">{currentOrder.wizardId.split('_')[1]}+' '+{currentOrder.wizardId.split('_')[2]}</p>
+                            <p className="w-1/2 truncate font-abhaya text-xs text-black text-right pr-10 monitor:text-md">{currentOrder.wizardId.split('_')[1]+' '+currentOrder.wizardId.split('_')[2]}</p>
                         </div>
                         <div className="flex">
                             <p className="w-1/2 truncate font-abhaya text-xs text-black pl-10 monitor:text-md">Payment</p>
