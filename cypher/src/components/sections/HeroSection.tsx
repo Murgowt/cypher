@@ -5,13 +5,16 @@ import CypherButton from "../atoms/CypherButton";
 import { aboutUsDetails } from '../../constants/properties';
 import AboutUsCard from '../molecules/AboutUsCard';
 import Navbar from '../molecules/Navbar';
-
+import { useNavigate } from "react-router-dom";
+import { CLIENT_SIGNIN } from "../../constants/routes.ui";
 interface HeroSectionProps{}
 
 const HeroSection:FC<HeroSectionProps> =()=>{
     let BannerPath = '/images/banner.png';
+    const navigate = useNavigate();
     const helperFunction =() =>{
         console.log("Clicked on Helper Function.")
+        navigate(CLIENT_SIGNIN)
     }
     return(
         <div className="pb-16 monitor:py-10 monitor:px-20">
@@ -20,8 +23,7 @@ const HeroSection:FC<HeroSectionProps> =()=>{
                 <div className="flex flex-col justify-center">
                     <div className="text-3xl font-abhaya font-extrabold text-secondary tablet:text-3xl desktop:text-xxl">Join Cypher Today!</div>
                     <div className='font-abhaya py-10 pr-[20%] text-secondary desktop:text-md monitor:text-lg' >
-                        <p >Your search for a certified Software professional ends here!!
-                    Cypher has got the best of the lot who go through a rigirous testing process before they are ready to cater to your needs.</p>
+                        <p >Your search for a <b>certified</b> Software professional ends here!! <b>Cyphers are software geeks</b> who are the best of the lot who go through a rigirous testing process before they are ready to cater to your needs.</p>
                     </div>
                     <div className="text-white desktop:text-md">
                         <CypherButton placeHolder= "Browse our verified coders now!" helperFunction={helperFunction}/>
