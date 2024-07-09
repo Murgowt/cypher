@@ -1,5 +1,6 @@
 import {FC} from 'react'
 import SkillBox from './SkillBox'
+import { IoIosClose } from "react-icons/io";
 
 interface RemovableSkillBoxProps {
     skill:string,
@@ -12,9 +13,9 @@ const RemovableSkillBox:FC<RemovableSkillBoxProps> = ({skill,index,parentFunc}) 
         parentFunc(index)
     ]
     return (
-        <div key={index} className='flex items-center justify-center bg-skillPurple h-10 w-fit  text-secondary m-2 rounded-sm'>
+        <div key={index} className='flex items-center justify-center bg-skillPurple h-10 w-fit text-secondary rounded-sm'>
             <SkillBox skill={skill} />
-            <h1 className='text-red cursor-pointer px-3' onClick={handleClick}> X</h1>
+            <IoIosClose className='text-red text-xl' onClick={handleClick}/>
         </div>
     )
 }

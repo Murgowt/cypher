@@ -10,7 +10,11 @@ export default {
       desktop: '1124px',
       monitor: '1800px'
     },
-    extend: {},
+    extend: {
+      minHeight:{
+        lg : '24rem'
+      }
+    },
     colors:{
       primary:'#FF9500',
       secondary:'#5D3891',

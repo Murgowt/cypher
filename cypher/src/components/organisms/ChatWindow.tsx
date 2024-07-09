@@ -48,8 +48,8 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId, cypherId, isClie
         await addDoc(chatsRef,{
             text:newMessage,
             createAt:serverTimestamp(), 
-            user: isClient?clientId:cypherId,
-        })
+            user: isClient?cypherId:clientId,
+        }) 
         setNewMessage('')
     }
     useEffect(()=>{
@@ -95,7 +95,7 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId, cypherId, isClie
         <div className="fixed p-4 w-full max-w-3xl h-1/2 desktop:h-3/4 desktop:max-w-md bg-white shadow-lg rounded-t-md flex flex-col">
             <div className="flex gap-2 items-center text-secondary border-b-2 border-lightgrey p-4 mb-2 font-abhaya">
                 {onBack && <IoMdArrowRoundBack onClick={onBack}/>}
-                {isClient ? clientUserName : cypherUserName}
+                {isClient ? cypherUserName : clientUserName}
             </div>
             <div className="flex-1 overflow-y-scroll mb-2 no-scrollbar">
                 {messages.map((msg: any, index: any) => (

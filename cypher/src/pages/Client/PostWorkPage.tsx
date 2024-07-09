@@ -4,6 +4,8 @@ import CREATE_PROJECT_REQUEST from '../../services/CreateProject';
 import { useAuthStore } from '../../helpers/authStore';
 import { useNavigate } from 'react-router-dom';
 import { CLIENT_DASHBOARD } from '../../constants/routes.ui';
+import { IoIosAddCircle } from "react-icons/io";
+
 interface PostWorkPageProps {}
 interface StateDeclaration {
     values:string[]
@@ -131,30 +133,34 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
                 <span>Please enter your project information below. </span>
             </div>
             <form className="py-8 mx-auto">
-                <div className='border-b-2 border-lightgrey mb-5'>
-                    <input className='border-b-2 border-primary mb-5 outline-none text-xl w-full text-secondary'  name="title" placeholder='Job Title' onChange={handleChange}/>
-                    <textarea className="mb-10 outline-none w-full" name="description" placeholder='Project Description' onChange={handleChange}/>
+                <div className='border-b-2 border-lightgrey mb-10'>
+                    <input className='mb-2 outline-none text-lg w-full text-secondary font-abhaya placeholder-secondary placeholder-opacity-50'  name="title" placeholder='Job Title' onChange={handleChange}/>
+                    <hr className="pb-4 border-t-2 border-primary w-24" />
+                    <textarea className="mb-10 outline-none w-full text-md font-abhaya placeholder-secondary placeholder-opacity-50" name="description" placeholder='Project Description' onChange={handleChange}/>
                 </div>
-                <div className='border-b-2 border-lightgrey mb-5 pb-5'>
-                    <h1 className='text-secondary text-lg'>Skills</h1>
+                <div className='border-b-2 border-lightgrey mb-10 pb-5'>
+                    <h1 className='text-secondary text-lg font-abhaya'>Skills</h1>
                     <div className='flex flex-wrap mt-5'>
-                        <input className='border-b-2 border-primary mb-5 mr-5 outline-none text-xl w-[20%] text-secondary'  name="title" placeholder='Add Skill' value={currSkill} onChange={handleAddingSkill}/>
-                        <h2 className='flex items-center justify-center text-primary underline cursor-pointer' onClick={handleAddSkill}>Add Skill</h2>
+                        <input className='mb-10 text-sm rounded-sm placeholder-secondary bg-skillPurple px-4 py-2 desktop:w-[20%] font-abhaya'  name="title" placeholder='Enter Skills' value={currSkill} onChange={handleAddingSkill}/>
+                        <IoIosAddCircle className="mx-4 mt-2 text-xl text-secondary" onClick={handleAddSkill}/>
                     </div>
-
                     <div className='flex flex-wrap'>
                         {skillList}
                     </div>
-                    
                 </div>
-                <div>
-                <h1 className='text-secondary text-lg mb-2'>Attachment</h1>
-                <input className="mb-10" type='file' onChange={handleFileUpload} multiple/>
-                <h1 className='text-secondary text-lg mb-2'>Number of Milestones</h1>
-                <input className='border-b-2 border-primary mb-10 outline-none text-xl w-10 text-secondary' onChange={handleChange} name={"milestones"} placeholder='#' type='number'/>
-
-                <h1 className='text-secondary text-lg mb-2'>Budget($)</h1>
-                <input className='border-b-2 border-primary mb-10 outline-none text-lg w-[2.75rem] text-secondary'  placeholder='$' onChange={handleChange} name={"budget"} type='number'/>
+                <div className='grid desktop:grid-cols-3 gap-4'>
+                    <div>
+                        <h1 className='text-md text-secondary pb-4 font-abhaya'>Attachment</h1>
+                        <input className="mb-10 block w-full text-xs text-secondary file:mr-2 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-abhaya file:bg-skillPurple file:text-secondary file:cursor-pointer" type='file' onChange={handleFileUpload} multiple/>
+                    </div>
+                    <div>
+                        <h1 className='text-md text-secondary pb-4 font-abhaya'>Number of Milestones</h1>
+                        <input className='mb-10 text-sm rounded-sm text-secondary bg-skillPurple px-4 py-2 w-[60%]' onChange={handleChange} name={"milestones"} placeholder='#' type='number'/>
+                    </div>
+                    <div>
+                        <h1 className='text-md text-secondary pb-4 font-abhaya'>Budget($)</h1>
+                        <input className='mb-10 text-sm rounded-sm text-secondary bg-skillPurple px-4 py-2  w-[60%]'  placeholder='$' onChange={handleChange} name={"budget"} type='number'/>
+                    </div>
                 </div>
                 <div className='w-full'>
                     <button className="bg-secondary text-white px-5 py-3 w-full rounded-lg shadow-lg" onClick={handleSubmit} >Create New Project</button>
@@ -162,12 +168,12 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
             </form>
             {
                 errorMsg.length==0?<></>:<div >
-                <h1 className='relative items-center justify-center   text-red'>*{errorMsg}</h1>
+                <h1 className='relative items-center justify-center text-red'>*{errorMsg}</h1>
             </div>
             }
             {
                 success?<div >
-                <h1 className='relative items-center justify-center   text-green'>{"*Login Succesful, loading..."}</h1>
+                <h1 className='relative items-center justify-center text-green'>{"*Login Succesful, loading..."}</h1>
             </div>:<></>
             }
             </div>
