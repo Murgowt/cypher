@@ -90,7 +90,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                             <div>
                                 {bidPlaced ? (
                                     <div className="flex justify-between items-center px-5 py-2 bg-buttonGrey rounded-sm text-white">
-                                        <p>Pending</p>
+                                        <p>pending</p>
                                     </div>
                                 ) : (
                                     <div className="flex justify-between items-center pb-4">

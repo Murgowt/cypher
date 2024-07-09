@@ -92,7 +92,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
         if (projectStatus === 'open') {
             return (
                 <div className="flex justify-between items-center px-5 bg-buttonGrey rounded-sm text-white">
-                    <p>Pending</p>
+                    <p>pending</p>
                 </div>
             );
         }

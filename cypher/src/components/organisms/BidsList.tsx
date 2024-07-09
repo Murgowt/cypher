@@ -6,6 +6,10 @@ import ChatWindow from '../../components/organisms/ChatWindow';
 import { useNavigate } from 'react-router-dom';
 import { PAYMENTS_PAGE } from '../../constants/routes.ui';
 import { IoMdStar } from "react-icons/io";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import { PiChatCircleDotsThin } from "react-icons/pi";
+
+
 
 export interface BidsListProps {
     project: {
@@ -95,7 +99,7 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
                         </div>
                     </div>
                     <div className="flex space-x-2 text-xs">
-                        <img src={chatImgPath} alt="Chat Icon" className="w-8 h-8 rounded-md ml-auto" onClick={() => handleChat(bid)} />
+                        <PiChatCircleDotsThin className="text-2xl ml-auto text-secondary" onClick={() => handleChat(bid)}/>
                         <button className="border border-secondary text-secondary px-3 py-1 rounded font-abhaya" onClick={() => handleAccept(bid)}>Accept</button>
                     </div>
                 </div>
