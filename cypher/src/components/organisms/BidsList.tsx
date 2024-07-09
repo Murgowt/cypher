@@ -6,7 +6,6 @@ import ChatWindow from '../../components/organisms/ChatWindow';
 import { useNavigate } from 'react-router-dom';
 import { PAYMENTS_PAGE } from '../../constants/routes.ui';
 import { IoMdStar } from "react-icons/io";
-import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { PiChatCircleDotsThin } from "react-icons/pi";
 
 
@@ -30,7 +29,6 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
     const [selectedBid, setSelectedBid] = useState<Bid | null>(null);
     const user = useAuthStore((state) => state.user);
     const authToken = useAuthStore((state) => state.authToken);
-    const chatImgPath = '/images/Chat.png';
     const imgPath = '/images/ProfilePhoto.png';
     const navigate = useNavigate();
 
