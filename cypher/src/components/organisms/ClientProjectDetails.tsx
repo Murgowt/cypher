@@ -115,7 +115,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
 
     const completionPercentage = (completedMilestones / project.milestones) * 100;
     return (
-        <div className="p-4 tablet:p-8 rounded-md bg-white shadow-md font-abhaya">
+        <div className="p-4 tablet:p-8 rounded-md bg-white shadow-md font-abhaya h-full">
             <div className="flex justify-between">
                 <h2 className="text-xl font-bold pb-2 text-secondary">{project.title}</h2>
                 {renderButton()}
@@ -128,7 +128,7 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
             )}
 
             <hr className="pb-4 border-t-2 border-primary w-24 border-opacity-50" />
-            <p className="text-sm pb-4 text-secondary">{project.description}</p>
+            <p className="text-sm pb-4 text-secondary h-40 overflow-y-auto">{project.description}</p>
 
             <p className="text-md pb-4 text-secondary">Skills</p>
             <div className="flex gap-4 flex-wrap pb-4">

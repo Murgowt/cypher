@@ -68,7 +68,7 @@ const ViewProjectPage: FC<ViewProjectPageProps> = () => {
     return (
         <div className="px-4 tablet:px-20">
             <div className="grid desktop:grid-cols-3 gap-6 py-8">
-                <div className="col-span-1 desktop:col-span-2">
+                <div className="col-span-1 desktop:col-span-2 desktop:h-[600px]">
                     {user?.role === 'wizard' ? (
                         <CypherProjectDetails key={project.id} project={project} bidPlaced={isPendingOrder}/>
                     ) : (

@@ -83,7 +83,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
             {apiError ? (
                 <p>Something went wrong</p>
             ) : (
-                <div className="p-4 tablet:p-8 rounded-md bg-white shadow-md font-abhaya overflow-hidden">
+                <div className="p-4 tablet:p-8 rounded-md bg-white shadow-md font-abhaya overflow-hidden h-full">
                     <div className='flex justify-between'>
                         <h2 className="text-xl font-bold pb-2 text-secondary">{project.title}</h2>
                         {project.status === 'open' && (
@@ -115,7 +115,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                     </div>
                     
                     <hr className="pb-4 border-t-2 border-primary w-24 border-opacity-50" />
-                    <p className="text-sm pb-4 text-secondary">{project.description}</p>
+                    <p className="text-sm pb-4 text-secondary h-40 overflow-y-auto">{project.description}</p>
                     
                     <p className="text-md pb-4 text-secondary">Skills</p>
                     <div className="flex gap-4 flex-wrap pb-4">
@@ -126,7 +126,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                         ))}
                     </div>
                     <hr className="my-10 border-t-2 border-black border-opacity-5" />
-                    <div className="grid grid-cols-1 tablet:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 tablet:grid-cols-4 gap-4">
                         <div>
                             <h3 className="text-md text-secondary pb-4">Attachments</h3>
                             <span 
@@ -180,10 +180,12 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                             )}
                         </div>
                         <div>
-                            <h3 className="text-md text-secondary pb-4">Upload Files</h3>
-                            <input className="mb-10" type='file' onChange={handleFileUpload} multiple />
-                            {fileUploadMsg === 1 && <p className="text-green-500">Files uploaded successfully</p>}
-                            {fileUploadMsg === 2 && <p className="text-red-500">File upload failed</p>}
+                        <div>
+                            <h1 className='text-md text-secondary pb-4 font-abhaya'>Upload Files</h1>
+                            <input className="mb-10 block w-full text-xs text-secondary file:mr-2 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-abhaya file:bg-skillPurple file:text-secondary file:cursor-pointer" type='file' onChange={handleFileUpload} multiple/>
+                        </div>
+                            {fileUploadMsg === 1 && <p className="text-green">Files uploaded successfully</p>}
+                            {fileUploadMsg === 2 && <p className="text-red">File upload failed</p>}
                         </div>
                     </div>
                     <BidPopUp isOpen={toggleOpen} onClose={handleClosePopup} project={project} />

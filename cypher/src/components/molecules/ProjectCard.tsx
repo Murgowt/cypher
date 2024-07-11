@@ -30,7 +30,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
 };
 
   return (
-    <div className="flex justify-between items-center p-3 rounded-lg border border-black border-opacity-5 w-full text-center text-xs monitor:text-md cursor-pointer" onClick={handleViewMore}>
+    <div className="flex justify-between items-center p-3 rounded-lg border border-black border-opacity-5 w-full text-center text-xs monitor:text-lg cursor-pointer monitor:p-8" onClick={handleViewMore}>
       <p className="w-1/4 truncate font-abhaya text-black">{project.title}</p>
       <p className="w-1/4 truncate font-abhaya text-black">{project.description}</p>
       <p className="w-1/4 truncate font-abhaya text-black">{project.status === 'open' ? 'pending' : project.status}</p>

@@ -53,6 +53,7 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
         if(result==2){
             console.log('success')
             toggleSuccess(true);
+            setPostData(postData)
         }
         else if(result==1){
             setErrorMsg('Account with email already exists.');
