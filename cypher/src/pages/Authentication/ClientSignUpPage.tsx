@@ -1,11 +1,13 @@
 import {FC, useState} from 'react';
 import FormElement from '../../components/atoms/FormElement';
 import { CLIENT_SIGNUP_REQUEST } from '../../services/auth';
-
+import { HOME_PAGE } from '../../constants/routes.ui';
+import { useNavigate } from 'react-router-dom';
 
 interface ClientSignUpPageProps{}
 
 const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
+    const navigate = useNavigate();
     const [postData, setPostData] = useState({
         first_name:'',
         last_name:'',
@@ -19,7 +21,9 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
 
         setPostData({...postData,[e.target.name]:e.target.value})
     }
-
+    function sleep(ms:number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
     const handleSubmit = async(e:any) =>{
         toggleSuccess(false)
         e.preventDefault();
@@ -48,12 +52,15 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
             return
         }
         let {confirmPassword,...rest}=postData
-        setErrorMsg('');
+        setErrorMsg('Loading....');
         const result = await CLIENT_SIGNUP_REQUEST(rest)
         if(result==2){
             console.log('success')
+            setErrorMsg('');
             toggleSuccess(true);
             setPostData(postData)
+            await sleep(1000)
+            navigate(HOME_PAGE)
         }
         else if(result==1){
             setErrorMsg('Account with email already exists.');
