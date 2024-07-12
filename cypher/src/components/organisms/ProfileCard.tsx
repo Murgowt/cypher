@@ -13,16 +13,16 @@ const ProfileCard: FC<ProfileCardProps> = ({ }) => {
   return (
     <>
       {user && (
-        <div className="p-8 tablet:px-8 pb-4 h-1/2">
-          <div className="border border-black border-opacity-5 bg-white rounded-md relative">
+        <div className="p-8 tablet:px-8">
+          <div className="border-t border-black border-opacity-5 bg-white rounded-md relative pb-4 shadow-md h-[215px] monitor:h-[400px]">
             <div className="absolute -top-12 left-1/2 -translate-x-1/2">
               <img
                 src={ProfilePath}
                 alt="Profile Picture"
-                className="w-28 h-28 rounded-full object-cover"
+                className="w-24 h-24 rounded-full object-cover"
               />
             </div>
-            <div className="p-4 pt-24 grid grid-cols-1 gap-2 tablet:px-1 monitor:gap-8">
+            <div className="p-4 pt-20 grid grid-cols-1 gap-2 tablet:px-1 monitor:gap-8">
               {Object.entries(details).map(([key, value]) => (
                 <div key={key} className="flex">
                   <p className="w-1/2 truncate font-abhaya text-xs text-black pl-10 monitor:text-md">{key}</p>

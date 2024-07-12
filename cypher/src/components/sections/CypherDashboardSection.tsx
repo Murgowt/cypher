@@ -19,20 +19,14 @@ const CypherDashboardSection: FC<CypherDashboardSectionProps> = ({ allOrders, re
         <RecentProjects allOrders={allOrders} recentOrders={recentOrders} />
       </div>
       <div className="col-span-2 flex flex-col">
-        <div className="flex-grow h-[40vh]">
+      <div className="flex flex-col justify-between col-span-2 h-[600px] monitor:h-[1150px]">
           <ViewClientsCard activeOrders={allOrders.activeOrders}/>
-        </div>
-        <div className="flex-grow h-[40vh]">
           <ViewBidsCard activeOrders={allOrders.activeOrders} pendingOrders={allOrders.pendingOrders} />
-        </div>
       </div>
-      <div className="flex flex-col col-span-2">
-        <div className="flex-grow h-[40vh]">
+      </div>
+      <div className="flex flex-col justify-between col-span-2 h-[600px] monitor:h-[1150px]">
         <ProfileCard />
-        </div>
-        <div className="flex-grow h-[40vh]">
         <PaymentCard completedOrders={allOrders.completedOrders} />
-        </div>
       </div>
     </div>
   );

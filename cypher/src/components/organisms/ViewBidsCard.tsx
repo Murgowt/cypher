@@ -12,18 +12,17 @@ export interface ViewBidsCardProps {
 
 const ViewBidsCard: FC<ViewBidsCardProps> = ({ activeOrders = [], pendingOrders = [] }) => {
   const navigate = useNavigate();
-
   const helperFunction = () => {
     navigate(FIND_WORK);
   };
 
   return (
-    <div className="p-2 tablet:pl-8 pb-4">
+    <div className="p-2 tablet:pl-8 flex flex-col">
       <div className="flex justify-between font-abhaya px-4">
         <p className="text-md text-secondary monitor:text-lg">My Bids ({[...activeOrders, ...pendingOrders].length})</p>
       </div>
-      <div className="shadow-md p-5 bg-white max-h-56 rounded-md overflow-y-auto monitor:py-8">
-        <div className="flex flex-col">
+      <div className="shadow-md p-5 bg-white flex-grow rounded-md  h-[215px] monitor:h-[400px] overflow-y-auto flex flex-col">
+        <div className="overflow-y-auto flex-grow">
           {(activeOrders.length === 0 && pendingOrders.length === 0) ? (
             <p className="text-center text-xs text-black font-abhaya my-10">No current bids.</p>
           ) : (
@@ -35,9 +34,9 @@ const ViewBidsCard: FC<ViewBidsCardProps> = ({ activeOrders = [], pendingOrders 
               ))}
             </div>
           )}
-          <div className='sticky bottom-0 bg-white pt-2 flex justify-center'>
-            <CypherButton placeHolder='Place a bid' helperFunction={helperFunction} />
-          </div>
+        </div>
+        <div className='mt-auto flex justify-center'>
+          <CypherButton placeHolder='Place a bid' helperFunction={helperFunction} />
         </div>
       </div>
     </div>

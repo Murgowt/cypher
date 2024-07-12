@@ -155,7 +155,7 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
                     </div>
                     <div>
                         <h1 className='text-md text-secondary pb-4 font-abhaya'>Number of Milestones</h1>
-                        <input className='mb-10 text-sm rounded-sm text-secondary bg-skillPurple px-4 py-2 w-[60%]' onChange={handleChange} name={"milestones"} placeholder='#' type='number'/>
+                        <input className='mb-10 text-sm rounded-sm text-secondary bg-skillPurple px-4 py-2 w-[60%]' onChange={handleChange} name={"milestones"} placeholder='#' min="1" type='number'/>
                     </div>
                     <div>
                         <h1 className='text-md text-secondary pb-4 font-abhaya'>Budget($)</h1>

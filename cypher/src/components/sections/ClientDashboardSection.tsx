@@ -17,10 +17,10 @@ const ClientDashboardSection: FC<ClientDashboardSectionProps> = ({ allOrders, re
       <div className="col-span-3">
         <RecentProjects allOrders={allOrders} recentOrders={recentOrders} />
       </div>
-      <div className="col-span-2 overflow-y-auto">
+      <div className="col-span-2">
         <ActiveProjects activeOrders={allOrders.activeOrders} pendingOrders={allOrders.pendingOrders} />
       </div>
-      <div className="flex flex-col col-span-2">
+      <div className="flex flex-col justify-between col-span-2 h-[600px] monitor:h-[1150px]">
         <ProfileCard />
         <PaymentCard completedOrders={allOrders.completedOrders} />
       </div>

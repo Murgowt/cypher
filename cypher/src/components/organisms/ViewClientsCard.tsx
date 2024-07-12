@@ -19,9 +19,9 @@ const ViewClientsCard: FC<ViewClientsCardProps> = ({ activeOrders = [] }) => {
           <p className="text-sm text-orange monitor:text-md">View All</p>
         </a>
       </div>
-      <div className="shadow-md p-4 bg-white rounded-md overflow-y-auto monitor:py-8" style={{ maxHeight: '250px' }}>
+      <div className="shadow-md p-4 bg-white rounded-md overflow-y-auto monitor:py-8 h-[215px] monitor:h-[400px]">
           {activeOrders.length === 0 ? (
-            <p className="text-center text-xs text-black font-abhaya my-10">
+            <p className="flex items-center justify-center text-center text-xs text-black font-abhaya my-10">
               No clients yet
             </p>
           ) : (

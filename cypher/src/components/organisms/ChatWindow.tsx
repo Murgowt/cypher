@@ -48,7 +48,7 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId, cypherId, isClie
         await addDoc(chatsRef,{
             text:newMessage,
             createAt:serverTimestamp(), 
-            user: isClient?cypherId:clientId,
+            user: isClient?clientId:cypherId,
         }) 
         setNewMessage('')
     }
@@ -92,7 +92,7 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId, cypherId, isClie
 
 
     return(
-        <div className="fixed p-4 w-full max-w-3xl h-1/2 desktop:h-3/4 desktop:max-w-md bg-white shadow-lg rounded-t-md flex flex-col">
+        <div className="p-4 w-full max-w-3xl h-[600px] desktop:max-w-md bg-white shadow-lg rounded-t-md flex flex-col">
             <div className="flex gap-2 items-center text-secondary border-b-2 border-lightgrey p-4 mb-2 font-abhaya">
                 {onBack && <IoMdArrowRoundBack onClick={onBack}/>}
                 {isClient ? cypherUserName : clientUserName}
@@ -116,6 +116,12 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId, cypherId, isClie
                     onChange={handleChange}
                     value={newMessage}
                     disabled={disabled}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') 
+                        {
+                            handleSubmit(e);
+                        }
+                      }}
                 />
                 <button
                     className="bg-secondary text-white p-2 rounded-r-md"

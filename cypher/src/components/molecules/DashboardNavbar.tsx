@@ -51,7 +51,7 @@ const DashboardNavbar: FC<DashboardNavbarProps> = () => {
             }
             
           <div className="flex items-center tablet:gap-8">
-            <NavLink href={fallBackLink} onclick={logout}>
+            <NavLink href={fallBackLink} onclick={logout} showUnderline={false}>
             <CypherButton placeHolder='Log Out' helperFunction={helperFunction}/>
             </NavLink>
             <Image path={ProfilePath} altText={'Profile Photo'}/>
