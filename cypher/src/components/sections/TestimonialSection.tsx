@@ -18,9 +18,9 @@ const TestimonialSection: FC<TestimonialSectionProps> =() =>{
                 </div>
                 <div className="flex grid grid-cols-1 tablet:grid-cols-2 gap-10 mt-20 ml-10 tablet:mt-32 tablet:ml-40 tablet:pr-10">
                     <div className="relative">
-                        <TestimonialCard imgPath={client1} name={"Abhinav"} designation={"Graduate Research Assistant @ University of Texas"} testimonial={"Cypher has been a great help for me to help understand, guide and teach me machine learning. The crew is really very prompt and helpful and ofcourse extremely talented!"}/>
+                        <TestimonialCard imgPath={client1} name={"Tristian"} designation={"SDE @ Blinklist"} testimonial={"Cypher has been a great help for me to help understand, guide and teach me machine learning. The crew is really very prompt and helpful and ofcourse extremely talented!"}/>
                     </div>
-                        <TestimonialCard imgPath={client2} name={"Nikhil"} designation={"Univeristy of North Texas"} testimonial={"Cypher is a life saviour! The cypher team has saved me countless times when my back was against the wall and I was running low on time and the deadlines were on my head."}/>
+                        <TestimonialCard imgPath={client2} name={"Chris"} designation={"SWE @ Laxful"} testimonial={"Cypher is a life saviour! The cypher team has saved me countless times when my back was against the wall and I was running low on time and the deadlines were on my head."}/>
                 </div>
            </div>
         </div>

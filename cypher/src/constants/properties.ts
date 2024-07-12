@@ -9,8 +9,8 @@ export const aboutUsDetails = [
   },
   {
     img: PiTrophy,
-    title: 'Plagarism Free  Work',
-    info: 'All works are plagiarism checked, to ensure genuinity and originality of work delivered.'
+    title: 'Quality Work',
+    info: 'Our cyphers provide the best quality work in the industry and are well known for being punctual.'
   },
   {
     img: GoVerified,
