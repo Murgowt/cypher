@@ -3,7 +3,7 @@ import CypherButton from "../atoms/CypherButton";
 import BrandLogo from '../atoms/BrandLogo';
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { CONTACT_US_ROUTE } from '../../constants/routes.ui';
+import { CLIENT_SIGNIN, CONTACT_US_ROUTE, CYPHER_SIGNIN, HOME_PAGE } from '../../constants/routes.ui';
 import {
   SOCIAL_FACEBOOK,
   SOCIAL_INSTAGRAM,
@@ -17,7 +17,6 @@ export interface LandingFooterProps {}
 const LandingFooter: FC<LandingFooterProps> = () => {
   const navigate = useNavigate();
   const helperFunction =() =>{
-    console.log('contact us button')
     navigate(CONTACT_US_ROUTE)
 }
 
@@ -38,9 +37,9 @@ const LandingFooter: FC<LandingFooterProps> = () => {
                 <BrandLogo/>
             </div>
             <div className="grid grid-cols-1 tablet:grid-cols-3 justify-items-center desktop:gap-4 font-abhaya text-white">
-                <p>Home</p>
-                <p>Find Work</p>
-                <p>Request Cypher</p>
+                <a href={HOME_PAGE}>Home</a>
+                <a href={CYPHER_SIGNIN}>Find Work</a>
+                <a href={CLIENT_SIGNIN}>Request Cypher</a>
             </div>
             <div className="flex items-right gap-2 desktop:gap-4">
                 <a
