@@ -2,12 +2,14 @@ import {FC, useEffect, useRef } from 'react'
 import firebase from 'firebase/compat/app';
 import 'firebase/firestore'
 import 'firebase/auth'
-import { collection, getFirestore, serverTimestamp, onSnapshot, query,where } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, collection, getFirestore, serverTimestamp, onSnapshot, query,where } from 'firebase/firestore';
 import { useState } from 'react';
 import { addDoc } from 'firebase/firestore';
 import SelfChat from '../molecules/SelfChat';
 import OppositeChat from '../molecules/OppositeChat';
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { CHATMAIL_REQUEST } from '../../services/client';
+import { useAuthStore } from '../../helpers/authStore';
 
 //Firebase Initializations
 const app = firebase.initializeApp({
@@ -36,6 +38,8 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId, cypherId, isClie
     const [messages, setMessages] = useState<any>([])
     const chatid = "clientId-"+clientId+"-projectId-"+projectId+'-CypherId-'+cypherId 
     const chatID = chatid.split(' ').join('_')
+    const user = useAuthStore((state) => state.user);
+    const authToken = useAuthStore((state) => state.authToken);
 
     // console.log(chatID)
     const chatsRef = collection(db,chatID)
@@ -50,7 +54,34 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId, cypherId, isClie
             createAt:serverTimestamp(), 
             user: isClient?clientId:cypherId,
         }) 
+
         setNewMessage('')
+
+        const userRef = doc(db, 'users', isClient ? clientId : cypherId)
+        const userDoc = await getDoc(userRef);
+        if (!userDoc.exists()) {
+            await setDoc(userRef, {
+                userId: isClient ? clientId : cypherId,
+                lastActive: serverTimestamp(),
+            });
+        } else {
+            await updateDoc(userRef, {
+                lastActive: serverTimestamp(),
+            });
+        }
+
+        const otherUserRef = doc(db,'users', isClient ? cypherId : clientId)
+        const otherUserDoc = await getDoc(otherUserRef)
+        const otherUserInactive = !otherUserDoc.exists() || ((Date.now()- otherUserDoc.data().lastActive.toMillis()) > 30 * 60 * 1000);
+
+        if(otherUserInactive){
+            const recipientId = isClient ? cypherId : clientId;
+            const recipientRole = isClient ? 'wizard' : 'client';
+
+            await CHATMAIL_REQUEST({ id: recipientId , user : recipientRole}, authToken!, user!.role);
+        }
+
+        
     }
     useEffect(()=>{
         const queryMessage = query(chatsRef,where('user','in',[clientId,cypherId]))
@@ -76,7 +107,6 @@ const ChatWindow : FC<ChatWindowProps> = ({clientId, projectId, cypherId, isClie
             })
             setMessages(Newmessages)
             
-
         })
     },[])
 

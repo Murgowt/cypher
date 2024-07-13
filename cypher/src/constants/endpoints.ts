@@ -12,6 +12,7 @@ export const CLOSEORDER_ENDPOINT         = "client/closeorder";
 export const GIVERATING_ENDPOINT         = "client/rating";
 export const PROJECTDETAILS_ENDPOINT  = (orderId: string) => `client/order/${orderId}`;
 export const CLIENT_ATTACHMENTS_ENDPOINT = (key: string) => `client/orderattachments/${key}`;
+export const CHATMAIL_ENDPOINT         = "/sendmail";
 
 export const CYPHERORDERS_ENDPOINT       = "wizard/allorders";
 export const FINDWORK_ENDPOINT           = "wizard/market";
@@ -22,3 +23,4 @@ export const ATTACHMENTS_ENDPOINT           = (key: string) => `wizard/orderatta
 export const CYPHER_RESET_PASSWORD_ENDPOINT     = "wizard/editprofile";
 export const CYPHER_FILE_UPLOAD                 = "wizard/orderattachments"
 export const GETPROJECTDETAILS_ENDPOINT  = (orderId: string) => `client/order/${orderId}`;
+export const REQUESTPAYMENT_ENDPOINT     = "wizard/requestpayment"

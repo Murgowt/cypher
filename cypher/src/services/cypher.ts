@@ -1,5 +1,5 @@
 import axios from "../helpers/axios";
-import { ATTACHMENTS_ENDPOINT, CYPHERORDERS_ENDPOINT, CYPHER_FILE_UPLOAD, CYPHER_RESET_PASSWORD_ENDPOINT, FINDWORK_ENDPOINT, PLACE_BID_ENDPOINT , GETPROJECTDETAILS_ENDPOINT} from "../constants/endpoints";
+import { ATTACHMENTS_ENDPOINT, CYPHERORDERS_ENDPOINT, CYPHER_FILE_UPLOAD, CYPHER_RESET_PASSWORD_ENDPOINT, FINDWORK_ENDPOINT, PLACE_BID_ENDPOINT , GETPROJECTDETAILS_ENDPOINT, REQUESTPAYMENT_ENDPOINT} from "../constants/endpoints";
 
 export const CYPHERORDERS_REQUEST = async (token: string, role: string) =>{
     let promise = axios.get(CYPHERORDERS_ENDPOINT, {
@@ -115,4 +115,25 @@ export const CYPHER_FILE_UPLOAD_REQUEST = async(file: File[],authToken:string, r
     return "Something went wrong, please try again later."
   })
 return promise
+}
+
+export const PAYMENT_REQUEST = async (postData:{wizardId:string,paypalId:string}, token: string, role: string ) =>{
+  let promise = axios.post(REQUESTPAYMENT_ENDPOINT,postData,{
+      headers: { 'token': token, 'user': role },
+    })
+              .then(response=>{
+                console.log(response)
+                  if('data' in response){
+                      return response.data
+                  }
+                  else{
+                      return "Something went wrong, please try again later."
+                  }
+              })
+              .catch(err=>{
+                  console.log(err)
+                  return "Something went wrong, please try again later."
+              })
+  console.log(promise)
+  return promise;
 }
