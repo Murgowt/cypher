@@ -15,7 +15,7 @@ export interface ClientProjectDetailsProps {
         status: string;
         completedMilestones: number;
         wizardId: string;
-        filesCount: string
+        filesCount: number
     };
 }
 
@@ -76,14 +76,14 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
         if (projectStatus === 'active') {
             if (completedMilestones < project.milestones) {
                 return (
-                    <div className="flex justify-between items-center pb-4">
-                        <CypherButton placeHolder="Release Milestone" helperFunction={handleReleaseMilestone} />
+                    <div className="flex justify-between items-center px-5 bg-primary rounded-sm text-white">
+                        <button onClick={handleReleaseMilestone}>Release Milestone</button>
                     </div>
                 );
             } else {
                 return (
-                    <div className="flex justify-between items-center pb-4">
-                        <CypherButton placeHolder="Close Project" helperFunction={handleComplete} />
+                    <div className="flex justify-between items-center px-5 bg-primary rounded-sm text-white">
+                        <button onClick={handleComplete}>Close Project</button>
                     </div>
                 );
             }
@@ -106,6 +106,10 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
             const response = await ATTACHMENTS_REQUEST(project.id, authToken!, user!.role);
             const attachmentUrls = response.data.urls;
             setAttachments(attachmentUrls);
+            console.log(attachmentUrls)
+            if(attachmentUrls.length === 0){
+                setIsLoadingAttachments(false)
+            }
         } catch (error) {
             setMessage('Something went wrong')
             setIsLoadingAttachments(false);
@@ -139,14 +143,14 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
                 ))}
             </div>
             <hr className="my-10 border-t-2 border-black border-opacity-5" />
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 tablet:grid-cols-3 gap-4">
                 <div>
                     <h3 className="text-md text-secondary pb-4">Attachments</h3>
                                 <span 
                                     className="inline-block bg-skillPurple text-secondary text-sm px-12 py-2 rounded-sm cursor-pointer" 
                                     onClick={handleAttachments}
                                 >
-                                    {isLoadingAttachments ? 'Loading...' : 'Download'}
+                                    {isLoadingAttachments ? 'Loading...' : project.filesCount === 0 ? '0' : 'Download'}
                                 </span>
                                 {attachments.length > 0 && (
                                     <div className="mt-4">
@@ -170,17 +174,26 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
                     </span>
                 </div>
                 <div>
-                    <h3 className="text-md text-secondary pb-4">Milestones</h3>
-                    <div className="relative w-32 bg-purple rounded-sm px-12 py-2">
-                        <div
-                            className="absolute top-0 left-0 h-full bg-secondary rounded-sm"
-                            style={{ width: `${completionPercentage}%` }}
-                        ></div>
-                        <div className="relative text-sm text-center text-primary font-bold">
-                            {completionPercentage.toFixed(0)}%
+                            {project.status === 'open' ? (
+                                <>
+                                    <h3 className="text-md text-secondary pb-4">Milestones</h3>
+                                    <span className="inline-block bg-skillPurple text-secondary text-sm px-12 py-2 rounded-sm">
+                                        {project.milestones}
+                                    </span>
+                                </>
+                            ) : (
+                                <>
+                                    <h3 className="text-md text-secondary pb-4">Progress</h3>
+                                    <div className="relative w-32 bg-purple rounded-sm px-12 py-2">
+                                        <div className="absolute top-0 left-0 h-full bg-secondary rounded-sm" style={{ width: `${completionPercentage}%` }}
+                                        ></div>
+                                        <div className="relative text-sm text-center text-primary font-bold">
+                                            {completionPercentage.toFixed(0)}%
+                                        </div>
+                                    </div>
+                                </>
+                            )}
                         </div>
-                    </div>
-                </div>
             </div>
             <RatingPopUp isOpen={toggleOpen} onClose={handleClosePopup} project={project}/>
         </div>

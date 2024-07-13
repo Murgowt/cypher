@@ -1,10 +1,7 @@
 import { FC, useState } from 'react';
-import CypherButton from '../atoms/CypherButton';
 import BidPopUp from '../molecules/BidPopUp';
 import { useAuthStore } from '../../helpers/authStore';
 import { ATTACHMENTS_REQUEST, CYPHER_FILE_UPLOAD_REQUEST } from '../../services/cypher';
-import { isAxiosError } from 'axios';
-import { ERRORS } from '../../constants/app';
 
 export interface CypherProjectDetailsProps {
     project: {
@@ -27,7 +24,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
     const [fileUploadMsg, setFileUploadMsg] = useState<number | null>(null);
 
     const [toggleOpen, setToggleOpen] = useState(false);
-    const [apiError, setApiError] = useState<string | null>(null);
+    const [apiError, setApiError] = useState<boolean>(false);
 
     const handleBid = () => {
         setToggleOpen(true);
@@ -35,6 +32,10 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
 
     const handleClosePopup = () => {
         setToggleOpen(false);
+    };
+
+    const handleBidSuccess = () => {
+        window.location.reload();
     };
 
     const techArray = JSON.parse(project.tech);
@@ -49,11 +50,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
             const attachmentUrls = response.data.urls;
             setAttachments(attachmentUrls);
         } catch (error) {
-            if (isAxiosError(error)) {
-                setApiError(error.response?.data?.error || error.response?.data?.message || ERRORS.SERVER_ERROR);
-            } else {
-                setApiError(ERRORS.SERVER_ERROR);
-            }
+            setApiError(true)
         } finally {
             setIsLoadingAttachments(false);
         }
@@ -94,10 +91,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                                     </div>
                                 ) : (
                                     <div className="flex justify-between items-center pb-4">
-                                        <CypherButton 
-                                            placeHolder="Bid On Project"
-                                            helperFunction={handleBid}  
-                                        />
+                                        <button className="bg-primary text-white px-5 py-2 rounded-sm" onClick={handleBid}>Bid On Project</button>
                                     </div>
                                 )}
                             </div>
@@ -113,10 +107,8 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                             </div>
                         )}
                     </div>
-                    
                     <hr className="pb-4 border-t-2 border-primary w-24 border-opacity-50" />
                     <p className="text-sm pb-4 text-secondary h-40 overflow-y-auto">{project.description}</p>
-                    
                     <p className="text-md pb-4 text-secondary">Skills</p>
                     <div className="flex gap-4 flex-wrap pb-4">
                         {techArray.map((skill: string) => (
@@ -129,10 +121,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                     <div className="grid grid-cols-2 tablet:grid-cols-4 gap-4">
                         <div>
                             <h3 className="text-md text-secondary pb-4">Attachments</h3>
-                            <span 
-                                className="inline-block bg-skillPurple text-secondary text-sm px-12 py-2 rounded-sm cursor-pointer" 
-                                onClick={handleAttachments}
-                            >
+                            <span className="inline-block bg-skillPurple text-secondary text-sm px-12 py-2 rounded-sm cursor-pointer" onClick={handleAttachments}>
                                 {isLoadingAttachments ? 'Loading...' : project.filesCount === 0 ? '0' : 'Download'}
                             </span>
                             {attachments.length > 0 && (
@@ -168,9 +157,7 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                                 <>
                                     <h3 className="text-md text-secondary pb-4">Progress</h3>
                                     <div className="relative w-32 bg-purple rounded-sm px-12 py-2">
-                                        <div
-                                            className="absolute top-0 left-0 h-full bg-secondary rounded-sm"
-                                            style={{ width: `${completionPercentage}%` }}
+                                        <div className="absolute top-0 left-0 h-full bg-secondary rounded-sm" style={{ width: `${completionPercentage}%` }}
                                         ></div>
                                         <div className="relative text-sm text-center text-primary font-bold">
                                             {completionPercentage.toFixed(0)}%
@@ -180,15 +167,15 @@ const CypherProjectDetails: FC<CypherProjectDetailsProps> = ({ project, bidPlace
                             )}
                         </div>
                         <div>
-                        <div>
-                            <h1 className='text-md text-secondary pb-4 font-abhaya'>Upload Files</h1>
-                            <input className="mb-10 block w-full text-xs text-secondary file:mr-2 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-abhaya file:bg-skillPurple file:text-secondary file:cursor-pointer" type='file' onChange={handleFileUpload} multiple/>
-                        </div>
+                            <div>
+                                <h1 className='text-md text-secondary pb-4 font-abhaya'>Upload Files</h1>
+                                <input className="mb-10 block w-full text-xs text-secondary file:mr-2 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-abhaya file:bg-skillPurple file:text-secondary file:cursor-pointer" type='file' onChange={handleFileUpload} multiple/>
+                            </div>
                             {fileUploadMsg === 1 && <p className="text-green">Files uploaded successfully</p>}
                             {fileUploadMsg === 2 && <p className="text-red">File upload failed</p>}
                         </div>
                     </div>
-                    <BidPopUp isOpen={toggleOpen} onClose={handleClosePopup} project={project} />
+                    <BidPopUp isOpen={toggleOpen} onClose={handleClosePopup} project={project} onBidSuccess={handleBidSuccess} />
                 </div>
             )}
         </>

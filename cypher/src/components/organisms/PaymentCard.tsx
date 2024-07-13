@@ -46,7 +46,7 @@ const PaymentCard: FC<PaymentCardProps> = ({ completedOrders }) => {
       </div>
       {completedOrders.length === 0 ? (
         <div className="border-t border-black border-opacity-5 shadow-md bg-white rounded-md h-[215px] flex items-center justify-center monitor:h-[400px]">
-          <p className="font-abhaya text-xs text-black monitor:text-md">No payments done yet.</p>
+          <p className="font-abhaya text-xs text-black monitor:text-md">No payments done yet</p>
         </div>
       ) : (
         <div className="border-t border-black border-opacity-5 shadow-md p-8 bg-white rounded-md h-[215px] monitor:h-[400px]">

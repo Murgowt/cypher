@@ -141,10 +141,10 @@ const PostWorkPage: FC<PostWorkPageProps> =() =>{
                 <div className='border-b-2 border-lightgrey mb-10 pb-5'>
                     <h1 className='text-secondary text-lg font-abhaya'>Skills</h1>
                     <div className='flex flex-wrap mt-5'>
-                        <input className='mb-10 text-sm rounded-sm placeholder-secondary bg-skillPurple px-4 py-2 desktop:w-[20%] font-abhaya'  name="title" placeholder='Enter Skills' value={currSkill} onChange={handleAddingSkill}/>
+                        <input className='mb-10 text-sm rounded-sm placeholder-secondary bg-skillPurple px-4 py-2 desktop:w-[20%] font-abhaya' onKeyDown={(e) => {if (e.key === 'Enter') {handleAddSkill();}}} name="title" placeholder='Enter Skills' value={currSkill} onChange={handleAddingSkill}/>
                         <IoIosAddCircle className="mx-4 mt-2 text-xl text-secondary" onClick={handleAddSkill}/>
                     </div>
-                    <div className='flex flex-wrap'>
+                    <div className='flex flex-wrap gap-2'>
                         {skillList}
                     </div>
                 </div>

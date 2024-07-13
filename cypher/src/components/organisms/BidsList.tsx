@@ -8,8 +8,6 @@ import { PAYMENTS_PAGE } from '../../constants/routes.ui';
 import { IoMdStar } from "react-icons/io";
 import { PiChatCircleDotsThin } from "react-icons/pi";
 
-
-
 export interface BidsListProps {
     project: {
         id: string;
@@ -80,28 +78,32 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
     }
 
     return (
-        <div className="p-4 shadow-md">
+        <div className="p-4 shadow-md desktop:h-[600px]">
             <h2 className="text-lg font-abhaya text-secondary mb-4">Bids</h2>
             <hr className="pb-4 border-t-2 border-primary w-24 border-opacity-50" />
-            {bids.map((bid, index) => (
-                <div key={index} className="flex items-center justify-between py-4">
-                    <div className="flex items-center gap-4">
-                        <img src={imgPath} alt="Profile Image" className="w-12 h-12 rounded-md" />
-                        <div>
-                            <h3 className="text-sm font-abhaya text-secondary">{bid.wizardId.split('_')[1]+' '+bid.wizardId.split('_')[2]}</h3>
-                            <p className="text-xs font-abhaya text-secondary">${bid.budget}</p>
-                            <div className="flex items-center">
-                                <IoMdStar className="text-yellow" />
-                                <p className="text-xs font-abhaya text-secondary ml-1">{bid.wizardRating}</p>
+            {bids.length === 0 ? (
+                <p className="flex justify-center items-center h-3/4 font-abhaya text-sm text-secondary">No bids yet</p>
+            ) : (
+                bids.map((bid, index) => (
+                    <div key={index} className="flex items-center justify-between py-4">
+                        <div className="flex items-center gap-4">
+                            <img src={imgPath} alt="Profile Image" className="w-12 h-12 rounded-md" />
+                            <div>
+                                <h3 className="text-sm font-abhaya text-secondary">{bid.wizardId.split('_')[1] + ' ' + bid.wizardId.split('_')[2]}</h3>
+                                <p className="text-xs font-abhaya text-secondary">${bid.budget}</p>
+                                <div className="flex items-center">
+                                    <IoMdStar className="text-yellow" />
+                                    <p className="text-xs font-abhaya text-secondary ml-1">{bid.wizardRating}</p>
+                                </div>
                             </div>
                         </div>
+                        <div className="flex space-x-2 text-xs">
+                            <PiChatCircleDotsThin className="text-2xl ml-auto text-secondary" onClick={() => handleChat(bid)} />
+                            <button className="border border-secondary text-secondary px-3 py-1 rounded font-abhaya" onClick={() => handleAccept(bid)}>Accept</button>
+                        </div>
                     </div>
-                    <div className="flex space-x-2 text-xs">
-                        <PiChatCircleDotsThin className="text-2xl ml-auto text-secondary" onClick={() => handleChat(bid)}/>
-                        <button className="border border-secondary text-secondary px-3 py-1 rounded font-abhaya" onClick={() => handleAccept(bid)}>Accept</button>
-                    </div>
-                </div>
-            ))}
+                ))
+            )}
         </div>
     );
 };

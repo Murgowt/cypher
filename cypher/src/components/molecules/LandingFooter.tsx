@@ -42,7 +42,7 @@ const LandingFooter: FC<LandingFooterProps> = () => {
                 <a href={CLIENT_SIGNIN}>Request Cypher</a>
             </div>
             <div className="flex items-right gap-2 desktop:gap-4">
-                <a
+              <a
                 className="p-2 rounded-md hover:text-primary transition-all duration-200 ease-in-out text-white border border-white border-opacity-50"
                 href={SOCIAL_FACEBOOK}
                 target="_blank"
