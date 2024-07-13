@@ -1,5 +1,5 @@
 import axios from "../helpers/axios";
-import { ATTACHMENTS_ENDPOINT, CYPHERORDERS_ENDPOINT, CYPHER_FILE_UPLOAD, CYPHER_RESET_PASSWORD_ENDPOINT, FINDWORK_ENDPOINT, PLACE_BID_ENDPOINT } from "../constants/endpoints";
+import { ATTACHMENTS_ENDPOINT, CYPHERORDERS_ENDPOINT, CYPHER_FILE_UPLOAD, CYPHER_RESET_PASSWORD_ENDPOINT, FINDWORK_ENDPOINT, PLACE_BID_ENDPOINT , GETPROJECTDETAILS_ENDPOINT} from "../constants/endpoints";
 
 export const CYPHERORDERS_REQUEST = async (token: string, role: string) =>{
     let promise = axios.get(CYPHERORDERS_ENDPOINT, {
@@ -7,6 +7,13 @@ export const CYPHERORDERS_REQUEST = async (token: string, role: string) =>{
       });
     return promise;
  };
+
+ export const GETPROJECTDETAILS_REQUEST = async (orderId: string, token: string, role: string) =>{
+  let promise = axios.get(GETPROJECTDETAILS_ENDPOINT(orderId), {
+      headers: { 'token': token, 'user': role },
+    });
+  return promise;
+};
 
  export const FINDWORK_REQUEST = async (token: string, role: string) =>{
   let promise = axios.get(FINDWORK_ENDPOINT, {

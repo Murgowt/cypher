@@ -13,10 +13,11 @@ const RemovableSkillBox:FC<RemovableSkillBoxProps> = ({skill,index,parentFunc}) 
         parentFunc(index)
     ]
     return (
-        <div key={index} className='flex items-center justify-center bg-skillPurple h-10 w-fit text-secondary rounded-sm'>
+        <div key={index} className='flex items-center justify-center bg-skillPurple h-10 w-fit text-secondary rounded-md'>
             <SkillBox skill={skill} />
             <IoIosClose className='text-red text-xl' onClick={handleClick}/>
         </div>
+        
     )
 }
 export default RemovableSkillBox

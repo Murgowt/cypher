@@ -10,7 +10,7 @@ export const ACCEPT_BID_ENDPOINT         = "client/acceptbid";
 export const UPDATEMILESTONE_ENDPOINT    = "client/updatemilestone";
 export const CLOSEORDER_ENDPOINT         = "client/closeorder";
 export const GIVERATING_ENDPOINT         = "client/rating";
-export const GETPROJECTDETAILS_ENDPOINT  = (orderId: string) => `client/order/${orderId}`;
+export const PROJECTDETAILS_ENDPOINT  = (orderId: string) => `client/order/${orderId}`;
 export const CLIENT_ATTACHMENTS_ENDPOINT = (key: string) => `client/orderattachments/${key}`;
 
 export const CYPHERORDERS_ENDPOINT       = "wizard/allorders";
@@ -21,3 +21,4 @@ export const PLACE_BID_ENDPOINT          = "wizard/bid";
 export const ATTACHMENTS_ENDPOINT           = (key: string) => `wizard/orderattachments/${key}`;
 export const CYPHER_RESET_PASSWORD_ENDPOINT     = "wizard/editprofile";
 export const CYPHER_FILE_UPLOAD                 = "wizard/orderattachments"
+export const GETPROJECTDETAILS_ENDPOINT  = (orderId: string) => `client/order/${orderId}`;

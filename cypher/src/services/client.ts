@@ -1,5 +1,5 @@
 import axios from "../helpers/axios";
-import { ALLORDERS_ENDPOINT, VIEWBIDS_ENDPOINT, PAYMENT_ENDPOINT, ACCEPT_BID_ENDPOINT, UPDATEMILESTONE_ENDPOINT, CLOSEORDER_ENDPOINT , GETPROJECTDETAILS_ENDPOINT , GIVERATING_ENDPOINT, CLIENT_ATTACHMENTS_ENDPOINT} from "../constants/endpoints";
+import { ALLORDERS_ENDPOINT, VIEWBIDS_ENDPOINT, PAYMENT_ENDPOINT, ACCEPT_BID_ENDPOINT, UPDATEMILESTONE_ENDPOINT, CLOSEORDER_ENDPOINT , GETPROJECTDETAILS_ENDPOINT , GIVERATING_ENDPOINT, CLIENT_ATTACHMENTS_ENDPOINT, PROJECTDETAILS_ENDPOINT} from "../constants/endpoints";
 
 export const ALLORDERS_REQUEST = async (token: string, role: string) =>{
     let promise = axios.get(ALLORDERS_ENDPOINT, {
@@ -7,6 +7,13 @@ export const ALLORDERS_REQUEST = async (token: string, role: string) =>{
       });
     return promise;
  };
+
+ export const PROJECTDETAILS_REQUEST = async (orderId: string, token: string, role: string) =>{
+  let promise = axios.get(PROJECTDETAILS_ENDPOINT(orderId), {
+      headers: { 'token': token, 'user': role },
+    });
+  return promise;
+};
 
  export const VIEWBIDS_REQUEST = async (orderId: string, token: string, role: string) =>{
   let promise = axios.get(VIEWBIDS_ENDPOINT(orderId), {

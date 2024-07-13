@@ -34,8 +34,6 @@ const DashboardNavbar: FC<DashboardNavbarProps> = () => {
           <BrandLogo/>
         </div>
         <div className="items-center justify-between hidden w-full tablet:flex desktop:flex">
-          
-            {/* TODO: Change href attributes */}
             { user?.role === 'client' ? 
             <div className="flex items-center tablet:gap-4 desktop:gap-10">
               <NavLink href={CLIENT_DASHBOARD}>Dashboard</NavLink>

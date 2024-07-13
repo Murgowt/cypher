@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import ActiveProjectsCard from '../molecules/ActiveProjectsCard';
-import CypherButton from '../atoms/CypherButton';
 import { AllOrdersResponse } from '../../interfaces/apis/clientapis';
 import { useNavigate } from 'react-router-dom';
 import { CLIENT_PROJECTS, POST_WORK } from '../../constants/routes.ui';
@@ -31,7 +30,7 @@ const ActiveProjects: FC<ActiveProjectsProps> = ({activeOrders = [], pendingOrde
         </div>
         <div className="flex-1 overflow-y-auto mb-4">
           {(activeOrders.length === 0 && pendingOrders.length === 0) ? (
-            <p className="text-center text-sm text-black font-abhaya my-10">No active projects found.</p>
+            <p className="text-center text-sm text-black font-abhaya my-10">No active projects found</p>
           ) : (
             <div className="grid grid-cols-1 gap-1 tablet:px-1">
               {[...activeOrders,...pendingOrders].map((i) => (
@@ -43,7 +42,7 @@ const ActiveProjects: FC<ActiveProjectsProps> = ({activeOrders = [], pendingOrde
           )}
         </div>
         <div className='mt-auto py-2 flex justify-center'>
-          <CypherButton placeHolder='Create New Project' helperFunction={helperFunction}/>
+          <button className="bg-secondary text-white px-4 py-2 text-sm rounded-lg shadow-lg" onClick={helperFunction}>Create New Project</button>
         </div>
       </div>
     </div>

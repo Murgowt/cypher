@@ -36,7 +36,7 @@ const RecentProjects: FC<ClientProjectsProps> = ({ allOrders, recentOrders }) =>
         </div>
         <div className="flex flex-col">
           <div className="pb-4 grid grid-cols-1 gap-2 tablet:px-1 monitor:gap-6">
-            {recentOrders.length === 0 ? <div className="flex justify-center p-3 w-full text-sm mt-20 monitor:text-lg">No Projects yet</div>: <></>}
+            {recentOrders.length === 0 ? <div className="flex justify-center p-3 w-full font-abhaya text-sm mt-20 monitor:text-lg">No Projects yet</div>: <></>}
             {recentOrders.map((i) => (
               <div key={i.id} className="col-span-1">
                 <ProjectCard project={i} />

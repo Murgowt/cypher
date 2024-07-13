@@ -14,7 +14,7 @@ interface CypherDashboardSectionProps {
 
 const CypherDashboardSection: FC<CypherDashboardSectionProps> = ({ allOrders, recentOrders }) => {
   return (
-    <div className="grid grid-cols-1 flex-grow desktop:grid-cols-7 pt-4">
+    <div className="grid grid-cols-1 gap-10 flex-grow desktop:grid-cols-7 pt-4">
       <div className="col-span-3">
         <RecentProjects allOrders={allOrders} recentOrders={recentOrders} />
       </div>
