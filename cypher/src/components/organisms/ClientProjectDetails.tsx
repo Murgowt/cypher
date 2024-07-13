@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import CypherButton from '../atoms/CypherButton';
 import { ATTACHMENTS_REQUEST, UPDATEMILESTONE_REQUEST, CLOSEORDER_REQUEST } from '../../services/client';
 import { useAuthStore } from '../../helpers/authStore';
 import RatingPopUp from '../molecules/RatingPopUp';
