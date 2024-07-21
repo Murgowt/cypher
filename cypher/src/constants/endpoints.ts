@@ -14,7 +14,7 @@ export const PROJECTDETAILS_ENDPOINT  = (orderId: string) => `client/order/${ord
 export const CLIENT_ATTACHMENTS_ENDPOINT = (key: string) => `client/orderattachments/${key}`;
 export const CHATMAIL_ENDPOINT         = "/sendmail";
 
-export const CYPHERORDERS_ENDPOINT       = "wizard/allorders";
+export const  CYPHERORDERS_ENDPOINT       = "wizard/allorders";
 export const FINDWORK_ENDPOINT           = "wizard/market";
 export const CYPHER_ENROLL               = "wizard/register";
 export const CYPHER_SIGNIN_ENDPOINT      = "wizard/login";
