@@ -30,9 +30,9 @@ const PayPalButton: React.FC<PayPalButtonProps> = ({ bid }) => {
     }
   }, [authToken, user]);
 
-  const handleApprove = useCallback(async (data: any) => {
+  const handleApprove = useCallback(async () => {
     try {
-      await ACCEPTBID_REQUEST(data, bid, authToken!, user!.role);
+      await ACCEPTBID_REQUEST(bid, authToken!, user!.role);
       setPaymentSuccess(true);
       setTimeout(() => {
         navigate(-1);

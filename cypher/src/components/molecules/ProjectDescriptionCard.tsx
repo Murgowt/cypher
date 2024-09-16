@@ -11,6 +11,7 @@ interface ProjectDescriptionCardProps {
         budget: number;
         milestones: number;
         filesCount: number;
+        paymentStatus: string;
     };
 }
 

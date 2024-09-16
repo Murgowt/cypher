@@ -24,6 +24,7 @@ const ClientDashboard: FC<ClientDashboardProps> =()=>{
               const res = await ALLORDERS_REQUEST(authToken!, user!.role);
               if (res.status === 200) {
                 const allOrdersResponse: AllOrdersResponse = res.data;
+                console.log(allOrdersResponse)
                 setallOrders(allOrdersResponse)
                 setApiError(null);
               }

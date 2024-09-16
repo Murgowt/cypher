@@ -14,7 +14,8 @@ export interface ClientProjectDetailsProps {
         status: string;
         completedMilestones: number;
         wizardId: string;
-        filesCount: number
+        filesCount: number;
+        paymentStatus: string;
     };
 }
 
@@ -89,11 +90,20 @@ const ClientProjectDetails: FC<ClientProjectDetailsProps> = ({ project }) => {
         }
 
         if (projectStatus === 'open') {
-            return (
-                <div className="flex justify-between items-center px-5 bg-buttonGrey rounded-sm text-white">
-                    <p>pending</p>
-                </div>
-            );
+            if (project.paymentStatus === 'pending') {
+                return (
+                    <div className="flex justify-between items-center px-5 bg-buttonGrey rounded-sm text-white">
+                        <p>payment pending</p>
+                    </div>
+                );
+            }
+            else{
+                    return (
+                        <div className="flex justify-between items-center px-5 bg-buttonGrey rounded-sm text-white">
+                            <p>pending</p>
+                        </div>
+                    );
+            }
         }
 
         return null;

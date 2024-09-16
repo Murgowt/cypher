@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { VIEWBIDS_REQUEST } from '../../services/client';
+import { ACCEPTBID_REQUEST, VIEWBIDS_REQUEST } from '../../services/client';
 import { useAuthStore } from '../../helpers/authStore';
 import { Bid } from '../../interfaces/apis/clientapis';
 import ChatWindow from '../../components/organisms/ChatWindow';
@@ -25,6 +25,7 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
     const [bids, setBids] = useState<Bid[]>([]);
     const [chat, setChat] = useState(false);
     const [selectedBid, setSelectedBid] = useState<Bid | null>(null);
+    const [acceptingBidId, setAcceptingBidId] = useState<string | null>(null);
     const user = useAuthStore((state) => state.user);
     const authToken = useAuthStore((state) => state.authToken);
     const imgPath = '/images/ProfilePhoto.png';
@@ -35,9 +36,16 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
         setChat(true);
     };
 
-    const handleAccept = (bid: Bid) => {
-        setSelectedBid(bid);
-        navigate(PAYMENTS_PAGE, { state: { bid }, replace: true });
+    const handleAccept = async (bid: Bid) => {
+        setAcceptingBidId(bid.id);
+        try {
+            await ACCEPTBID_REQUEST(bid, authToken!, user!.role);
+            navigate(PAYMENTS_PAGE, { state: { success: true }, replace: true });
+        } catch (error) {
+            navigate(PAYMENTS_PAGE, { state: { success: true }, replace: true });
+        } finally {
+            setAcceptingBidId(null);
+        }
     };
 
     const handleBack = () => {
@@ -51,7 +59,6 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
                 const response = await VIEWBIDS_REQUEST(project.id, authToken!, user?.role!);
                 if (Array.isArray(response.data.bids)) {
                     setBids(response.data.bids);
-                    console.log(response.data.bids)
                 } else {
                     console.error('Expected an array of bids but received:', response.data);
                 }
@@ -84,8 +91,8 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
             {bids.length === 0 ? (
                 <p className="flex justify-center items-center h-3/4 font-abhaya text-sm text-secondary">No bids yet</p>
             ) : (
-                bids.map((bid, index) => (
-                    <div key={index} className="flex items-center justify-between py-4">
+                bids.map((bid) => (
+                    <div key={bid.id} className="flex items-center justify-between py-4">
                         <div className="flex items-center gap-4">
                             <img src={imgPath} alt="Profile Image" className="w-12 h-12 rounded-md" />
                             <div>
@@ -99,7 +106,13 @@ const BidsList: FC<BidsListProps> = ({ project }) => {
                         </div>
                         <div className="flex space-x-2 text-xs">
                             <PiChatCircleDotsThin className="text-2xl ml-auto text-secondary" onClick={() => handleChat(bid)} />
-                            <button className="border border-secondary text-secondary px-3 py-1 rounded font-abhaya" onClick={() => handleAccept(bid)}>Accept</button>
+                            <button 
+                                className="border border-secondary text-secondary px-3 py-1 rounded font-abhaya disabled:opacity-50"
+                                onClick={() => handleAccept(bid)}
+                                disabled={acceptingBidId === bid.id}
+                            >
+                                {acceptingBidId === bid.id ? 'Accepting...' : 'Accept'}
+                            </button>
                         </div>
                     </div>
                 ))

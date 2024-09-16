@@ -12,6 +12,7 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
         first_name:'',
         last_name:'',
         email:'',
+        mobile: '',
         password:'',
         confirmPassword: ''
     })
@@ -96,6 +97,11 @@ const ClientSignUpPage: FC<ClientSignUpPageProps> =()=>{
                     labelText="Your Email*" helperFunction={handleChange} 
                     placeHolder="" name="email" 
                     type="email" id="email" />
+
+                <FormElement 
+                    labelText="Your Mobile Number" helperFunction={handleChange} 
+                    placeHolder="" name="mobile" 
+                    type="mobile" id="mobile" />
 
                 <FormElement 
                     labelText="Your password*" helperFunction={handleChange} 

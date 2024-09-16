@@ -2,7 +2,8 @@ import { FC } from 'react';
 import ProjectCard from '../molecules/ProjectCard';
 import ProgressCounts from '../molecules/ProgressCounts';
 import { AllOrdersResponse, Order } from '../../interfaces/apis/clientapis';
-import { CLIENT_PROJECTS } from '../../constants/routes.ui';
+import { CLIENT_PROJECTS, CYPHER_PROJECTS } from '../../constants/routes.ui';
+import { useAuthStore } from '../../helpers/authStore';
 
 
 export interface ClientProjectsProps {
@@ -18,11 +19,13 @@ const RecentProjects: FC<ClientProjectsProps> = ({ allOrders, recentOrders }) =>
     allOrders.activeOrders?.length + allOrders.pendingOrders?.length
   ];
 
+  const user = useAuthStore((state) => state.user);
+
   return (
     <div className="p-2 tablet:pl-10">
       <div className="flex justify-between font-abhaya px-10">
         <p className="text-md text-secondary monitor:text-lg">Projects</p>
-        <a href={CLIENT_PROJECTS}>
+        <a href={user?.role === 'client' ? CLIENT_PROJECTS : CYPHER_PROJECTS}>
         <p className="text-sm text-orange monitor:text-md">Manage Projects</p>
         </a>
       </div>

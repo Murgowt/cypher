@@ -41,6 +41,7 @@ const ViewProjectPage: FC<ViewProjectPageProps> = () => {
                     const res = await CYPHERORDERS_REQUEST(authToken!, user!.role);
                     if (res.status === 200) {
                         const allOrdersResponse: CypherOrdersResponse = res.data;
+                        console.log(allOrdersResponse)
                         setAllOrders(allOrdersResponse);
                     }
                 } 
@@ -85,7 +86,7 @@ const ViewProjectPage: FC<ViewProjectPageProps> = () => {
                             disabled={(!isPendingOrder && project.status==='open') || project.status==='completed' }
                             placeholder={chatWindowPlaceholder}
                         />
-                    ) : project.status === 'open' ? (
+                    ) : project.status === 'open' && project.paymentStatus!= 'pending' ? (
                         <BidsList project={project} />
                     ) : (
                         <ChatWindow
