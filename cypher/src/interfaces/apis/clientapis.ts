@@ -15,7 +15,8 @@ export const OrderSchema = z.object({
     wizardId: z.string(),
     title: z.string(),
     creationtimestamp: z.number(),
-    filesCount: z.number()
+    filesCount: z.number(),
+    paymentStatus: z.string().optional()
   });
 
 export type Order = z.infer<typeof OrderSchema>;

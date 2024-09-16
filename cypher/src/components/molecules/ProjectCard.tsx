@@ -11,7 +11,8 @@ export interface ProjectCardProps {
     budget: number;
     milestones: number;
     filesCount: number;
-    status: string
+    status: string;
+    paymentStatus?: string;
 };
 }
 

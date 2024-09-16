@@ -36,10 +36,9 @@ export const CREATEORDER_REQUEST = async (token: string, role: string) => {
   }
 };
 
-export const ACCEPTBID_REQUEST = async (data: any, bid: any, token: string, role: string) => {
+export const ACCEPTBID_REQUEST = async ( bid: any, token: string, role: string) => {
   try {
     const response = await axios.post(ACCEPT_BID_ENDPOINT, {
-      paymentId: data.orderID,
       orderId: bid.orderId,
       wizardId: bid.wizardId,
       finalBudget: bid.budget,

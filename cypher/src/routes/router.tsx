@@ -20,7 +20,7 @@ import TestResultPage from '../pages/Cypher/TestResultPage';
 import ViewProjectPage from '../pages/Cypher/ViewProjectPage';
 import PaymentPage from '../pages/Client/PaymentPage';
 import ContactUsForm from '../pages/ContactUsPage';
-
+import ApprovalsPage from '../pages/Admin/ApprovalsPage';
 
 const router = createBrowserRouter([
         {
@@ -131,6 +131,10 @@ const router = createBrowserRouter([
              {
                 path:'*',
                 element:<Error404Page/>
+            },
+            {
+                path:'admin',
+                element:<ApprovalsPage/>
             },
         ]
     }
